@@ -33,7 +33,7 @@ class Admin(db.Model,UserMixin):
 
     password_hash = db.Column(db.String(200))
 
-    created_at = db.Column(db.DateTime, default=db.datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def set_password(self,password):
         """hashing the password"""
