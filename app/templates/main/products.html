@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}All Products - Shopping On Tuesday{% endblock %}
+
+{% block content %}
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>All Products</h1>
+        <p class="page-subtitle">Browse our complete collection of anime merchandise and stationery</p>
+    </div>
+
+    <!-- Category Filter Buttons -->
+    <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterProducts('all')">
+            All Products ({{ products|length }})
+        </button>
+        <button class="filter-btn" onclick="filterProducts('anime')">
+            🎌 Anime ({{ products|selectattr('category', 'equalto', 'anime')|list|length }})
+        </button>
+        <button class="filter-btn" onclick="filterProducts('stationery')">
+            📝 Stationery ({{ products|selectattr('category', 'equalto', 'stationery')|list|length }})
+        </button>
+    </div>
+
+    <!-- Products Grid -->
+    {% if products %}
+        <div class="product-grid" id="productGrid">
+            {% for product in products %}
+                <div class="product-card" data-category="{{ product.category }}">
+                    <!-- Product Image -->
+                    {% if product.image_url %}
+                        <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image">
+                    {% else %}
+                        <div class="product-image product-placeholder">
+                            {% if product.category == 'anime' %}
+                                <span class="placeholder-icon">🎌</span>
+                            {% else %}
+                                <span class="placeholder-icon">📝</span>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    <!-- Category Badge -->
+                    <div class="category-badge {{ product.category }}">
+                        {{ product.category|capitalize }}
+                    </div>
+                    
+                    <!-- Product Info -->
+                    <div class="product-info">
+                        <h3 class="product-name">{{ product.name }}</h3>
+                        
+                        {% if product.description %}
+                            <p class="product-description">{{ product.description[:80] }}{% if product.description|length > 80 %}...{% endif %}</p>
+                        {% endif %}
+                        
+                        <p class="product-price">₹{{ product.price }}</p>
+                        
+                        <!-- Stock Status -->
+                        {% if product.stock > 0 %}
+                            <p class="product-stock in-stock">
+                                ✓ {{ product.stock }} in stock
+                            </p>
+                        {% else %}
+                            <p class="product-stock out-of-stock">
+                                ✗ Out of Stock
+                            </p>
+                        {% endif %}
+                        
+                        <!-- Action Buttons -->
+                        <div class="product-actions">
+                            <a href="/product/{{ product.id }}" class="btn btn-outline btn-block">
+                                View Details
+                            </a>
+                            
+                            {% if product.stock > 0 %}
+                                <a href="https://ig.me/m/yourhandle?text=Hi! I'm interested in {{ product.name }}" 
+                                   class="btn btn-block"
+                                   target="_blank">
+                                    Buy Now
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- Empty State -->
+        <div class="empty-state">
+            <p class="empty-message">No products available yet.</p>
+            <p class="empty-subtitle">Check back soon for amazing deals!</p>
+        </div>
+    {% endif %}
+{% endblock %}
