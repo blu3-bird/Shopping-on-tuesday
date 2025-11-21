@@ -13,4 +13,5 @@ def index():
 @main.route('/products')
 def products():
     """Products listing page"""
-    return "<h5>Products</h5>"
+    all_products = Product.query.all()
+    return render_template ('main/products.html', products=all_products)
