@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} - Shopping On Tuesday{% endblock %}
+
+{% block content %}
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb-separator">›</span>
+        <a href="/products">Products</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">{{ product.name }}</span>
+    </nav>
+
+    <!-- Product Detail Container -->
+    <div class="product-detail-container">
+        <!-- Product Image Section -->
+        <div class="product-detail-image">
+            {% if product.image_url %}
+                <img src="{{ product.image_url }}" alt="{{ product.name }}">
+            {% else %}
+                <div class="product-image-placeholder">
+                    {% if product.category == 'anime' %}
+                        <span class="placeholder-icon-large">🎌</span>
+                    {% else %}
+                        <span class="placeholder-icon-large">📝</span>
+                    {% endif %}
+                </div>
+            {% endif %}
+            
+            <!-- Category Badge -->
+            <div class="category-badge-large {{ product.category }}">
+                {{ product.category|capitalize }}
+            </div>
+        </div>
+
+        <!-- Product Info Section -->
+        <div class="product-detail-info">
+            <h1 class="product-detail-title">{{ product.name }}</h1>
+            
+            <!-- Price and Stock -->
+            <div class="product-detail-price-section">
+                <p class="product-detail-price">₹{{ product.price }}</p>
+                
+                {% if product.stock > 0 %}
+                    <p class="stock-badge in-stock">
+                        <span class="stock-icon">✓</span>
+                        <span>{{ product.stock }} in stock</span>
+                    </p>
+                {% else %}
+                    <p class="stock-badge out-of-stock">
+                        <span class="stock-icon">✗</span>
+                        <span>Out of Stock</span>
+                    </p>
+                {% endif %}
+            </div>
+
+            <!-- Description -->
+            <div class="product-detail-description">
+                <h3>Description</h3>
+                {% if product.description %}
+                    <p>{{ product.description }}</p>
+                {% else %}
+                    <p class="no-description">No description available for this product.</p>
+                {% endif %}
+            </div>
+
+            <!-- Product Meta Information -->
+            <div class="product-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Category:</span>
+                    <span class="meta-value">{{ product.category|capitalize }}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Product ID:</span>
+                    <span class="meta-value">#{{ product.id }}</span>
+                </div>
+                {% if product.created_at %}
+                <div class="meta-item">
+                    <span class="meta-label">Added:</span>
+                    <span class="meta-value">{{ product.created_at.strftime('%B %d, %Y') }}</span>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="product-detail-actions">
+                {% if product.stock > 0 %}
+                    <a href="https://ig.me/m/blu3_bird_?text=Hi! I want to buy {{ product.name }} (Product ID: {{ product.id }})" 
+                       class="btn btn-large btn-primary"
+                       target="_blank">
+                        🛒 Buy Now via Instagram
+                    </a>
+                    <p class="purchase-note">
+                        You'll be redirected to Instagram to complete your purchase
+                    </p>
+                {% else %}
+                    <button class="btn btn-large btn-disabled" disabled>
+                        Out of Stock
+                    </button>
+                    <p class="purchase-note">
+                        This item is currently unavailable
+                    </p>
+                {% endif %}
+                
+                <a href="/products" class="btn btn-outline btn-large">
+                    ← Back to Products
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Products Section -->
+    {% if related_products %}
+    <section class="related-products-section">
+        <h2 class="section-title">You May Also Like</h2>
+        <div class="product-grid">
+            {% for p in related_products %}
+                <div class="product-card">
+                    {% if p.image_url %}
+                        <img src="{{ p.image_url }}" alt="{{ p.name }}" class="product-image">
+                    {% else %}
+                        <div class="product-image product-placeholder">
+                            {% if p.category == 'anime' %}
+                                <span class="placeholder-icon">🎌</span>
+                            {% else %}
+                                <span class="placeholder-icon">📝</span>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    
+                    <div class="product-info">
+                        <h3 class="product-name">{{ p.name }}</h3>
+                        <p class="product-price">₹{{ p.price }}</p>
+                        
+                        {% if p.stock > 0 %}
+                            <p class="product-stock in-stock">✓ In Stock</p>
+                        {% else %}
+                            <p class="product-stock out-of-stock">✗ Out of Stock</p>
+                        {% endif %}
+                        
+                        <a href="/product/{{ p.id }}" class="btn btn-block">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+{% endblock %}
