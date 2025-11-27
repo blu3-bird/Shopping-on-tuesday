@@ -25,3 +25,13 @@ def dashboard():
                            low_stock=low_stock,
                            out_of_stock=out_of_stock,
                            recent_products=recent_products)
+
+@admin.route('/products')
+@login_required
+def products():
+    """
+    Docstring for products
+    """
+
+    products=Product.query.order_by(Product.created_at.desc()).all()
+    return render_template('admin/product_list.html',products=products)
