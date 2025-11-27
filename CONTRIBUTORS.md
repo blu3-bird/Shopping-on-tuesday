@@ -1,0 +1,62 @@
+# 🙏 Contributors
+
+Thank you to everyone who has contributed to Shopping On Tuesday!
+
+This project exists because of your help. Whether you fixed a bug, added a feature, improved documentation, or simply gave feedback - **you matter!**
+
+---
+
+## 🌟 Core Team
+
+| Name | Role | GitHub |
+|------|------|--------|
+| Pardeep Singh | Creator & Maintainer | [@blu3-bird](https://github.com/blu3-bird) |
+
+---
+
+## 💪 Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START -->
+<!-- Add contributors here as they join! -->
+
+| Avatar | Name | Contributions |
+|--------|------|---------------|
+| <img src="https://github.com/username.png" width="50"> | [Name](https://github.com/username) | 💻 🐛 |
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+---
+
+## 📊 Contribution Types
+
+| Emoji | Type | Description |
+|-------|------|-------------|
+| 💻 | Code | Writing code |
+| 🐛 | Bug Fix | Fixing bugs |
+| 📖 | Docs | Documentation |
+| 🎨 | Design | UI/UX improvements |
+| 💡 | Ideas | Suggesting features |
+| 👀 | Review | Reviewing PRs |
+| 🔧 | Tools | Dev tools/configs |
+
+---
+
+## ✨ How to Add Yourself
+
+After your PR is merged:
+
+1. Add your row to the contributors table above
+2. Include your:
+   - GitHub avatar: `https://github.com/USERNAME.png`
+   - Name with GitHub link
+   - Contribution type emoji(s)
+
+---
+
+<div align="center">
+
+### Want to see your name here?
+
+Check out our [Contributing Guide](CONTRIBUTING.md) and find a [Good First Issue](https://github.com/pardeep/shopping-on-tuesday/labels/good%20first%20issue)!
+
+</div>
