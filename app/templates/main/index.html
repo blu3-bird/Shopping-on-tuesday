@@ -1,85 +1,145 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block title %}Home - Shopping On Tuesday{% endblock
+%} {% block content %}
 
-{% block title %}Home - Shopping On Tuesday{% endblock %}
+<!-- <link rel="stylesheet" href="style.css"> -->
+<!-- Hero Section -->
+<section class="hero-section">
+  <h1>🛍️ Welcome to Shopping On Tuesday</h1>
+  <p class="hero-subtitle">
+    Your one-stop shop for Anime Merchandise & Stationery
+  </p>
+  <a href="/products" class="btn btn-large">Browse All Products</a>
+</section>
+<button
+  class="scroll-button"
+  id="scroll-button"
+  style="display: flex; align-items: center; justify-content: center"
+>
+  <i
+    class="fas fa-angle-up"
+    style="
+      color: #fff;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 20px;
 
-{% block content %}
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <h1>🛍️ Welcome to Shopping On Tuesday</h1>
-        <p class="hero-subtitle">Your one-stop shop for Anime Merchandise & Stationery</p>
-        <a href="/products" class="btn btn-large">Browse All Products</a>
-    </section>
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid #ffffff;
 
-    <!-- Categories -->
-    <section class="categories-section">
-        <h2 class="section-title">Shop by Category</h2>
-        <div class="category-grid">
-            <div class="category-card">
-                <div class="category-icon">🎌</div>
-                <h3>Anime Merch</h3>
-                <p>Keychains, Posters, Figures</p>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">📝</div>
-                <h3>Stationery</h3>
-                <p>Notebooks, Pens, Sticky Notes</p>
-            </div>
-        </div>
-    </section>
+      background-color: rgb(45, 66, 99);
+      border: 1px solid #3567e4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease-in-out;
+    "
+  ></i>
+</button>
 
-    <!-- Featured Products -->
-    <section class="products-section">
-        <h2 class="section-title">Featured Products</h2>
-        
-        {% if products %}
-            <div class="product-grid">
-                {% for product in products %}
-                    <div class="product-card">
-                        <!-- Product Image -->
-                        {% if product.image_url %}
-                            <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image">
-                        {% else %}
-                            <div class="product-image product-placeholder">
-                                {% if product.category == 'anime' %}
-                                    <span class="placeholder-icon">🎌</span>
-                                {% else %}
-                                    <span class="placeholder-icon">📝</span>
-                                {% endif %}
-                            </div>
-                        {% endif %}
-                        
-                        <!-- Product Info -->
-                        <div class="product-info">
-                            <h3 class="product-name">{{ product.name }}</h3>
-                            <p class="product-price">₹{{ product.price }}</p>
-                            
-                            <!-- Stock Status -->
-                            {% if product.stock > 0 %}
-                                <p class="product-stock in-stock">✓ In Stock ({{ product.stock }} available)</p>
-                            {% else %}
-                                <p class="product-stock out-of-stock">✗ Out of Stock</p>
-                            {% endif %}
-                            
-                            <!-- Buy Button -->
-                            {% if product.stock > 0 %}
-                                <a href="https://ig.me/m/blu3_bird_?text=Hi! I'm interested in {{ product.name }}" 
-                                   class="btn btn-block"
-                                   target="_blank">
-                                    Buy Now via Instagram
-                                </a>
-                            {% else %}
-                                <button class="btn btn-disabled btn-block" disabled>Out of Stock</button>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+<!-- Categories -->
+<section class="categories-section">
+  <h2 class="section-title">Shop by Category</h2>
+  <div class="category-grid">
+    <div class="category-card">
+      <div class="category-icon">🎌</div>
+      <h3>Anime Merch</h3>
+      <p>Keychains, Posters, Figures</p>
+    </div>
+    <div class="category-card">
+      <div class="category-icon">📝</div>
+      <h3>Stationery</h3>
+      <p>Notebooks, Pens, Sticky Notes</p>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products -->
+<section class="products-section">
+  <h2 class="section-title">Featured Products</h2>
+
+  {% if products %}
+  <div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+      <!-- Product Image -->
+      {% if product.image_url %}
+      <img
+        src="{{ product.image_url }}"
+        alt="{{ product.name }}"
+        class="product-image"
+      />
+      {% else %}
+      <div class="product-image product-placeholder">
+        {% if product.category == 'anime' %}
+        <span class="placeholder-icon">🎌</span>
         {% else %}
-            <!-- No Products Message -->
-            <div class="empty-state">
-                <p class="empty-message">No products available yet.</p>
-                <p class="empty-subtitle">Check back soon for amazing deals!</p>
-            </div>
+        <span class="placeholder-icon">📝</span>
         {% endif %}
-    </section>
+      </div>
+      {% endif %}
+
+      <!-- Product Info -->
+      <div class="product-info">
+        <h3 class="product-name">{{ product.name }}</h3>
+        <p class="product-price">₹{{ product.price }}</p>
+
+        <!-- Stock Status -->
+        {% if product.stock > 0 %}
+        <p class="product-stock in-stock">
+          ✓ In Stock ({{ product.stock }} available)
+        </p>
+        {% else %}
+        <p class="product-stock out-of-stock">✗ Out of Stock</p>
+        {% endif %}
+
+        <!-- Buy Button -->
+        {% if product.stock > 0 %}
+        <a
+          href="https://ig.me/m/yourhandle?text=Hi! I'm interested in {{ product.name }}"
+          class="btn btn-block"
+          target="_blank"
+        >
+          Buy Now via Instagram
+        </a>
+        {% else %}
+        <button class="btn btn-disabled btn-block" disabled>
+          Out of Stock
+        </button>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <!-- No Products Message -->
+  <div class="empty-state">
+    <p class="empty-message">No products available yet.</p>
+    <p class="empty-subtitle">Check back soon for amazing deals!</p>
+  </div>
+  {% endif %}
+</section>
+<script>
+  let btn = document.getElementById("scroll-button");
+
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 0) {
+      btn.style.display = "block";
+    } else {
+      btn.style.display = "none";
+    }
+  });
+
+  btn.addEventListener("click", function () {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+</script>
+
 {% endblock %}

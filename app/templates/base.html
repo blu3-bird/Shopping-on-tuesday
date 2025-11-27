@@ -1,166 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Shopping On Tuesday{% endblock %}</title>
-    
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
+
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Link to external CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
     <!-- Header -->
     <header>
-        <nav>
-            <!-- Logo -->
-            <a href="/" class="logo">
-                <img src="{{ url_for('static', filename='uploads/logo.png') }}" 
-                     alt="Shopping On Tuesday" 
-                     onerror="this.style.display='none'">
-                <span>🛍️ Shopping On Tuesday</span>
-            </a>
-            
-            <!-- Navigation Links -->
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/products">Products</a></li>
-                <li><a href="/auth/login">Login</a></li>
-                <li><a href="/admin/">Admin</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <!-- Logo -->
+        <a href="/" class="logo">
+          <img
+            src="{{ url_for('static', filename='uploads/logo.png') }}"
+            alt="Dropship Store Logo"
+            onerror="this.style.display='none'"
+          />
+          <span>🛍️ Shopping On Tuesday</span>
+        </a>
+
+        <!-- Navigation Links -->
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/products">Products</a></li>
+          <li><a href="/auth/login">Login</a></li>
+          <li><a href="/admin/">Admin</a></li>
+        </ul>
+      </nav>
     </header>
-    
+
+    <!-- Main Content (filled by child templates) -->
     <main>
-        {% block content %}
-        
-        {% endblock %}
+      {% block content %}
+      <!-- Child templates put their content here -->
+      {% endblock %}
     </main>
-    
+
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <p>&copy; 2024 Shopping On Tuesday. Anime & Stationery</p>
-            
-            <div class="footer-links">
-                <a href="#" id="aboutLink">About Me</a>
-                <a href="https://instagram.com/blu3_bird_" target="_blank">Instagram</a>
-                <a href="https://github.com/blu3-bird" target="_blank">GitHub</a>
-            </div>
+      <div class="footer-content">
+        <p>&copy; 2024 Shopping On Tuesday. Anime & Stationery</p>
+
+        <div class="footer-links">
+          <a href="#" id="aboutLink">About Me</a>
+          <a href="https://instagram.com/yourhandle" target="_blank"
+            >Instagram</a
+          >
+          <a href="https://github.com/yourhandle" target="_blank">GitHub</a>
         </div>
+      </div>
     </footer>
-    
+
     <!-- About Me Modal -->
-<div id="aboutModal" class="modal">
-    <div class="modal-content">
+    <div id="aboutModal" class="modal">
+      <div class="modal-content">
         <button class="close-modal" onclick="closeModal()">&times;</button>
-        
+
         <div class="modal-header">
-            <img src="{{ url_for('static', filename='uploads/profile.jpg') }}" 
-                 alt="Pardeep Singh"
-                 onerror="this.src='https://ui-avatars.com/api/?name=Pardeep+Singh&size=80&background=3498db&color=fff'">
-            <div>
-                <h2>Pardeep Singh</h2>
-                <p class="creator-title">Open Source Contributor | Learner | Developer</p>
-            </div>
+          <img
+            src="{{ url_for('static', filename='uploads/profile.jpg') }}"
+            alt="Pardeep Singh"
+            onerror="this.src='https://ui-avatars.com/api/?name=Pardeep+Singh&size=80&background=3498db&color=fff'"
+          />
+          <div>
+            <h2>Pardeep Singh</h2>
+            <p style="color: var(--text-secondary); margin: 0">Learner</p>
+          </div>
         </div>
-        
+
         <div class="modal-body">
-            <p class="greeting">Yo 🦥</p>
-            <p class="bio">
-                I'm a Python developer and aspiring entrepreneur on a mission to 
-                learn by building. This project is my playground for exploring 
-                Flask, databases, and real-world web development.
-            </p>
-            
-            <div class="tech-stack">
-                <h4>🛠️ Tech Stack</h4>
-                <div class="tech-badges">
-                    <span class="tech-badge">Python</span>
-                    <span class="tech-badge">Flask</span>
-                    <span class="tech-badge">SQLAlchemy</span>
-                    <span class="tech-badge">HTML/CSS</span>
-                    <span class="tech-badge">JavaScript</span>
-                </div>
-            </div>
+          <p><strong>👋 Hey there!</strong></p>
+          <p>
+            I'm Pardeep Singh, a Python developer and aspiring entrepreneur.
+            This dropshipping platform is my journey into building real-world
+            applications while learning Flask and web development.
+          </p>
 
-            <div class="about-section">
-                <h4>🎯 What I'm About</h4>
-                <ul class="about-list">
-                    <li>Fueled by curiosity and coffee</li>
-                </ul>
-            </div>
+          <p><strong>🎯 What I Do:</strong></p>
+          <ul>
+            <li>🐍 Learning Python & Flask</li>
+            <li>🛍️ Dropshipping anime merchandise & stationery</li>
+            <li>💻 Building projects to learn by doing</li>
+            <li>📚 Focused on practical skills over theory</li>
+          </ul>
 
-            <div class="about-section">
-                <h4>💡 What's this Project?</h4>
-                <p class="project-info">
-                    A sleek Flask-powered mini store for my Instagram stationary page — featuring smooth product handling, clean UI, and a lightweight stack (Flask, SQLAlchemy, Jinja2, CSS).
-                </p>
-            </div>
-            
-            <div class="social-links">
-                <h4>📬 Let's Connect</h4>
-                <div class="social-buttons">
-                    <a href="https://github.com/blu3-bird" class="social-btn github" target="_blank">
-                        <span>GitHub</span>
-                    </a>
-                    <a href="https://instagram.com/blu3_bird_" class="social-btn instagram" target="_blank">
-                        <span>Instagram</span>
-                    </a>
-                </div>
-            </div>
+          <p><strong>🚀 This Project:</strong></p>
+          <p>
+            Built from scratch to understand web development, databases,
+            authentication, and deployment. Every line of code is a learning
+            experience!
+          </p>
 
-            <p class="footer-quote">
-                "Priate's Dreams.. have no end!" 🚀
-            </p>
+          <p><strong>📬 Connect:</strong></p>
+          <p>
+            Feel free to reach out if you're also learning or want to
+            collaborate!
+          </p>
+
+          <p style="margin-top: 1rem">
+            <a
+              href="https://instagram.com/blu3_bird_"
+              class="btn"
+              target="_blank"
+              >Instagram</a
+            >
+            <a href="https://github.com/blu3-bird" class="btn" target="_blank"
+              >GitHub</a
+            >
+          </p>
         </div>
+      </div>
     </div>
-</div>
-    
+
     <!-- JavaScript for Modal (Minimal!) -->
     <script>
-        // Open About Modal
-        document.getElementById('aboutLink').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('aboutModal').classList.add('active');
-        });
-        
-        // Close Modal
-        function closeModal() {
-            document.getElementById('aboutModal').classList.remove('active');
-        }
-        
-        // Close modal when clicking outside
-        document.getElementById('aboutModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
+      // Open About Modal
+      document
+        .getElementById("aboutLink")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          document.getElementById("aboutModal").classList.add("active");
         });
 
-        function filterProducts(category) {
-            // Get all product cards
-            const products = document.querySelectorAll('.product-card');
-            
-            // Get all filter buttons
-            const buttons = document.querySelectorAll('.filter-btn');
-            
-            // Remove active class from all buttons
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
-            // Add active class to clicked button
-            event.target.classList.add('active');
-            
-            // Show/hide products based on category
-            products.forEach(product => {
-                const productCategory = product.getAttribute('data-category');
-                
-                if (category === 'all') {
-                    product.classList.remove('hidden');
-                } else if (productCategory === category) {
-                    product.classList.remove('hidden');
-                } else {
-                    product.classList.add('hidden');
-                }
-            });
-        }
+      // Close Modal
+      function closeModal() {
+        document.getElementById("aboutModal").classList.remove("active");
+      }
+
+      // Close modal when clicking outside
+      document
+        .getElementById("aboutModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeModal();
+          }
+        });
+
+      function filterProducts(category) {
+        // Get all product cards
+        const products = document.querySelectorAll(".product-card");
+
+        // Get all filter buttons
+        const buttons = document.querySelectorAll(".filter-btn");
+
+        // Remove active class from all buttons
+        buttons.forEach((btn) => btn.classList.remove("active"));
+
+        // Add active class to clicked button
+        event.target.classList.add("active");
+
+        // Show/hide products based on category
+        products.forEach((product) => {
+          const productCategory = product.getAttribute("data-category");
+
+          if (category === "all") {
+            product.classList.remove("hidden");
+          } else if (productCategory === category) {
+            product.classList.remove("hidden");
+          } else {
+            product.classList.add("hidden");
+          }
+        });
+      }
     </script>
-</body>
+  </body>
 </html>
