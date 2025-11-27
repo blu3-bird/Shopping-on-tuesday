@@ -1,38 +1,48 @@
 /*   CSS VARIABLES (Design System) */
 :root {
     /* Primary Colors */
-    --primary-color: #2c3e50;      /* Dark blue-gray */
-    --secondary-color: #3498db;    /* Bright blue */
-    --accent-color: #e74c3c;       /* Red (for sale badges, etc.) */
-    
+    --primary-color: #2c3e50;
+    /* Dark blue-gray */
+    --secondary-color: #3498db;
+    /* Bright blue */
+    --accent-color: #e74c3c;
+    /* Red (for sale badges, etc.) */
+
     /* Background Colors */
-    --bg-color: #f8f9fa;           /* Light gray background */
-    --card-bg: #ffffff;            /* White for cards */
-    --header-bg: #2c3e50;          /* Header background */
-    --footer-bg: #34495e;          /* Footer background */
-    
+    --bg-color: #f8f9fa;
+    /* Light gray background */
+    --card-bg: #ffffff;
+    /* White for cards */
+    --header-bg: #2c3e50;
+    /* Header background */
+    --footer-bg: #34495e;
+    /* Footer background */
+
     /* Text Colors */
-    --text-primary: #333333;       /* Main text */
-    --text-secondary: #6c757d;     /* Secondary text */
-    --text-light: #ffffff;         /* White text */
-    
+    --text-primary: #333333;
+    /* Main text */
+    --text-secondary: #6c757d;
+    /* Secondary text */
+    --text-light: #ffffff;
+    /* White text */
+
     /* Border & Shadow */
     --border-color: #dee2e6;
-    --shadow: 0 2px 8px rgba(0,0,0,0.1);
-    --shadow-hover: 0 4px 12px rgba(0,0,0,0.15);
-    
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+
     /* Spacing */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 1.5rem;
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
-    
+
     /* Border Radius */
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 12px;
-    
+
     /* Container Width */
     --container-width: 1200px;
 }
@@ -145,10 +155,7 @@ footer {
     color: var(--secondary-color);
 }
 
-/* ========================================
-   MODAL (About Me)
-   ======================================== */
-
+/*    MODAL (About Me) */
 .modal {
     display: none;
     position: fixed;
@@ -157,8 +164,7 @@ footer {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
+    background-color: rgba(0, 0, 0, 0.5);
     animation: fadeIn 0.3s;
 }
 
@@ -174,14 +180,11 @@ footer {
     border-radius: var(--radius-lg);
     max-width: 500px;
     width: 90%;
-    max-height: 85vh;
-    overflow-y: auto;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-    animation: slideUp 0.3s ease-out;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s;
     position: relative;
 }
 
-/* Header Section */
 .modal-header {
     display: flex;
     align-items: center;
@@ -197,236 +200,33 @@ footer {
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid var(--secondary-color);
-    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
 }
 
 .modal-header h2 {
     color: var(--primary-color);
     margin: 0;
-    font-size: 1.5rem;
 }
 
-.creator-title {
-    color: var(--secondary-color);
-    margin: 0.25rem 0 0 0;
-    font-size: 0.9rem;
-    font-weight: 500;
+.modal-body {
+    color: var(--text-primary);
+    line-height: 1.8;
 }
 
-/* Close Button */
 .close-modal {
     position: absolute;
     top: var(--spacing-sm);
     right: var(--spacing-sm);
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: bold;
     color: var(--text-secondary);
     cursor: pointer;
     background: none;
     border: none;
-    transition: all 0.3s ease;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transition: color 0.3s;
 }
 
 .close-modal:hover {
     color: var(--accent-color);
-    background: rgba(231, 76, 60, 0.1);
-    transform: rotate(90deg);
-}
-
-/* Body Section */
-.modal-body {
-    color: var(--text-primary);
-    line-height: 1.7;
-}
-
-.greeting {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.bio {
-    color: var(--text-secondary);
-    margin-bottom: var(--spacing-md);
-}
-
-/* Tech Stack */
-.tech-stack {
-    margin-bottom: var(--spacing-md);
-}
-
-.tech-stack h4 {
-    color: var(--primary-color);
-    margin-bottom: 0.75rem;
-    font-size: 1rem;
-}
-
-.tech-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.tech-badge {
-    background: linear-gradient(135deg, var(--secondary-color), #2980b9);
-    color: var(--text-light);
-    padding: 0.35rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    transition: transform 0.2s ease;
-}
-
-.tech-badge:hover {
-    transform: translateY(-2px);
-}
-
-/* About Sections */
-.about-section {
-    margin-bottom: var(--spacing-md);
-}
-
-.about-section h4 {
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-}
-
-.about-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.about-list li {
-    padding: 0.4rem 0;
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-}
-
-.project-info {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    margin: 0;
-}
-
-/* Social Links */
-.social-links {
-    margin-bottom: var(--spacing-md);
-}
-
-.social-links h4 {
-    color: var(--primary-color);
-    margin-bottom: 0.75rem;
-    font-size: 1rem;
-}
-
-.social-buttons {
-    display: flex;
-    gap: 0.75rem;
-}
-
-.social-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.6rem 1.25rem;
-    border-radius: var(--radius-md);
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.social-btn.github {
-    background: #333;
-    color: white;
-}
-
-.social-btn.github:hover {
-    background: #555;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.social-btn.instagram {
-    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    color: white;
-}
-
-.social-btn.instagram:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4);
-}
-
-/* Footer Quote */
-.footer-quote {
-    text-align: center;
-    color: var(--text-secondary);
-    font-style: italic;
-    margin-top: var(--spacing-md);
-    padding-top: var(--spacing-md);
-    border-top: 1px solid var(--border-color);
-    font-size: 0.95rem;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* Scrollbar Styling */
-.modal-content::-webkit-scrollbar {
-    width: 6px;
-}
-
-.modal-content::-webkit-scrollbar-track {
-    background: var(--bg-color);
-    border-radius: 3px;
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-    background: var(--secondary-color);
-    border-radius: 3px;
-}
-
-/* Mobile Responsive */
-@media (max-width: 480px) {
-    .modal-content {
-        padding: var(--spacing-md);
-        width: 95%;
-    }
-    
-    .modal-header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .social-buttons {
-        flex-direction: column;
-    }
-    
-    .social-btn {
-        width: 100%;
-    }
 }
 
 /*   BUTTONS */
@@ -462,16 +262,22 @@ footer {
 
 /*ANIMATIONS */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes slideUp {
-    from { 
+    from {
         transform: translateY(50px);
         opacity: 0;
     }
-    to { 
+
+    to {
         transform: translateY(0);
         opacity: 1;
     }
@@ -527,28 +333,31 @@ footer {
     margin-top: var(--spacing-xs);
 }
 
-/* RESPONSIVE DESIGN */
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
 @media (max-width: 768px) {
     nav {
         flex-direction: column;
         gap: var(--spacing-sm);
     }
-    
+
     nav ul {
         flex-wrap: wrap;
         justify-content: center;
     }
-    
+
     .footer-content {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .product-grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
 }
-   /*HOMEPAGE*/
+
+/*HOMEPAGE*/
 
 /* Hero Section */
 .hero-section {
@@ -702,11 +511,11 @@ footer {
     .hero-section h1 {
         font-size: 1.8rem;
     }
-    
+
     .hero-subtitle {
         font-size: 1rem;
     }
-    
+
     .category-grid {
         grid-template-columns: 1fr;
     }
@@ -1032,20 +841,20 @@ footer {
         grid-template-columns: 1fr;
         gap: var(--spacing-md);
     }
-    
+
     .product-detail-image img,
     .product-image-placeholder {
         height: 300px;
     }
-    
+
     .product-detail-title {
         font-size: 1.5rem;
     }
-    
+
     .product-detail-price {
         font-size: 1.8rem;
     }
-    
+
     .product-detail-price-section {
         flex-direction: column;
         align-items: flex-start;
