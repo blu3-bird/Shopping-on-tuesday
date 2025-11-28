@@ -24,4 +24,5 @@ instance/
 .DS_Store
 Thumbs.db
 
-#icons
+#Icons
+icons/
