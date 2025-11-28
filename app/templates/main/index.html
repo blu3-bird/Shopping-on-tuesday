@@ -1,85 +1,94 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block title %}Home - Shopping On Tuesday{% endblock
+%} {% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+  <h1>🛍️ Welcome to Shopping On Tuesday</h1>
+  <p class="hero-subtitle">
+    Your one-stop shop for Anime Merchandise & Stationery
+  </p>
+  <a href="/products" class="btn btn-large">Browse All Products</a>
+</section>
 
-{% block title %}Home - Shopping On Tuesday{% endblock %}
+<!-- Categories -->
+<section class="categories-section">
+  <h2 class="section-title">Shop by Category</h2>
+  <div class="category-grid">
+    <div class="category-card">
+      <div class="category-icon">🎌</div>
+      <h3>Anime Merch</h3>
+      <p>Keychains, Posters, Figures</p>
+    </div>
+    <div class="category-card">
+      <div class="category-icon">📝</div>
+      <h3>Stationery</h3>
+      <p>Notebooks, Pens, Sticky Notes</p>
+    </div>
+  </div>
+</section>
 
-{% block content %}
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <h1>🛍️ Welcome to Shopping On Tuesday</h1>
-        <p class="hero-subtitle">Your one-stop shop for Anime Merchandise & Stationery</p>
-        <a href="/products" class="btn btn-large">Browse All Products</a>
-    </section>
+<!-- Featured Products -->
+<section class="products-section">
+  <h2 class="section-title">Featured Products</h2>
 
-    <!-- Categories -->
-    <section class="categories-section">
-        <h2 class="section-title">Shop by Category</h2>
-        <div class="category-grid">
-            <div class="category-card">
-                <div class="category-icon">🎌</div>
-                <h3>Anime Merch</h3>
-                <p>Keychains, Posters, Figures</p>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">📝</div>
-                <h3>Stationery</h3>
-                <p>Notebooks, Pens, Sticky Notes</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Products -->
-    <section class="products-section">
-        <h2 class="section-title">Featured Products</h2>
-        
-        {% if products %}
-            <div class="product-grid">
-                {% for product in products %}
-                    <div class="product-card">
-                        <!-- Product Image -->
-                        {% if product.image_url %}
-                            <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image">
-                        {% else %}
-                            <div class="product-image product-placeholder">
-                                {% if product.category == 'anime' %}
-                                    <span class="placeholder-icon">🎌</span>
-                                {% else %}
-                                    <span class="placeholder-icon">📝</span>
-                                {% endif %}
-                            </div>
-                        {% endif %}
-                        
-                        <!-- Product Info -->
-                        <div class="product-info">
-                            <h3 class="product-name">{{ product.name }}</h3>
-                            <p class="product-price">₹{{ product.price }}</p>
-                            
-                            <!-- Stock Status -->
-                            {% if product.stock > 0 %}
-                                <p class="product-stock in-stock">✓ In Stock ({{ product.stock }} available)</p>
-                            {% else %}
-                                <p class="product-stock out-of-stock">✗ Out of Stock</p>
-                            {% endif %}
-                            
-                            <!-- Buy Button -->
-                            {% if product.stock > 0 %}
-                                <a href="https://ig.me/m/blu3_bird_?text=Hi! I'm interested in {{ product.name }}" 
-                                   class="btn btn-block"
-                                   target="_blank">
-                                    Buy Now via Instagram
-                                </a>
-                            {% else %}
-                                <button class="btn btn-disabled btn-block" disabled>Out of Stock</button>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+  {% if products %}
+  <div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+      <!-- Product Image -->
+      {% if product.image_url %}
+      <img
+        src="{{ product.image_url }}"
+        alt="{{ product.name }}"
+        class="product-image"
+      />
+      {% else %}
+      <div class="product-image product-placeholder">
+        {% if product.category == 'anime' %}
+        <span class="placeholder-icon">🎌</span>
         {% else %}
-            <!-- No Products Message -->
-            <div class="empty-state">
-                <p class="empty-message">No products available yet.</p>
-                <p class="empty-subtitle">Check back soon for amazing deals!</p>
-            </div>
+        <span class="placeholder-icon">📝</span>
         {% endif %}
-    </section>
+      </div>
+      {% endif %}
+
+      <!-- Product Info -->
+      <div class="product-info">
+        <h3 class="product-name">{{ product.name }}</h3>
+        <p class="product-price">₹{{ product.price }}</p>
+
+        <!-- Stock Status -->
+        {% if product.stock > 0 %}
+        <p class="product-stock in-stock">
+          ✓ In Stock ({{ product.stock }} available)
+        </p>
+        {% else %}
+        <p class="product-stock out-of-stock">✗ Out of Stock</p>
+        {% endif %}
+
+        <!-- Buy Button -->
+        {% if product.stock > 0 %}
+        <a
+          href="https://ig.me/m/blu3_bird_?text=Hi! I'm interested in {{ product.name }}"
+          class="btn btn-block"
+          target="_blank"
+        >
+          Buy Now via Instagram
+        </a>
+        {% else %}
+        <button class="btn btn-disabled btn-block" disabled>
+          Out of Stock
+        </button>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <!-- No Products Message -->
+  <div class="empty-state">
+    <p class="empty-message">No products available yet.</p>
+    <p class="empty-subtitle">Check back soon for amazing deals!</p>
+  </div>
+  {% endif %}
+</section>
 {% endblock %}
