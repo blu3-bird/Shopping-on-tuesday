@@ -2,6 +2,9 @@ from flask import redirect, render_template, flash, url_for
 from flask_login import login_required, current_user
 from app.admin import admin
 from app.models import Product
+from sqlalchemy.exc import DataError , OperationalError , IntegrityError
+from app.admin import ProductForm
+from app.models import db
 
 @admin.route('/')
 @login_required
@@ -36,8 +39,43 @@ def products():
     products=Product.query.order_by(Product.created_at.desc()).all()
     return render_template('admin/product_detail.html',products=products)
 
-@admin.route('/add-product')
+@admin.route('/add-product', methods=['GET','POST'])
 @login_required
 def add_product():
-    """Add new product form"""
-    return "<h1>Add Product Form - Coming Soon!</h1><a href='/admin/'>← Back to Dashboard</a>"
+    """
+    add product
+    """
+    form = ProductForm()
+
+    if form.validate_on_submit():
+
+        product = Product(
+            name=form.name.data,
+            price=form.price.data,
+            category=form.category.data,
+            stock=form.stock.data,
+            description=form.description.data,
+            image_url=form.image_url.data
+        )
+
+        try:
+            db.session.add(product)
+            db.session.commit()
+
+            flash(f'Product {product.name} has been successfully added', 'success')
+
+            return redirect(url_for('admin.products_list'))
+        except DataError as e:
+            db.session.rollback()
+
+            raise e
+        except OperationalError as e:
+            db.session.rollback()
+
+            raise e
+        
+        except IntegrityError as e:
+            db.session.rollback()
+
+            raise e
+    return render_template('admin/add_product.html', form=form)
