@@ -14,7 +14,7 @@ def dashboard():
     anime_count=Product.query.filter_by(category='anime').count()
     stationary_count = Product.query.filter_by(category='stationary').count()
     low_stock=Product.query.filter(Product.stock <3).count()
-    out_of_stock = Product.query.filter(Product.stock == 0).count
+    out_of_stock = Product.query.filter(Product.stock == 0).count()
 
     recent_products = Product.query.order_by(Product.created_at.desc()).limit(5).all()
 
@@ -34,4 +34,10 @@ def products():
     """
 
     products=Product.query.order_by(Product.created_at.desc()).all()
-    return render_template('admin/product_list.html',products=products)
+    return render_template('admin/product_detail.html',products=products)
+
+@admin.route('/add-product')
+@login_required
+def add_product():
+    """Add new product form"""
+    return "<h1>Add Product Form - Coming Soon!</h1><a href='/admin/'>← Back to Dashboard</a>"
