@@ -43,3 +43,9 @@ def create_app(config_name = 'default'):
         db.create_all()
 
         return app
+    
+    # Error Handlers
+    from flask import render_template
+    @app.errorhandler(404)
+    def page_not_found(error):
+        return render_template('errors/404.html'), 404
