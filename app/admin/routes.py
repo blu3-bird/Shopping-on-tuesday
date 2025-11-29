@@ -79,3 +79,46 @@ def add_product():
 
             raise e
     return render_template('admin/add_product.html', form=form)
+
+@admin.route('/edit-product/<int: product_id>', methods=['GET','POST'])
+@login_required
+def edit_product(product_id):
+    """Edit product route"""
+
+    product = Product.query.get_or_404(product_id)
+
+    form = ProductForm(obj=product)
+
+    if form.validate_on_submit():
+
+        product.name=form.name.data
+        product.price = form.price.data
+        product.category = form.category.data
+        product.stock = form.stock.data
+        product.description = form.stock.data
+        product.image_url = form.image_url.data
+
+        try:
+            db.session.commit()
+
+            flash(f'Info Updated for Product: {product.name} has been updated!')
+
+            return redirect(url_for('admin.product_list'))
+        except DataError as e:
+            db.session.rollback()
+
+            raise e
+        
+        except IntegrityError as e:
+            db.session.rollback()
+
+            raise e
+        
+        except OperationalError as e:
+            db.session.rollback()
+
+            raise e
+        
+    return render_template('admin/edit_product.html', form=form, product=product)
+
+
