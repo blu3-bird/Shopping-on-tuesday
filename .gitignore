@@ -23,3 +23,6 @@ instance/
 #OS 
 .DS_Store
 Thumbs.db
+
+# Migrations - keep versions, ignore pycache
+migrations/__pycache__/
