@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}📦 All Products - Admin{% endblock %}
+
+{% block content %}
+    <!-- Page Header -->
+    <div class="admin-list-header">
+        <h1>📦 All Products</h1>
+        <div class="admin-list-actions">
+            <a href="{{ url_for('admin.add_product') }}" class="btn btn-primary">➕ Add Product</a>
+            <a href="{{ url_for('admin.dashboard') }}" class="btn btn-outline">← Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Products Table -->
+    {% if products %}
+        <div class="admin-table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Product Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td>#{{ product.id }}</td>
+                            <td>
+                                <strong>{{ product.name }}</strong>
+                                {% if product.description %}
+                                    <br>
+                                    <small class="text-muted">
+                                        {{ product.description[:50] }}{% if product.description|length > 50 %}...{% endif %}
+                                    </small>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="category-tag {{ product.category }}">
+                                    {{ product.category|capitalize }}
+                                </span>
+                            </td>
+                            <td>₹{{ product.price }}</td>
+                            <td>
+                                {% if product.stock == 0 %}
+                                    <span class="stock-tag out-of-stock">Out of Stock</span>
+                                {% elif product.stock < 5 %}
+                                    <span class="stock-tag low-stock">{{ product.stock }} left</span>
+                                {% else %}
+                                    <span class="stock-tag in-stock">{{ product.stock }}</span>
+                                {% endif %}
+                            </td>
+                            <td class="action-buttons">
+                                <a href="{{ url_for('admin.edit_product', product_id=product.id) }}" 
+                                   class="btn btn-small btn-edit">
+                                    ✏️ Edit
+                                </a>
+                                <form action="{{ url_for('admin.delete_product', product_id=product.id) }}" 
+                                      method="POST" 
+                                      class="delete-form"
+                                      onsubmit="return confirm('Are you sure you want to delete {{ product.name }}?');">
+                                    <button type="submit" class="btn btn-small btn-delete">
+                                        🗑️ Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <!-- Empty State -->
+        <div class="empty-state">
+            <div class="empty-icon">📦</div>
+            <p class="empty-message">No products yet!</p>
+            <p class="empty-subtitle">Add your first product to get started.</p>
+            <a href="{{ url_for('admin.add_product') }}" class="btn btn-primary">➕ Add First Product</a>
+        </div>
+    {% endif %}
+{% endblock %}
