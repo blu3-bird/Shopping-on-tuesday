@@ -37,7 +37,7 @@ def products_list():
     """
 
     products = Product.query.order_by(Product.created_at.desc()).all()
-    return render_template('admin/product_detail.html',products = products)
+    return render_template('main/products.html',products = products)
 
 @admin.route('/add-product', methods = ['GET', 'POST'])
 @login_required
