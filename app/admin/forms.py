@@ -12,8 +12,8 @@ class ProductForm(FlaskForm):
 
     stock = IntegerField('Stock',validators=[DataRequired(message='Stock is empty'),NumberRange(min=0, message='Stock cannot be negative')])
 
-    description = TextAreaField('Product Description',validators=[Length(max=1000, message='Word limit exceeds'),Optional])
+    description = TextAreaField('Product Description',validators=[Length(max=1000, message='Word limit exceeds'),Optional()])
 
-    image_url = StringField('Image URL',Optional)
+    image_url = StringField('Image URL',validators=[Optional()])
 
     submit = SubmitField('Add Product')
