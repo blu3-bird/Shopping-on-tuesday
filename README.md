@@ -96,6 +96,21 @@ Thanks goes to these wonderful people:
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/blu3-bird"><img src="https://avatars.githubusercontent.com/u/194448323?v=4?s=100" width="100px;" alt="Pardeep Singh"/><br /><sub><b>Pardeep Singh</b></sub></a><br /><a href="https://github.com/blu3-bird/Shopping-on-tuesday/commits?author=blu3-bird" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ZainabTravadi"><img src="https://avatars.githubusercontent.com/u/195310178?v=4?s=100" width="100px;" alt="Zainab Travadi"/><br /><sub><b>Zainab Travadi</b></sub></a><br /><a href="https://github.com/blu3-bird/Shopping-on-tuesday/commits?author=ZainabTravadi" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/blu3-bird"><img src="https://avatars.githubusercontent.com/u/194448323?v=4?s=100" width="100px;" alt="Pardeep Singh"/><br /><sub><b>Pardeep Singh</b></sub></a><br /><a href="https://github.com/blu3-bird/Shopping-on-tuesday/commits?author=blu3-bird" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/etaiami09-cmd"><img src="https://avatars.githubusercontent.com/u/235846178?v=4?s=100" width="100px;" alt="Etai codes"/><br /><sub><b>Etai codes</b></sub></a><br /><a href="https://github.com/blu3-bird/Shopping-on-tuesday/commits?author=etaiami09-cmd" title="Code">💻</a></td>
     </tr>
   </tbody>
