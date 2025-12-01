@@ -25,6 +25,7 @@ This project exists because of your help. Whether you fixed a bug, added a featu
 | <img src="https://github.com/VanshikaSultania.png" width="50"> | [Vanshika Sultania ](https://github.com/VanshikaSultania ) | 💻  |
 | <img src="https://github.com/etaiami09-cmd.png" width="50"> | [Etai ](https://github.com/etaiami09-cmd ) | 💻 🎨   |
 | <img src="https://github.com/MeloveGupta.png" width="50"> | [Melove Gupta ](https://github.com/MeloveGupta ) | 💻 🎨   |
+| <img src="https://github.com/ZainabTravadi.png" width="50"> | [Zainab Travadi ](https://github.com/ZainabTravadi ) | 📖 |
 
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
