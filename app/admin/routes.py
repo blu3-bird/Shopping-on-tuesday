@@ -1,3 +1,18 @@
+"""
+Admin route handlers for managing products and dashboard functionalities.
+
+This module contains all the routes related to the admin panel, including:
+- Displaying dashboard metrics
+- Listing products
+- Creating new products
+- Editing existing products
+- Deleting products
+
+These routes are protected by authentication and interact with the Product model
+to perform CRUD operations. Proper error handling and database transaction safety
+are implemented for all write operations.
+"""
+
 from flask import redirect, render_template, flash, url_for
 from flask_login import login_required, current_user
 from app.admin import admin
@@ -10,7 +25,14 @@ from app import db
 @login_required
 def dashboard():
     """
-    Docstring for dashboard
+    Display the admin dashboard with product statistics.
+
+    This route gathers various product-related metrics such as total count,
+    category-wise counts, low-stock product count, and recently added products.
+    The data is then rendered on the dashboard page.
+
+    Returns:
+        Response: Rendered admin dashboard HTML page with product statistics.
     """
 
     total_products=Product.query.count()
@@ -33,7 +55,12 @@ def dashboard():
 @login_required
 def products_list():
     """
-    Docstring for products
+    Display the list of all products for the admin.
+
+    Products are shown in descending order of their creation date.
+
+    Returns:
+        Response: Rendered HTML page displaying the product list.
     """
 
     products = Product.query.order_by(Product.created_at.desc()).all()
@@ -43,7 +70,14 @@ def products_list():
 @login_required
 def add_product():
     """
-    add product
+    Create a new product and add it to the database.
+
+    Handles both displaying the form (GET) and processing form submission (POST).
+    Validates user input and inserts a new product into the database.
+    If a database error occurs, the transaction is rolled back.
+
+    Returns:
+        Response: Rendered form page or redirect to the product list page.
     """
     form = ProductForm()
 
@@ -74,7 +108,19 @@ def add_product():
 @admin.route('/edit-product/<int:product_id>', methods=['GET', 'POST'])
 @login_required
 def edit_product(product_id):
-    """Edit product route"""
+    """
+    Edit the details of an existing product.
+
+    Fetches a product by ID and pre-fills the form with existing data.
+    On submission, updates the product with new values.
+    Rolls back if any database error occurs.
+
+    Args:
+        product_id (int): ID of the product to be edited.
+
+    Returns:
+        Response: Rendered edit form page or redirect after updating product.
+    """
 
     product = Product.query.get_or_404(product_id)
 
@@ -106,7 +152,17 @@ def edit_product(product_id):
 @admin.route('/delete-product/<int:product_id>',methods=['POST'])
 @login_required
 def delete_product(product_id):
-    """delete product route"""
+    """
+    Delete a product from the database.
+
+    Fetches the product by ID and removes it. Rolls back on errors.
+
+    Args:
+        product_id (int): ID of the product to delete.
+
+    Returns:
+        Response: Redirect to product list page after deletion or rollback.
+    """
 
     product = Product.query.get_or_404(product_id)
 
