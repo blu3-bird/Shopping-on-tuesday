@@ -1,5 +1,5 @@
 #app/__init__.py
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
@@ -41,6 +41,12 @@ def create_app(config_name = 'default'):
     app.register_blueprint(main)
     app.register_blueprint(admin, url_prefix='/admin')
     app.register_blueprint(auth, url_prefix='/auth')
+
+        # Error handlers
+    @app.errorhandler(500)
+    def internal_error(error):
+        """Handle 500 errors"""
+        return render_template('errors/500.html'), 500
 
     with app.app_context():
         db.create_all()
