@@ -77,6 +77,17 @@
                                 </a>
                             {% endif %}
                         </div>
+
+                        <div class="product-quick-actions">
+                            <a href="/product/{{ product.id }}" class="btn btn-sm btn-primary">View Details</a>
+                        
+                            {% if product.stock > 0 %}
+                            <a href="https://ig.me/m/blu3_bird_?text=Hi! I'm interested in {{ product.name }}" class="btn btn-sm btn-secondary"
+                                target="_blank">
+                                Buy Now
+                            </a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             {% endfor %}
