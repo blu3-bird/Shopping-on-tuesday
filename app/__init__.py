@@ -42,6 +42,13 @@ def create_app(config_name = 'default'):
     app.register_blueprint(admin, url_prefix='/admin')
     app.register_blueprint(auth, url_prefix='/auth')
 
+    # Custom error handlers
+    @app.errorhandler(404)
+    def page_not_found(e):
+        """Custom 404 error page"""
+        from flask import render_template
+        return render_template('error/404.html'), 404
+
     with app.app_context():
         db.create_all()
 
