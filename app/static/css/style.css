@@ -1552,3 +1552,89 @@ footer {
     background: #fee2e2;
     color: #991b1b;
 }
+
+
+/*Interactive Product Cards (Hover, Zoom, Quick Actions)*/
+
+/* Main card hover lift */
+.product-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+/* Lift + shadow on hover */
+.product-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+}
+
+/*IMAGE ZOOM ON HOVER*/
+
+.product-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+}
+
+/* Ensure image fills wrapper */
+.product-image-wrapper img,
+.product-image-wrapper .product-placeholder {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Smooth zoom */
+.product-image-wrapper img {
+    transition: transform 250ms ease;
+}
+
+/* Zoom image when hovering card */
+.product-card:hover .product-image-wrapper img {
+    transform: scale(1.09);
+}
+
+/*QUICK ACTIONS OVERLAY*/
+
+.product-quick-actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+
+    background: linear-gradient(
+        to top,
+        rgba(15, 23, 42, 0.85),
+        rgba(15, 23, 42, 0.0)
+    );
+
+    opacity: 0;
+    transform: translateY(18px);
+    pointer-events: none;
+
+    transition: opacity 200ms ease, transform 200ms ease;
+}
+
+/* Reveal on hover */
+.product-card:hover .product-quick-actions {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Style for quick-action buttons */
+.product-quick-actions .btn {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.9rem;
+    white-space: nowrap;
+    color: white;
+}
