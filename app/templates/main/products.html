@@ -23,22 +23,19 @@
     </div>
 
     <!-- Products Grid -->
-    {% if products %}
-        <div class="product-grid" id="productGrid">
-            {% for product in products %}
-                <div class="product-card" data-category="{{ product.category }}">
-                    <!-- Product Image -->
-                    {% if product.image_url %}
-                        <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image">
-                    {% else %}
-                        <div class="product-image product-placeholder">
-                            {% if product.category == 'anime' %}
-                                <span class="placeholder-icon">🎌</span>
-                            {% else %}
-                                <span class="placeholder-icon">📝</span>
-                            {% endif %}
-                        </div>
-                    {% endif %}
+    <div class="product-image-wrapper">
+    {% if product.image_url %}
+        <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image">
+    {% else %}
+        <div class="product-image product-placeholder">
+            {% if product.category == 'anime' %}
+                <span class="placeholder-icon">🎌</span>
+            {% else %}
+                <span class="placeholder-icon">📝</span>
+            {% endif %}
+        </div>
+    {% endif %}
+    </div>
 
                     <!-- Category Badge -->
                     <div class="category-badge {{ product.category }}">
