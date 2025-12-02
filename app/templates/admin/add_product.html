@@ -26,7 +26,7 @@
             <!-- Product Name -->
             <div class="form-group">
                 {{ form.name.label(class="form-label") }}
-                {{ form.name(class="form-input", placeholder="Enter product name") }}
+                {{ form.name(class="form-input") }}
                 {% if form.name.errors %}
                     <div class="form-errors">
                         {% for error in form.name.errors %}
@@ -40,7 +40,7 @@
             <div class="form-row">
                 <div class="form-group">
                     {{ form.price.label(class="form-label") }}
-                    {{ form.price(class="form-input", placeholder="299") }}
+                    {{ form.price(class="form-input") }}
                     {% if form.price.errors %}
                         <div class="form-errors">
                             {% for error in form.price.errors %}
@@ -52,7 +52,7 @@
 
                 <div class="form-group">
                     {{ form.stock.label(class="form-label") }}
-                    {{ form.stock(class="form-input", placeholder="10") }}
+                    {{ form.stock(class="form-input") }}
                     {% if form.stock.errors %}
                         <div class="form-errors">
                             {% for error in form.stock.errors %}
@@ -79,7 +79,7 @@
             <!-- Description -->
             <div class="form-group">
                 {{ form.description.label(class="form-label") }}
-                {{ form.description(class="form-input form-textarea", placeholder="Enter product description (optional)", rows="4") }}
+                {{ form.description(class="form-input form-textarea", rows="4") }}
                 {% if form.description.errors %}
                     <div class="form-errors">
                         {% for error in form.description.errors %}
@@ -92,7 +92,7 @@
             <!-- Image URL -->
             <div class="form-group">
                 {{ form.image_url.label(class="form-label") }}
-                {{ form.image_url(class="form-input", placeholder="https://example.com/image.jpg (optional)") }}
+                {{ form.image_url(class="form-input") }}
                 {% if form.image_url.errors %}
                     <div class="form-errors">
                         {% for error in form.image_url.errors %}
