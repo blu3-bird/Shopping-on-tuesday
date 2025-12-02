@@ -1,0 +1,67 @@
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    background: #f4f7f9;
+    color: #222;
+    text-align: center;
+    padding: 6rem 1rem;
+    margin: 0;
+}
+
+/* Card */
+.card {
+    display: inline-block;
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    max-width: 520px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Heading 500 */
+h1 {
+    font-size: 4rem;
+    margin: 0;
+    color: #e63946;
+    letter-spacing: -1px;
+}
+
+/* Paragraph */
+p {
+    margin: 0.5rem 0 1.25rem;
+    font-size: 1.1rem;
+    color: #444;
+}
+
+/* Button */
+.button {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.7rem 1.2rem;
+    text-decoration: none;
+    border-radius: 10px;
+    background: #007bff;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.button:hover {
+    background: #0069d9;
+    transform: translateY(-2px);
+}
+
+/* Small text */
+small {
+    display: block;
+    margin-top: 1rem;
+    color: #777;
+    font-size: 0.9rem;
+}

@@ -1,5 +1,5 @@
 #app/__init__.py
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
@@ -10,14 +10,13 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 migrate = Migrate()
 
-def create_app(config_name = 'default'):
+def create_app(config_name='default'):
 
     app = Flask(__name__)
-
     app.config.from_object(config[config_name])
 
-    instance_path = os.path.join(app.root_path,'..','instance')
-
+    # Create instance directory if needed
+    instance_path = os.path.join(app.root_path, '..', 'instance')
     if not os.path.exists(instance_path):
         os.makedirs(instance_path)
 
@@ -30,19 +29,27 @@ def create_app(config_name = 'default'):
 
     @login_manager.user_loader
     def load_user(user_id):
-        """to get Admin object"""
+        """To get Admin object"""
         from app.models import Admin
         return Admin.query.get(int(user_id))
 
-    from app.main.routes import main
-    from app.auth.routes import auth
-    from app.admin.routes import admin
+    # Import blueprints (CORRECT import — no circular import)
+    from app.main import main
+    from app.auth import auth
+    from app.admin import admin
 
+    # Register blueprints
     app.register_blueprint(main)
     app.register_blueprint(admin, url_prefix='/admin')
     app.register_blueprint(auth, url_prefix='/auth')
 
+    # ⭐ ADDING THE CUSTOM 500 ERROR HANDLER HERE ⭐
+    @app.errorhandler(500)
+    def internal_server_error(error):
+        return render_template("errors/500.html"), 500
+
+    # Create tables
     with app.app_context():
         db.create_all()
 
-        return app
+    return app
