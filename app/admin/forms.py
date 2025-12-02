@@ -34,15 +34,35 @@ class ProductForm(FlaskForm):
         ProductForm: A validated form instance used for product creation or editing.
     """
 
-    name = StringField('Product Name',validators=[DataRequired(message='Name of the product is required'),Length(min=3,max=50, message='Name must be between 3 to 50 characters')])
+    # Validation constants
+    NAME_MIN_LENGTH = 3
+    NAME_MAX_LENGTH = 50
+    PRICE_MIN = 1
+    STOCK_MIN = 0
+    DESCRIPTION_MAX_LENGTH = 1000
 
-    price = FloatField('Price of Product',validators=[DataRequired(message='Price is required'),NumberRange(min=1, message='Price of Product cant be negative')])
+    name = StringField('Product Name', validators=[
+        DataRequired(message='Name of the product is required'),
+        Length(min=NAME_MIN_LENGTH, max=NAME_MAX_LENGTH,
+               message=f'Name must be between {NAME_MIN_LENGTH} to {NAME_MAX_LENGTH} characters')
+    ])
+
+    price = FloatField('Price of Product', validators=[
+        DataRequired(message='Price is required'),
+        NumberRange(min=PRICE_MIN, message=f'Price of Product must be at least {PRICE_MIN}')
+    ])
 
     category = SelectField('Product Category',choices=[('anime','Anime'),('stationery','Stationery')],validators=[DataRequired(message='Category of product is required')])
 
-    stock = IntegerField('Stock',validators=[DataRequired(message='Stock is empty'),NumberRange(min=0, message='Stock cannot be negative')])
+    stock = IntegerField('Stock', validators=[
+        DataRequired(message='Stock is empty'),
+        NumberRange(min=STOCK_MIN, message=f'Stock cannot be less than {STOCK_MIN}')
+    ])
 
-    description = TextAreaField('Product Description',validators=[Length(max=1000, message='Word limit exceeds'),Optional()])
+    description = TextAreaField('Product Description', validators=[
+        Length(max=DESCRIPTION_MAX_LENGTH, message=f'Description cannot exceed {DESCRIPTION_MAX_LENGTH} characters'),
+        Optional()
+    ])
 
     image_url = StringField('Image URL',validators=[Optional()])
 
