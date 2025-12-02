@@ -1,0 +1,61 @@
+{
+  "projectName": "Shopping-on-tuesday",
+  "projectOwner": "blu3-bird",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "blu3-bird",
+      "name": "Pardeep Singh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/194448323?v=4",
+      "profile": "https://github.com/blu3-bird",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ZainabTravadi",
+      "name": "Zainab Travadi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/195310178?v=4",
+      "profile": "https://github.com/ZainabTravadi",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "etaiami09-cmd",
+      "name": "Etai codes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/235846178?v=4",
+      "profile": "https://github.com/etaiami09-cmd",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "MeloveGupta",
+      "name": "Melove Gupta",
+      "avatar_url": "https://avatars.githubusercontent.com/u/119809561?v=4",
+      "profile": "https://github.com/MeloveGupta",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "rooqidev",
+      "name": "Rooqidev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/227508742?v=4",
+      "profile": "https://github.com/rooqidev",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "commitType": "docs"
+}
