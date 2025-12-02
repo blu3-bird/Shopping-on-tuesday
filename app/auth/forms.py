@@ -27,7 +27,15 @@ class adminForm(FlaskForm):
         adminForm: A validated form instance used for admin authentication.
     """
 
-    username = StringField('Username',validators=[DataRequired(message='Username is required!'),Length(min=3, max=40, message='Username must be between 3 and 40.')])
+    # Validation constants
+    USERNAME_MIN_LENGTH = 3
+    USERNAME_MAX_LENGTH = 40
+
+    username = StringField('Username', validators=[
+        DataRequired(message='Username is required!'),
+        Length(min=USERNAME_MIN_LENGTH, max=USERNAME_MAX_LENGTH,
+               message=f'Username must be between {USERNAME_MIN_LENGTH} and {USERNAME_MAX_LENGTH}.')
+    ])
 
     password = PasswordField('Password',validators=[DataRequired(message='Password is required!')])
 
