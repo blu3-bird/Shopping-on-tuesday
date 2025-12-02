@@ -21,6 +21,7 @@ from sqlalchemy.exc import DataError , OperationalError , IntegrityError,SQLAlch
 from app.admin.forms import ProductForm
 from app import db
 
+
 @admin.route('/')
 @login_required
 def dashboard():
@@ -178,3 +179,4 @@ def delete_product(product_id):
         db.session.rollback()
         flash('Something went wrong, Please try again','error')
         return redirect(url_for('admin.products_list'))
+  
