@@ -39,6 +39,8 @@ class ProductForm(FlaskForm):
     NAME_MAX_LENGTH = 50
     PRICE_MIN = 1
     STOCK_MIN = 0
+    DISCOUNT_MIN = 0
+    DISCOUNT_MAX = 99
     DESCRIPTION_MAX_LENGTH = 1000
 
     name = StringField(
@@ -64,6 +66,21 @@ class ProductForm(FlaskForm):
             ),
         ],
         render_kw={"placeholder": "299"},
+    )
+
+    original_price = FloatField(
+        'Original Price',validators=[
+            Optional(),NumberRange(min=PRICE_MIN, message='Price can never be negative'),
+        ],
+        render_kw={'placeholder' :500}
+    )
+
+    discount_percentage = FloatField(
+        "Discount Percentage", validators=[
+            Optional(),
+            NumberRange(min=DISCOUNT_MIN, max=DISCOUNT_MAX, message=f'Discount must be between {DISCOUNT_MIN} and {DISCOUNT_MIN}')
+        ],
+        render_kw={'placeholder': '10%'}
     )
 
     category = SelectField(
