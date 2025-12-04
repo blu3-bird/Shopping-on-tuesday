@@ -63,6 +63,37 @@
                 </div>
             </div>
 
+            
+            <div class="form-row">
+                <!-- Original Price (MRP) -->
+                <div class="form-group">
+                    {{ form.original_price.label(class="form-label") }}
+                    {{ form.original_price(class="form-input", placeholder="e.g., 1999.00") }}
+                    <small class="form-hint">💡 Leave empty if no discount</small>
+                    {% if form.original_price.errors %}
+                        <div class="form-errors">
+                            {% for error in form.original_price.errors %}
+                                <span class="error-text">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Discount Percentage -->
+                <div class="form-group">
+                    {{ form.discount_percentage.label(class="form-label") }}
+                    {{ form.discount_percentage(class="form-input", placeholder="e.g., 20") }}
+                    <small class="form-hint">💡 Auto-calculated if left empty</small>
+                    {% if form.discount_percentage.errors %}
+                        <div class="form-errors">
+                            {% for error in form.discount_percentage.errors %}
+                                <span class="error-text">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
             <!-- Category -->
             <div class="form-group">
                 {{ form.category.label(class="form-label") }}
