@@ -41,29 +41,62 @@ class ProductForm(FlaskForm):
     STOCK_MIN = 0
     DESCRIPTION_MAX_LENGTH = 1000
 
-    name = StringField('Product Name', validators=[
-        DataRequired(message='Name of the product is required'),
-        Length(min=NAME_MIN_LENGTH, max=NAME_MAX_LENGTH,
-               message=f'Name must be between {NAME_MIN_LENGTH} to {NAME_MAX_LENGTH} characters')
-    ])
+    name = StringField(
+        'Product Name',
+        validators=[
+            DataRequired(message='Name of the product is required'),
+            Length(
+                min=NAME_MIN_LENGTH,
+                max=NAME_MAX_LENGTH,
+                message=f'Name must be between {NAME_MIN_LENGTH} to {NAME_MAX_LENGTH} characters'
+            ),
+        ],
+        render_kw={"placeholder": "Enter product name"},
+    )
 
-    price = FloatField('Price of Product', validators=[
-        DataRequired(message='Price is required'),
-        NumberRange(min=PRICE_MIN, message=f'Price of Product must be at least {PRICE_MIN}')
-    ])
+    price = FloatField(
+        'Price of Product',
+        validators=[
+            DataRequired(message='Price is required'),
+            NumberRange(
+                min=PRICE_MIN,
+                message=f'Price of Product must be at least {PRICE_MIN}',
+            ),
+        ],
+        render_kw={"placeholder": "299"},
+    )
 
-    category = SelectField('Product Category',choices=[('anime','Anime'),('stationery','Stationery')],validators=[DataRequired(message='Category of product is required')])
+    category = SelectField(
+        'Product Category',
+        choices=[('anime', 'Anime'), ('stationery', 'Stationery')],
+        validators=[DataRequired(message='Category of product is required')],
+    )
 
-    stock = IntegerField('Stock', validators=[
-        DataRequired(message='Stock is empty'),
-        NumberRange(min=STOCK_MIN, message=f'Stock cannot be less than {STOCK_MIN}')
-    ])
+    stock = IntegerField(
+        'Stock',
+        validators=[
+            DataRequired(message='Stock is empty'),
+            NumberRange(min=STOCK_MIN, message=f'Stock cannot be less than {STOCK_MIN}'),
+        ],
+        render_kw={"placeholder": "10"},
+    )
 
-    description = TextAreaField('Product Description', validators=[
-        Length(max=DESCRIPTION_MAX_LENGTH, message=f'Description cannot exceed {DESCRIPTION_MAX_LENGTH} characters'),
-        Optional()
-    ])
+    description = TextAreaField(
+        'Product Description',
+        validators=[
+            Length(
+                max=DESCRIPTION_MAX_LENGTH,
+                message=f'Description cannot exceed {DESCRIPTION_MAX_LENGTH} characters',
+            ),
+            Optional(),
+        ],
+        render_kw={"placeholder": "Enter product description (optional)"},
+    )
 
-    image_url = StringField('Image URL',validators=[Optional()])
+    image_url = StringField(
+        'Image URL',
+        validators=[Optional()],
+        render_kw={"placeholder": "https://i.postimg.cc/R032DzLF/8431562.jpg  (optional)"},
+    )
 
     submit = SubmitField('Add Product')
