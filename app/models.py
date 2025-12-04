@@ -46,6 +46,9 @@ class Product(db.Model):
     category = db.Column(db.String(50), nullable=False)
     image_url = db.Column(db.String(255))
 
+    original_price = db.Column(db.Float)
+    discount_percentage = db.Column(db.Float)
+
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -58,6 +61,34 @@ class Product(db.Model):
             str: Human-readable representation of the Product instance.
         """
         return f'<Product {self.name}>'
+    
+    @property
+    def has_discount(self):
+        """
+        Docstring for has_discount
+        
+        """
+        return self.original_price and self.original_price > self.price
+
+    @property
+    def discount_amount(self):
+        """"""
+        if self.has_product:
+            return self.original_price - self.price
+        return 0
+
+    @property 
+    def calculated_discount_percented(self):
+        """
+        Docstring for calculated_discount_percented
+        
+        :param self: Description
+        """
+        if self.discount_percentage:
+            return self.discount_percentage
+        if self.has_discount:
+            return int(((self.original_price - self.price) / self.original_price) * 100)
+        return 0
 
 class Admin(db.Model,UserMixin):
     """
