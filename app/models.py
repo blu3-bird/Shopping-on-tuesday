@@ -72,13 +72,13 @@ class Product(db.Model):
 
     @property
     def discount_amount(self):
-        """"""
-        if self.has_product:
+        """docstring"""
+        if self.has_discount:
             return self.original_price - self.price
         return 0
 
     @property 
-    def calculated_discount_percented(self):
+    def calculated_discount_percent(self):
         """
         Docstring for calculated_discount_percented
         
