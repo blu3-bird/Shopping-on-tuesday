@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}- Shopping On Tuesday{% endblock %}
+{% block title %}{{ product.name }} - Shopping On Tuesday{% endblock %}
 
 {% block content %}
     <!-- Breadcrumb Navigation -->
@@ -32,16 +32,49 @@
             <div class="category-badge-large {{ product.category }}">
                 {{ product.category|capitalize }}
             </div>
+
+            {% if product.has_discount %}
+                <div class="discount-badge-large">
+                    {{ product.calculated_discount_percentage }}% OFF
+                </div>
+            {% endif %}
+
         </div>
 
         <!-- Product Info Section -->
         <div class="product-detail-info">
             <h1 class="product-detail-title">{{ product.name }}</h1>
             
-            <!-- Price and Stock -->
+            
             <div class="product-detail-price-section">
-                <p class="product-detail-price">₹{{ product.price }}</p>
                 
+                <!-- Main Price Display -->
+                <div class="price-display">
+                    <!-- Selling Price (Main) -->
+                    <p class="product-detail-price">₹{{ product.price }}</p>
+                    
+                    
+                    {% if product.has_discount %}
+                        <p class="product-original-price">
+                            <span class="mrp-label">M.R.P.:</span>
+                            <span class="mrp-value">₹{{ product.original_price }}</span>
+                        </p>
+                    {% endif %}
+                </div>
+
+                <!-- Discount Info Box -->
+                {% if product.has_discount %}
+                    <div class="discount-info-box">
+                        <span class="discount-percent-badge">
+                            {{ product.calculated_discount_percent }}% OFF
+                        </span>
+                        <span class="savings-text">
+                            You save ₹{{ product.discount_amount|int }}
+                        </span> 
+                    </div>
+                {% endif %}
+                
+                <!-- Stock Status -->
                 {% if product.stock > 0 %}
                     <p class="stock-badge in-stock">
                         <span class="stock-icon">✓</span>
@@ -81,12 +114,23 @@
                     <span class="meta-value">{{ product.created_at.strftime('%B %d, %Y') }}</span>
                 </div>
                 {% endif %}
+                
+                
+                {% if product.has_discount %}
+                <div class="meta-item meta-discount">
+                    <span class="meta-label">Discount:</span>
+                    <span class="meta-value discount-highlight">
+                        {{ product.calculated_discount_percent }}% off
+                    </span>
+                </div>
+                {% endif %}
+                
             </div>
 
             <!-- Action Buttons -->
             <div class="product-detail-actions">
                 {% if product.stock > 0 %}
-                    <a href="https://ig.me/m/blu3_bird_?text=Hi! I want to buy {{ product.name }} (Product ID: {{ product.id }})" 
+                    <a href="https://ig.me/m/blu3_bird_?text=Hi! I want to buy {{ product.name }} (Product ID: {{ product.id }}) at ₹{{ product.price }}{% if product.has_discount %} ({{ product.calculated_discount_percent }}% off!){% endif %}" 
                        class="btn btn-large btn-primary"
                        target="_blank">
                         🛒 Buy Now via Instagram
@@ -117,6 +161,13 @@
         <div class="product-grid">
             {% for p in related_products %}
                 <div class="product-card">
+                    
+                    {% if p.has_discount %}
+                        <div class="product-discount-badge">
+                            {{ p.calculated_discount_percent }}% OFF
+                        </div>
+                    {% endif %}
+                    
                     {% if p.image_url %}
                         <img src="{{ p.image_url }}" alt="{{ p.name }}" class="product-image">
                     {% else %}
@@ -131,7 +182,17 @@
                     
                     <div class="product-info">
                         <h3 class="product-name">{{ p.name }}</h3>
-                        <p class="product-price">₹{{ p.price }}</p>
+                        
+                        
+                        <div class="product-price-container">
+                            <p class="product-price">₹{{ p.price }}</p>
+                            {% if p.has_discount %}
+                                <p class="product-original-price-small">
+                                    ₹{{ p.original_price }}
+                                </p>
+                            {% endif %}
+                        </div>
+                        
                         
                         {% if p.stock > 0 %}
                             <p class="product-stock in-stock">✓ In Stock</p>
