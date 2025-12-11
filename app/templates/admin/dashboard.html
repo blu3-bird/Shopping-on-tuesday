@@ -2,6 +2,10 @@
 
 {% block title %}Admin Dashboard - Shopping On Tuesday{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
 {% block content %}
     <!-- Dashboard Header -->
     <div class="dashboard-header">
