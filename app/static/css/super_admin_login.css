@@ -1,0 +1,219 @@
+/* Main Authentication Container */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-md);
+    min-height: calc(100vh - 200px); /* Adjust based on header/footer height */
+}
+
+/* Auth Card */
+.auth-card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 450px;
+    overflow: hidden;
+}
+
+/* Auth Header */
+.auth-header {
+    padding: var(--spacing-lg);
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.auth-header h1 {
+    margin-bottom: var(--spacing-xs);
+    color: var(--primary-color);
+    font-size: 1.8rem;
+}
+
+.auth-header p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Alert Messages */
+.alert {
+    margin: 0 var(--spacing-md);
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+}
+
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.1);
+    border: 1px solid rgba(40, 167, 69, 0.2);
+    color: #28a745;
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.2);
+    color: #dc3545;
+}
+
+.alert-warning {
+    background-color: rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+}
+
+.alert-info {
+    background-color: rgba(23, 162, 184, 0.1);
+    border: 1px solid rgba(23, 162, 184, 0.2);
+    color: #17a2b8;
+}
+
+/* Form */
+.auth-form {
+    padding: var(--spacing-lg);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+.form-input::placeholder {
+    color: #adb5bd;
+    font-size: 0.9rem;
+}
+
+.form-errors {
+    margin-top: var(--spacing-xs);
+}
+
+.error-text {
+    color: #dc3545;
+    font-size: 0.85rem;
+    display: block;
+}
+
+/* Checkbox */
+.form-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.checkbox-input {
+    margin-right: var(--spacing-xs);
+    width: 16px;
+    height: 16px;
+}
+
+.checkbox-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Submit Button */
+.btn-primary {
+    background-color: var(--secondary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-color);
+}
+
+.auth-submit {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-spinner {
+    display: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    margin-left: var(--spacing-xs);
+    animation: spinner 0.8s linear infinite;
+}
+
+/* When form is submitting, show spinner and change label opacity */
+.auth-form.submitting .btn-spinner {
+    display: inline-block;
+}
+
+.auth-form.submitting .btn-label {
+    opacity: 0.7;
+}
+
+@keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Auth Footer */
+.auth-footer {
+    padding: var(--spacing-md);
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    background-color: #f8f9fa;
+}
+
+.auth-footer a {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.auth-footer a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* Responsive styles */
+@media (max-width: 576px) {
+    .auth-card {
+        border-radius: 0;
+        box-shadow: none;
+        max-width: 100%;
+    }
+    
+    .auth-container {
+        padding: 0;
+    }
+    
+    .auth-header {
+        padding: var(--spacing-md);
+    }
+    
+    .auth-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .auth-form {
+        padding: var(--spacing-md);
+    }
+}
