@@ -2,6 +2,10 @@
 
 {% block title %}📦 All Products - Admin{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product_list.css') }}">
+{% endblock %}
+
 {% block content %}
     <!-- Page Header -->
     <div class="admin-list-header">
