@@ -2,6 +2,10 @@
 
 {% block title %}🔐Login - Shopping On Tuesday{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/super_admin_login.css') }}">
+{% endblock %}
+
 {% block content %}
     <div class="auth-container">
         <div class="auth-card">
