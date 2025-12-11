@@ -2,6 +2,10 @@
 
 {% block title %}{{ product.name }} - Shopping On Tuesday{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product_detail.css') }}">
+{% endblock %}
+
 {% block content %}
     <!-- Breadcrumb Navigation -->
     <nav class="breadcrumb">
