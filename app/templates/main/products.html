@@ -2,6 +2,10 @@
 
 {% block title %}All Products - Shopping On Tuesday{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/products.css') }}">
+{% endblock %}
+
 {% block content %}
     <!-- Page Header -->
     <div class="page-header">
