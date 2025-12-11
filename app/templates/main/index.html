@@ -2,6 +2,11 @@
 
 {% block title %}🏠Home - Shopping On Tuesday{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+
 {% block content %}
     <!-- Hero Section -->
     <section class="hero-section">
