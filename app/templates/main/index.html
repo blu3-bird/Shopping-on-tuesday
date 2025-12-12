@@ -32,6 +32,9 @@
         </div>
     </section>
 
+    {% from 'components/trust_badges.html' import render_trust_badges %}
+    {{ render_trust_badges() }}
+
     <!-- Featured Products -->
     <section class="products-section">
         <h2 class="section-title">Featured Products</h2>
