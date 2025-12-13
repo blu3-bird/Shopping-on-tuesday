@@ -49,6 +49,8 @@ class Product(db.Model):
     original_price = db.Column(db.Float)
     discount_percentage = db.Column(db.Float)
 
+    highlights = db.Column(db.Text)
+
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
