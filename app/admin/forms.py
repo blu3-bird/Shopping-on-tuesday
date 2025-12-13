@@ -83,6 +83,15 @@ class ProductForm(FlaskForm):
         render_kw={'placeholder': '10%'}
     )
 
+    highlights = TextAreaField(
+        "Product Highlights" , validators=[
+            Optional()
+        ],
+        render_kw={
+            'placeholder': "Product Highlights, (once per line)"
+        }
+    )
+
     category = SelectField(
         'Product Category',
         choices=[('anime', 'Anime'), ('stationery', 'Stationery')],
