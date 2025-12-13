@@ -89,6 +89,7 @@ def add_product():
             price = form.price.data,
             original_price = form.original_price.data,
             discount_percentage = form.discount_percentage.data,
+            highlights = form.highlights.data,
             category = form.category.data,
             stock = form.stock.data,
             description = form.description.data,
@@ -135,6 +136,7 @@ def edit_product(product_id):
         product.price = form.price.data
         product.original_price = form.original_price.data
         product.discount_percentage = form.discount_percentage.data
+        product.highlights = form.highlights.data
         product.category = form.category.data
         product.stock = form.stock.data
         product.description = form.description.data
