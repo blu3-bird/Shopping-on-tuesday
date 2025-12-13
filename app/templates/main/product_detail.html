@@ -102,6 +102,20 @@
                 {% endif %}
             </div>
 
+            <!--Product Highlights-->
+            {% if product.highlights %}
+            <div class="product-highlights-section">
+                <h3>Product Highlights</h3>
+                <ul class="hightlight-list">
+                    {% for highlight in product.highlights.split('\n') %}
+                        {% if highlight.strip() %}
+                            <li>{{ highlight.strip() }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
             <!--Trust badges-->
             {% from 'components/trust_badges.html' import render_trust_badges %}
 
