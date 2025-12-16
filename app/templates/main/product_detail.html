@@ -158,6 +158,36 @@
                        target="_blank">
                         🛒 Buy Now via Instagram
                     </a>
+
+                            <!-- Share Button -->
+                            <div class="share-button-container">
+                                <button class="btn btn-outline btn-large share-toggle-btn" onclick="toggleShareMenu()">
+                                    📤 Share Product
+                                    <span class="dropdown-arrow">▼</span>
+                                </button>
+                                
+                                <div class="share-dropdown" id="shareDropdown">
+                                    <!-- WhatsApp Share -->
+                                    <a href="https://wa.me/?text=Check out this {{ product.category }} product: {{ product.name }} for ₹{{ product.price }}! {{ request.url }}" 
+                                    target="_blank" 
+                                    class="share-option whatsapp">
+                                        <span class="share-icon">💬</span>
+                                        Share on WhatsApp
+                                    </a>
+                                    
+                                    <!-- Copy Link -->
+                                    <button onclick="copyProductLink()" class="share-option copy-link">
+                                        <span class="share-icon">🔗</span>
+                                        Copy Link
+                                    </button>
+                                    
+                                    <!-- Native Share (Mobile Only) -->
+                                    <button onclick="nativeShare()" class="share-option native-share" id="nativeShareBtn">
+                                        <span class="share-icon">📱</span>
+                                        More Options
+                                    </button>
+                                </div>
+                            </div>
                     <p class="purchase-note">
                         You'll be redirected to Instagram to complete your purchase
                     </p>

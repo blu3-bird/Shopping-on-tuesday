@@ -156,7 +156,7 @@
     </div>
 </div>
     
-    <!-- JavaScript for Modal (Minimal!) -->
+    <!-- JavaScript for Modal -->
     <script>
         // Open About Modal
         document.getElementById('aboutLink').addEventListener('click', function(e) {
@@ -219,6 +219,81 @@
                 closeBugModal();
             }
         });
+
+                // ================================
+        // SHARE BUTTON FUNCTIONALITY
+        // ================================
+        
+        function toggleShareMenu() {
+            const dropdown = document.getElementById('shareDropdown');
+            const button = document.querySelector('.share-toggle-btn');
+            
+            dropdown.classList.toggle('active');
+            button.classList.toggle('active');
+        }
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const container = document.querySelector('.share-button-container');
+            const dropdown = document.getElementById('shareDropdown');
+            const button = document.querySelector('.share-toggle-btn');
+            
+            if (container && !container.contains(event.target)) {
+                dropdown?.classList.remove('active');
+                button?.classList.remove('active');
+            }
+        });
+        
+        // Copy product link to clipboard
+        function copyProductLink() {
+            const url = window.location.href;
+            
+            navigator.clipboard.writeText(url).then(function() {
+                // Show success message
+                showCopySuccess();
+            }).catch(function(err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = url;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showCopySuccess();
+            });
+        }
+        
+        function showCopySuccess() {
+            const message = document.createElement('div');
+            message.className = 'copy-success';
+            message.textContent = '✓ Link copied to clipboard!';
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                message.remove();
+            }, 3000);
+        }
+        
+        // Native share (mobile only)
+        function nativeShare() {
+            const shareData = {
+                title: document.title,
+                text: 'Check out this product!',
+                url: window.location.href
+            };
+            
+            if (navigator.share) {
+                navigator.share(shareData);
+            }
+        }
+        
+        // Hide native share button if not supported
+        if (!navigator.share) {
+            const nativeBtn = document.getElementById('nativeShareBtn');
+            if (nativeBtn) {
+                nativeBtn.style.display = 'none';
+            }
+        }
     </script>
 </body>
 </html>
