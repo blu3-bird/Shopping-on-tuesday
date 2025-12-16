@@ -355,3 +355,126 @@
     font-weight: bold;
     font-size: 1.2rem;
 }
+ /*Share btn*/
+
+.share-button-container {
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.share-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
+.dropdown-arrow {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.share-toggle-btn.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.share-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin-top: 10px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.share-dropdown.active {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Share Options */
+.share-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    width: 100%;
+    border: none;
+    background: white;
+    text-decoration: none;
+    color: #2c3e50;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    font-size: 1rem;
+}
+
+.share-option:hover {
+    background: #f8f9fa;
+}
+
+.share-option .share-icon {
+    font-size: 1.3rem;
+}
+
+/* Specific Share Button Colors */
+.share-option.whatsapp:hover {
+    background: #e8f5e9;
+}
+
+.share-option.copy-link:hover {
+    background: #e3f2fd;
+}
+
+.share-option.native-share:hover {
+    background: #f3e5f5;
+}
+
+/* Hide native share on desktop */
+@media (min-width: 768px) {
+    .native-share {
+        display: none;
+    }
+}
+
+/* Copy feedback */
+.copy-success {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #27ae60;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 10000;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
