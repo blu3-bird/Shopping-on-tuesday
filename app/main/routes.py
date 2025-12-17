@@ -13,7 +13,7 @@ Routes:
 """
 
 from app.main import main
-from flask import render_template
+from flask import render_template, current_app
 from app.models import Product
 
 @main.route('/')
@@ -23,14 +23,18 @@ def index():
 
     Fetches a limited number of products from the database to display
     on the homepage as featured or latest items.
-
-    Returns:
-        Response: Rendered homepage template with product data.
     """
 
     products = Product.query.limit(6).all()
 
-    return render_template('main/index.html',products=products)
+    instagram_url = current_app.config["INSTAGRAM_URL"]
+
+    return render_template(
+        'main/index.html',
+        products=products,
+        instagram_url=instagram_url
+    )
+
 
 @main.route('/products')
 def products():

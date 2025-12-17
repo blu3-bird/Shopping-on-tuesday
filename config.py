@@ -30,3 +30,6 @@ config ={
     'production' : ProductionConfig,
     'default': DevelopmentConfig
 }
+
+
+INSTAGRAM_URL = "https://instagram.com/blu3_bird_"
