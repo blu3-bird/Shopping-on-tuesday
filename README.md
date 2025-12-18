@@ -71,6 +71,14 @@ email-validator: latest
    - Unix/MacOS: `source venv/bin/activate`
 4. Install dependencies: `pip install -r requirements.txt`
 
+## Screenshots
+
+### Homepage
+![Homepage](screenshots/homepage.png)
+
+### Products Page
+![Products](screenshots/products.png)
+
 
 ## 👥 Contributing
 
