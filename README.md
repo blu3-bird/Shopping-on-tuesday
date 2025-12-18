@@ -106,6 +106,7 @@ Thanks goes to these wonderful people:
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/leotrevizo37"><img src="https://avatars.githubusercontent.com/u/63759139?v=4?s=100" width="100px;" alt="Leo Trevizo"/><br /><sub><b>Leo Trevizo</b></sub></a><br /><a href="https://github.com/blu3-bird/Shopping-on-tuesday/commits?author=leotrevizo37" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/MalathiBalaraman31"><img src="https://avatars.githubusercontent.com/u/149077958?v=4?s=100" width="100px;" alt="Malathi "/><br /><sub><b>Malathi </b></sub></a><br /><a href="https://github.com/blu3-bird/Shopping-on-tuesday/commits?author=MalathiBalaraman31" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://anujcom.vercel.app/"><img src="https://avatars.githubusercontent.com/u/154220750?v=4?s=100" width="100px;" alt="Anuj Kumar"/><br /><sub><b>Anuj Kumar</b></sub></a><br /><a href="https://github.com/blu3-bird/Shopping-on-tuesday/commits?author=Anujpandey12345" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
