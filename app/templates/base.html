@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Shopping On Tuesday{% endblock %}</title>
-    
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     {% block extra_css %}{% endblock %}
 </head>
+
 <body>
     <!-- Header -->
     <header>
         <nav>
             <!-- Logo -->
             <a href="/" class="logo">
-                <img src="{{ url_for('static', filename='uploads/logo.png') }}" 
-                     alt="Shopping On Tuesday" 
-                     onerror="this.style.display='none'">
+                <img src="{{ url_for('static', filename='uploads/logo.png') }}" alt="Shopping On Tuesday"
+                    onerror="this.style.display='none'">
                 <span>🛍️ Shopping On Tuesday</span>
             </a>
-            
+
             <!-- Navigation Links -->
             <ul>
                 <li><a href="/">Home</a></li>
@@ -29,148 +30,154 @@
             </ul>
         </nav>
     </header>
-    
+
     <main>
         {% block content %}
-        
+
         {% endblock %}
     </main>
-    
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <p>&copy; 2024 Shopping On Tuesday. Anime & Stationery</p>
-            
+
             <div class="footer-links">
                 <a href="#" id="reportBugLink">🐛 Report a Bug</a>
                 <a href="#" id="aboutLink">About Me</a>
-                <a href="https://instagram.com/blu3_bird_" target="_blank">Instagram</a>
+                <a href="{{ instagram_url }}" target="_blank" rel="noopener noreferrer">
+                    Instagram
+                </a>
+
                 <a href="https://github.com/blu3-bird" target="_blank">GitHub</a>
             </div>
         </div>
     </footer>
-    
+
     <!-- About Me Modal -->
-<div id="aboutModal" class="modal">
-    <div class="modal-content">
-        <button class="close-modal" onclick="closeModal()">&times;</button>
-        
-        <div class="modal-header">
-            <img src="{{ url_for('static', filename='uploads/profile.jpg') }}" 
-                 alt="Pardeep Singh"
-                 onerror="this.src='https://ui-avatars.com/api/?name=Pardeep+Singh&size=80&background=3498db&color=fff'">
-            <div>
-                <h2>Pardeep Singh</h2>
-                <p class="creator-title">Open Source Contributor | Learner | Developer</p>
-            </div>
-        </div>
-        
-        <div class="modal-body">
-            <p class="greeting">Yo 🦥</p>
-            <p class="bio">
-                I'm a Python developer and aspiring entrepreneur on a mission to 
-                learn by building. This project is my playground for exploring 
-                Flask, databases, and real-world web development.
-            </p>
-            
-            <div class="tech-stack">
-                <h4>🛠️ Tech Stack</h4>
-                <div class="tech-badges">
-                    <span class="tech-badge">Python</span>
-                    <span class="tech-badge">Flask</span>
-                    <span class="tech-badge">SQLAlchemy</span>
-                    <span class="tech-badge">HTML/CSS</span>
-                    <span class="tech-badge">JavaScript</span>
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+
+            <div class="modal-header">
+                <img src="{{ url_for('static', filename='uploads/profile.jpg') }}" alt="Pardeep Singh"
+                    onerror="this.src='https://ui-avatars.com/api/?name=Pardeep+Singh&size=80&background=3498db&color=fff'">
+                <div>
+                    <h2>Pardeep Singh</h2>
+                    <p class="creator-title">Open Source Contributor | Learner | Developer</p>
                 </div>
             </div>
 
-            <div class="about-section">
-                <h4>🎯 What I'm About</h4>
-                <ul class="about-list">
-                    <li>Fueled by curiosity and coffee</li>
-                </ul>
-            </div>
+            <div class="modal-body">
+                <p class="greeting">Yo 🦥</p>
+                <p class="bio">
+                    I'm a Python developer and aspiring entrepreneur on a mission to
+                    learn by building. This project is my playground for exploring
+                    Flask, databases, and real-world web development.
+                </p>
 
-            <div class="about-section">
-                <h4>💡 What's this Project?</h4>
-                <p class="project-info">
-                    A sleek Flask-powered mini store for my Instagram stationery page — featuring smooth product handling, clean UI, and a lightweight stack (Flask, SQLAlchemy, Jinja2, CSS).
+                <div class="tech-stack">
+                    <h4>🛠️ Tech Stack</h4>
+                    <div class="tech-badges">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Flask</span>
+                        <span class="tech-badge">SQLAlchemy</span>
+                        <span class="tech-badge">HTML/CSS</span>
+                        <span class="tech-badge">JavaScript</span>
+                    </div>
+                </div>
+
+                <div class="about-section">
+                    <h4>🎯 What I'm About</h4>
+                    <ul class="about-list">
+                        <li>Fueled by curiosity and coffee</li>
+                    </ul>
+                </div>
+
+                <div class="about-section">
+                    <h4>💡 What's this Project?</h4>
+                    <p class="project-info">
+                        A sleek Flask-powered mini store for my Instagram stationery page — featuring smooth product
+                        handling, clean UI, and a lightweight stack (Flask, SQLAlchemy, Jinja2, CSS).
+                    </p>
+                </div>
+
+                <div class="social-links">
+                    <h4>📬 Let's Connect</h4>
+                    <div class="social-buttons">
+                        <a href="https://github.com/blu3-bird" class="social-btn github" target="_blank">
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://instagram.com/blu3_bird_" class="social-btn instagram" target="_blank">
+                            <span>Instagram</span>
+                        </a>
+                    </div>
+                </div>
+
+                <p class="footer-quote">
+                    "Priate's Dreams.. have no end!" 🚀
                 </p>
             </div>
-            
-            <div class="social-links">
-                <h4>📬 Let's Connect</h4>
-                <div class="social-buttons">
-                    <a href="https://github.com/blu3-bird" class="social-btn github" target="_blank">
-                        <span>GitHub</span>
-                    </a>
-                    <a href="https://instagram.com/blu3_bird_" class="social-btn instagram" target="_blank">
-                        <span>Instagram</span>
-                    </a>
+        </div>
+    </div>
+    <!-- Report Bug Modal -->
+    <div id="reportBugModal" class="modal bug-modal">
+        <div class="modal-content bug-modal-content">
+            <button class="close-modal" onclick="closeBugModal()">&times;</button>
+
+            <div class="modal-header bug-header">
+                <p class="bug-symbol">🐛</p>
+                <p class="bug-header-text">Report A Bug</p>
+            </div>
+
+            <div class="modal-body">
+                <div class="bug-description">
+                    <label for="describe-bug-area" class="bug-describe-request">What went wrong?</label>
+                    <textarea class="bug-describe-area" id="describe-bug-area"
+                        placeholder="Describe the bug"></textarea>
                 </div>
-            </div>
+                <div class="where-happen">
+                    <label class="where-happen-text" for="where-happen-area">Where did this happen?</label>
+                    <textarea class="where-happen-area" id="where-happen-area" placeholder="link"></textarea>
+                </div>
+                <div class="attach-files">
+                    <p class="attach-files-text">please attach any related files (screenshots, screen recordings, etc)
+                    </p>
+                    <label for="file-upload" class="upload-label">Upload Files</label>
+                    <input type="file" id="file-upload" class="file-input">
+                </div>
 
-            <p class="footer-quote">
-                "Priate's Dreams.. have no end!" 🚀
-            </p>
+                <div class="contact-info">
+                    <label class="contact-info-request" for="contact-info-area">Please enter your contact info</label>
+                    <input type="text" class="contact-info-area" id="contact-info-area"
+                        placeholder="Email adress, Phone number, etc">
+                </div>
+
+                <div class="send-reprot">
+                    <button class="send-button">Send Bug Report</button>
+                </div>
+                <p class="footer-quote">
+                    Thank you for your assistance!
+                </p>
+            </div>
         </div>
     </div>
-</div>
-<!-- Report Bug Modal -->
-<div id="reportBugModal" class="modal bug-modal">
-    <div class="modal-content bug-modal-content">
-        <button class="close-modal" onclick="closeBugModal()">&times;</button>
-        
-        <div class="modal-header bug-header">
-            <p class="bug-symbol">🐛</p>
-            <p class="bug-header-text">Report A Bug</p>
-        </div>
-        
-        <div class="modal-body">
-            <div class="bug-description">
-                <label for="describe-bug-area" class="bug-describe-request">What went wrong?</label>
-                <textarea class="bug-describe-area" id="describe-bug-area" placeholder="Describe the bug"></textarea>
-            </div>
-            <div class="where-happen">
-                <label class="where-happen-text" for="where-happen-area">Where did this happen?</label>
-                <textarea class="where-happen-area" id="where-happen-area" placeholder="link"></textarea>
-            </div>
-            <div class="attach-files">
-                <p class="attach-files-text">please attach any related files (screenshots, screen recordings, etc)</p>
-                <label for="file-upload" class="upload-label">Upload Files</label>
-                <input type="file" id="file-upload" class="file-input">
-            </div>
 
-            <div class="contact-info">
-                <label class="contact-info-request" for="contact-info-area">Please enter your contact info</label>
-                <input type="text" class="contact-info-area" id="contact-info-area" placeholder="Email adress, Phone number, etc">
-            </div>
-            
-            <div class="send-reprot">
-                <button class="send-button">Send Bug Report</button>
-            </div>
-            <p class="footer-quote">
-                Thank you for your assistance!
-            </p>
-        </div>
-    </div>
-</div>
-    
     <!-- JavaScript for Modal -->
     <script>
         // Open About Modal
-        document.getElementById('aboutLink').addEventListener('click', function(e) {
+        document.getElementById('aboutLink').addEventListener('click', function (e) {
             e.preventDefault();
             document.getElementById('aboutModal').classList.add('active');
         });
-        
+
         // Close Modal
         function closeModal() {
             document.getElementById('aboutModal').classList.remove('active');
         }
-        
+
         // Close modal when clicking outside
-        document.getElementById('aboutModal').addEventListener('click', function(e) {
+        document.getElementById('aboutModal').addEventListener('click', function (e) {
             if (e.target === this) {
                 closeModal();
             }
@@ -179,20 +186,20 @@
         function filterProducts(category) {
             // Get all product cards
             const products = document.querySelectorAll('.product-card');
-            
+
             // Get all filter buttons
             const buttons = document.querySelectorAll('.filter-btn');
-            
+
             // Remove active class from all buttons
             buttons.forEach(btn => btn.classList.remove('active'));
-            
+
             // Add active class to clicked button
             event.target.classList.add('active');
-            
+
             // Show/hide products based on category
             products.forEach(product => {
                 const productCategory = product.getAttribute('data-category');
-                
+
                 if (category === 'all') {
                     product.classList.remove('hidden');
                 } else if (productCategory === category) {
@@ -203,55 +210,55 @@
             });
         }
         // bug report modal
-        document.getElementById('reportBugLink').addEventListener('click', function(e) {
+        document.getElementById('reportBugLink').addEventListener('click', function (e) {
             e.preventDefault();
             document.getElementById('reportBugModal').classList.add('active');
         });
-        
+
         // Close Modal
         function closeBugModal() {
             document.getElementById('reportBugModal').classList.remove('active');
         }
-        
+
         // Close modal when clicking outside
-        document.getElementById('reportBugModal').addEventListener('click', function(e) {
+        document.getElementById('reportBugModal').addEventListener('click', function (e) {
             if (e.target === this) {
                 closeBugModal();
             }
         });
 
-                // ================================
+        // ================================
         // SHARE BUTTON FUNCTIONALITY
         // ================================
-        
+
         function toggleShareMenu() {
             const dropdown = document.getElementById('shareDropdown');
             const button = document.querySelector('.share-toggle-btn');
-            
+
             dropdown.classList.toggle('active');
             button.classList.toggle('active');
         }
-        
+
         // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             const container = document.querySelector('.share-button-container');
             const dropdown = document.getElementById('shareDropdown');
             const button = document.querySelector('.share-toggle-btn');
-            
+
             if (container && !container.contains(event.target)) {
                 dropdown?.classList.remove('active');
                 button?.classList.remove('active');
             }
         });
-        
+
         // Copy product link to clipboard
         function copyProductLink() {
             const url = window.location.href;
-            
-            navigator.clipboard.writeText(url).then(function() {
+
+            navigator.clipboard.writeText(url).then(function () {
                 // Show success message
                 showCopySuccess();
-            }).catch(function(err) {
+            }).catch(function (err) {
                 // Fallback for older browsers
                 const textArea = document.createElement('textarea');
                 textArea.value = url;
@@ -262,18 +269,18 @@
                 showCopySuccess();
             });
         }
-        
+
         function showCopySuccess() {
             const message = document.createElement('div');
             message.className = 'copy-success';
             message.textContent = '✓ Link copied to clipboard!';
             document.body.appendChild(message);
-            
+
             setTimeout(() => {
                 message.remove();
             }, 3000);
         }
-        
+
         // Native share (mobile only)
         function nativeShare() {
             const shareData = {
@@ -281,12 +288,12 @@
                 text: 'Check out this product!',
                 url: window.location.href
             };
-            
+
             if (navigator.share) {
                 navigator.share(shareData);
             }
         }
-        
+
         // Hide native share button if not supported
         if (!navigator.share) {
             const nativeBtn = document.getElementById('nativeShareBtn');
@@ -296,4 +303,5 @@
         }
     </script>
 </body>
+
 </html>

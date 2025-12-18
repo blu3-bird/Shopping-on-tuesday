@@ -14,6 +14,7 @@ def create_app(config_name='default'):
 
     app = Flask(__name__)
     app.config.from_object(config[config_name])
+    app.config["INSTAGRAM_URL"] = "https://instagram.com/blu3_bird_"
 
     # Create instance directory if needed
     instance_path = os.path.join(app.root_path, '..', 'instance')
