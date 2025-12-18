@@ -90,6 +90,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Anujpandey12345",
+      "name": "Anuj Kumar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/154220750?v=4",
+      "profile": "https://anujcom.vercel.app/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
