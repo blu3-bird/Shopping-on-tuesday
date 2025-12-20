@@ -1,149 +1,61 @@
 <!-- TOP BANNER -->
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:ff00c8,100:00c6ff&height=160&text=Shopping-on-Tuesday&fontSize=48&fontColor=ffffff&animation=twinkling"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00c6ff,100:ff00c8&height=160&text=pandas-and-numpy&fontSize=48&fontColor=ffffff&animation=twinkling"/>
 </div>
 
-
 <p align="center">
-  <img src="https://img.shields.io/badge/-Python-blue?logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/License-MIT-green" />
-  <img src="https://img.shields.io/badge/Flask-App-orange?logo=flask&logoColor=white" />
+  <img src="https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/Pandas-🐼-green" />
+  <img src="https://img.shields.io/badge/NumPy-🔢-orange" />
+  <img src="https://img.shields.io/badge/Status-Active-purple" />
 </p>
 
+---
 
 ## 📝 Description
 
-Shopping-on-Tuesday is a clean and beginner-friendly e-commerce platform built for Instagram-based stationery shops.  
-Powered by **Flask + SQLAlchemy**, it delivers a smooth workflow — from browsing products to signing in — without unnecessary overhead.
+This repo is my personal **data playground** for mastering Pandas and NumPy.  
+It includes notes, practice code, and mini experiments built around real data tasks like filtering, cleaning, reshaping, and quick visual checks.
 
-If you want something minimal but functional, this project is the sweet spot.
-
----
-
-## 🛠️ Tech Stack
-
-- 🐍 Python  
-- 🔥 Flask  
-- 🗄️ SQLAlchemy  
-- 🎨 Jinja2  
-- 🌐 HTML / CSS / JavaScript  
+In short:  
+**Just me learning data by messing with data.**
 
 ---
 
-## 📦 Key Dependencies
+## 🐼 What I’m Learning
 
-Here’s the clean format you wanted:
-
-- **Flask** → `3.1.2`  
-- **Flask-Login** → `0.6.3`  
-- **Flask-SQLAlchemy** → `3.1.1`  
-- **Flask-WTF** → `1.2.2`  
-- **Pillow** → `12.0.0`  
-- **Email Validator** → `latest`  
-
----
-
-## 📁 Project Structure
-
-```
-.
-├── LICENSE
-├── app
-│   ├── __init__.py
-│   ├── admin
-│   │   ├── __init__.py
-│   │   └── routes.py
-│   ├── auth
-│   │   ├── __init__.py
-│   │   ├── forms.py
-│   │   └── routes.py
-│   ├── main
-│   │   ├── __init__.py
-│   │   └── routes.py
-│   ├── models.py
-│   ├── static
-│   │   ├── css
-│   │   │   └── style.css
-│   │   └── js
-│   │       └── main.js
-│   └── templates
-│       ├── admin
-│       │   └── dashboard.html
-│       ├── auth
-│       │   └── login.html
-│       ├── base.html
-│       └── main
-│           ├── index.html
-│           ├── product_detail.html
-│           └── products.html
-├── config.py
-├── requirements.txt
-└── run.py
-```
-
-## 🛠️ Development Setup
-
-### Python Setup
-1. Install Python (v3.8+ recommended)
-2. Create a virtual environment: `python -m venv venv`
-3. Activate the environment:
-   - Windows: `venv\Scripts\activate`
-   - Unix/MacOS: `source venv/bin/activate`
-4. Install dependencies: `pip install -r requirements.txt`
-
-
-## 👥 Contributing
-
-Contributions are welcome! Here's how you can help:
-
-1. **Fork** the repository
-2. **Clone** your fork: `git clone https://github.com/blu3-bird/Shopping-on-tuesday.git`
-3. **Create** a new branch: `git checkout -b feature/your-feature`
-4. **Commit** your changes: `git commit -am 'Add some feature'`
-5. **Push** to your branch: `git push origin feature/your-feature`
-6. **Open** a pull request
-
-Please ensure your code follows the project's style guidelines and includes tests where applicable.
-
-## 🌟 Contributors
-
-<!-- ALL-CONTRIBUTORS-LIST:START -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-
-<table>
-<tbody>
- <tr>
-   <td align="center" width="14.28%"><a href="https://github.com/blu3-bird"><img src="https://avatars.githubusercontent.com/u/194448323?v=4?s=100" width="100px;" /><br /><sub><b>Pardeep Singh</b></sub></a></td>
-   <td align="center" width="14.28%"><a href="https://github.com/ZainabTravadi"><img src="https://avatars.githubusercontent.com/u/195310178?v=4?s=100" width="100px;" /><br /><sub><b>Zainab Travadi</b></sub></a></td>
-   <td align="center" width="14.28%"><a href="https://github.com/etaiami09-cmd"><img src="https://avatars.githubusercontent.com/u/235846178?v=4?s=100" width="100px;" /><br /><sub><b>Etai Codes</b></sub></a></td>
-   <td align="center" width="14.28%"><a href="https://github.com/MeloveGupta"><img src="https://avatars.githubusercontent.com/u/119809561?v=4?s=100" width="100px;" /><br /><sub><b>Melove Gupta</b></sub></a></td>
-   <td align="center" width="14.28%"><a href="https://github.com/rooqidev"><img src="https://avatars.githubusercontent.com/u/227508742?v=4?s=100" width="100px;" /><br /><sub><b>Rooqidev</b></sub></a></td>
-   <td align="center" width="14.28%"><a href="https://github.com/Padhmashikha"><img src="https://avatars.githubusercontent.com/u/219302428?v=4?s=100" width="100px;" /><br /><sub><b>Padhmashikha Iyapparaju</b></sub></a></td>
-   <td align="center" width="14.28%"><a href="https://github.com/MVGRAO"><img src="https://avatars.githubusercontent.com/u/134282307?v=4?s=100" width="100px;" /><br /><sub><b>Venkata Gajapathi Rao Mugunda</b></sub></a></td>
- </tr>
- <tr>
-   <td align="center" width="14.28%"><a href="https://github.com/leotrevizo37"><img src="https://avatars.githubusercontent.com/u/63759139?v=4?s=100" width="100px;" /><br /><sub><b>Leo Trevizo</b></sub></a></td>
-   <td align="center" width="14.28%"><a href="https://github.com/MalathiBalaraman31"><img src="https://avatars.githubusercontent.com/u/149077958?v=4?s=100" width="100px;" /><br /><sub><b>Malathi</b></sub></a></td>
-   <td align="center" width="14.28%"><a href="https://anujcom.vercel.app/"><img src="https://avatars.githubusercontent.com/u/154220750?v=4?s=100" width="100px;" /><br /><sub><b>Anuj Kumar</b></sub></a></td>
- </tr>
-</tbody>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+- Filtering, slicing, querying data  
+- Cleaning and fixing messy datasets  
+- Working with missing values  
+- Grouping, merging, reshaping  
+- Array operations, stats, math  
+- Broadcasting & indexing  
+- Tiny data experiments for fun  
 
 ---
 
-## 📜 License
+## 🚀 Purpose
 
-This project is licensed under the **MIT License**.
+To build a clean and repeatable Python data workflow while actually *doing* stuff —  
+not just reading theory.
+
+This repo helps me:
+
+- Train my intuition for data  
+- Build muscle memory with Pandas + NumPy  
+- Try ideas quickly  
+- Track my progress in one place  
+
+---
+
+## ⭐ Support
+
+If this repo matches your vibe, drop a **⭐ star** —  
+it genuinely keeps me motivated ✨
 
 ---
 
 <!-- BOTTOM BANNER -->
 <div align="center">
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:ff00c8,100:00c6ff&height=160&section=footer&fontSize=0&animation=twinkling"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00c6ff,100:ff00c8&height=160&section=footer&fontSize=0&animation=twinkling"/>
 </div>
-
