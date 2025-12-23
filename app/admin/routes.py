@@ -16,6 +16,7 @@ are implemented for all write operations.
 from flask import redirect, render_template, flash, url_for
 from flask_login import login_required, current_user
 from app.admin import admin
+from app.constants import LOW_STOCK_THRESHOLD, RECENT_PRODUCTS_LIMIT, CATEGORY_ANIME, CATEGORY_STATIONERY
 from app.models import Product
 from sqlalchemy.exc import DataError , OperationalError , IntegrityError,SQLAlchemyError
 from app.admin.forms import ProductForm
@@ -37,12 +38,12 @@ def dashboard():
     """
 
     total_products=Product.query.count()
-    anime_count=Product.query.filter_by(category='anime').count()
-    stationery_count = Product.query.filter_by(category='stationery').count()
-    low_stock=Product.query.filter(Product.stock <3).count()
+    anime_count=Product.query.filter_by(category=CATEGORY_ANIME).count()
+    stationery_count = Product.query.filter_by(category=CATEGORY_STATIONERY).count()
+    low_stock=Product.query.filter(Product.stock < LOW_STOCK_THRESHOLD).count()
     out_of_stock = Product.query.filter(Product.stock == 0).count()
 
-    recent_products = Product.query.order_by(Product.created_at.desc()).limit(5).all()
+    recent_products = Product.query.order_by(Product.created_at.desc()).limit(RECENT_PRODUCTS_LIMIT).all()
 
     return render_template('admin/dashboard.html',
                            total_products=total_products,
