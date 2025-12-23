@@ -14,6 +14,13 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, IntegerField, FloatField , TextAreaField
 from wtforms.validators import DataRequired, NumberRange, Length, Optional
 
+from app.constants import CATEGORY_ANIME, CATEGORY_STATIONERY
+
+PRODUCT_CATEGORIES = [
+    (CATEGORY_ANIME, 'Anime'),
+    (CATEGORY_STATIONERY, 'Stationery')
+]
+
 class ProductForm(FlaskForm):
     """
     Form for creating or editing product information.
@@ -94,7 +101,7 @@ class ProductForm(FlaskForm):
 
     category = SelectField(
         'Product Category',
-        choices=[('anime', 'Anime'), ('stationery', 'Stationery')],
+        choices=PRODUCT_CATEGORIES,
         validators=[DataRequired(message='Category of product is required')],
     )
 
