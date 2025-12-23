@@ -14,6 +14,7 @@ Routes:
 
 from app.main import main
 from flask import render_template, current_app
+from app.constants import FEATURED_PRODUCTS_LIMIT, RELATED_PRODUCTS_LIMIT
 from app.models import Product
 
 @main.route('/')
@@ -25,13 +26,13 @@ def index():
     on the homepage as featured or latest items.
     """
 
-    products = Product.query.limit(6).all()
+    featured_products = Product.query.limit(FEATURED_PRODUCTS_LIMIT).all()
 
     instagram_url = current_app.config["INSTAGRAM_URL"]
 
     return render_template(
         'main/index.html',
-        products=products,
+        products=featured_products,
         instagram_url=instagram_url
     )
 
@@ -72,7 +73,7 @@ def product_detail(product_id):
 
     related_product = Product.query.filter(
         Product.category == product.category,
-        Product.id != product.id).limit(4).all()
+        Product.id != product.id).limit(RELATED_PRODUCTS_LIMIT).all()
     
     return render_template('main/product_detail.html',
                            product=product,

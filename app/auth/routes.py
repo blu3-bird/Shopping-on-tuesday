@@ -15,6 +15,7 @@ Routes:
 from flask import redirect, request, render_template, url_for, flash
 from flask_login import current_user, login_user, logout_user, login_required
 from app.auth.forms import adminForm
+from app.constants import ROUTE_ADMIN_DASHBOARD
 from app.models import Admin
 from app.auth import auth
 
@@ -35,9 +36,9 @@ def login():
         Response: Redirect to dashboard or next page on successful login.
     """
 
-    # check if user is already logined in
+    # check if user is already logged in
     if current_user.is_authenticated:
-        return redirect(url_for('admin.dashboard'))
+        return redirect(url_for(ROUTE_ADMIN_DASHBOARD))
     
     form = adminForm()
 
@@ -57,7 +58,7 @@ def login():
         if next_page:
             return redirect(next_page)
         
-        return redirect(url_for('admin.dashboard'))
+        return redirect(url_for(ROUTE_ADMIN_DASHBOARD))
     
     return render_template('auth/login.html', form=form)
     
