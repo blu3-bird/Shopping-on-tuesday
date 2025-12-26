@@ -108,6 +108,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "xlebovoz",
+      "name": "XLEB",
+      "avatar_url": "https://avatars.githubusercontent.com/u/189365255?v=4",
+      "profile": "https://xlebovoz-links.vercel.app/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
