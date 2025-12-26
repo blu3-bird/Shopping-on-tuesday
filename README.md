@@ -46,39 +46,60 @@ Here’s the clean format you wanted:
 ## 📁 Project Structure
 
 ```
-.
-├── LICENSE
-├── app
-│   ├── __init__.py
-│   ├── admin
-│   │   ├── __init__.py
-│   │   └── routes.py
-│   ├── auth
-│   │   ├── __init__.py
-│   │   ├── forms.py
-│   │   └── routes.py
-│   ├── main
-│   │   ├── __init__.py
-│   │   └── routes.py
-│   ├── models.py
-│   ├── static
-│   │   ├── css
-│   │   │   └── style.css
-│   │   └── js
-│   │       └── main.js
-│   └── templates
-│       ├── admin
-│       │   └── dashboard.html
-│       ├── auth
-│       │   └── login.html
-│       ├── base.html
-│       └── main
-│           ├── index.html
-│           ├── product_detail.html
-│           └── products.html
+Shopping-on-tuesday/
+├── .all-contributorsrc
 ├── config.py
+├── CONTRIBUTORS.md
+├── LICENSE
+├── README.md
 ├── requirements.txt
-└── run.py
+├── run.py
+└── app/
+    ├── constants.py
+    ├── models.py
+    ├── __init__.py
+    ├── templates/
+    │   ├── base.html
+    │   ├── main/
+    │   │   ├── index.html
+    │   │   ├── products.html
+    │   │   └── product_detail.html
+    │   ├── errors/
+    │   │   └── 500.html
+    │   ├── components/
+    │   │   └── trust_badges.html
+    │   ├── auth/
+    │   │   └── login.html
+    │   └── admin/
+    │       ├── add_product.html
+    │       ├── dashboard.html
+    │       ├── edit_product.html
+    │       └── product_list.html
+    ├── main/
+    │   ├── routes.py
+    │   └── __init__.py
+    ├── auth/
+    │   ├── forms.py
+    │   ├── routes.py
+    │   └── __init__.py
+    ├── admin/
+    │   ├── forms.py
+    │   ├── routes.py
+    │   └── __init__.py
+    └── static/
+        ├── js/
+        │   └── main.js
+        └── css/
+            ├── 500.css
+            ├── add_edit_product.css
+            ├── base.css
+            ├── dashboard.css
+            ├── index.css
+            ├── products.css
+            ├── product_detail.css
+            ├── product_list.css
+            ├── style.css
+            └── super_admin_login.css
 ```
 
 ## 🛠️ Development Setup
