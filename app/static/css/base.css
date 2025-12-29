@@ -46,12 +46,13 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
+    /* background-color: var(--bg-color); */
     color: var(--text-primary);
     line-height: 1.6;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 main {
@@ -99,6 +100,14 @@ nav {
     color: var(--text-light);
     font-size: 1.25rem;
     font-weight: 600;
+}
+
+#name_logo {
+    transition: color 0.3s ease;
+}
+
+#name_logo:hover {
+    color: #2980b9;
 }
 
 .logo img {
@@ -186,6 +195,10 @@ footer {
 .btn-large {
     padding: var(--spacing-sm) var(--spacing-lg);
     font-size: 1.1rem;
+}
+
+.btn-large:hover {
+    background-color: #2980b9;
 }
 
 .btn-disabled {
@@ -426,17 +439,18 @@ footer {
     display: flex;
     align-items: center;
     background: #f8f9fa;
-    border: 2px solid #e9ecef;
+    /* border: 2px solid #e9ecef; */
     border-radius: 10px;
     padding: 15px 20px;
     flex: 1;
     min-width: 250px;
+    cursor: pointer;
     transition: transform 0.3s ease;
 }
 
 .trust-badge:hover{
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px;
+    box-shadow: var(--shadow-hover);
 }
 
 .badge-icon{
