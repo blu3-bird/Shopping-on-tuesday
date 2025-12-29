@@ -8,6 +8,10 @@
   <img src="https://img.shields.io/badge/-Python-blue?logo=python&logoColor=white" />
   <img src="https://img.shields.io/badge/License-MIT-green" />
   <img src="https://img.shields.io/badge/Flask-App-orange?logo=flask&logoColor=white" />
+  <img src="https://img.shields.io/github/stars/blu3-bird/Shopping-on-tuesday?style=flat&color=blue" />
+  <img src="https://img.shields.io/github/forks/blu3-bird/Shopping-on-tuesday?style=flat&label=Forks" />
+  <img src="https://img.shields.io/github/contributors/blu3-bird/Shopping-on-tuesday?style=flat&label=Contributors" />
+  <img src="https://img.shields.io/github/last-commit/blu3-bird/Shopping-on-tuesday?style=flat" />
 </p>
 
 
