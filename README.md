@@ -65,6 +65,7 @@ Shopping-on-tuesday/
     │   │   ├── products.html
     │   │   └── product_detail.html
     │   ├── errors/
+    │   │   ├── 400.html
     │   │   └── 500.html
     │   ├── components/
     │   │   └── trust_badges.html
@@ -90,7 +91,7 @@ Shopping-on-tuesday/
         ├── js/
         │   └── main.js
         └── css/
-            ├── 500.css
+            ├── error.css
             ├── add_edit_product.css
             ├── base.css
             ├── dashboard.css

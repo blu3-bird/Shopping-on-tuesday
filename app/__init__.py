@@ -48,6 +48,15 @@ def create_app(config_name='default'):
     @app.errorhandler(500)
     def internal_server_error(error):
         return render_template("errors/500.html"), 500
+    
+    # test 5xx err
+    # @app.route('/t500')
+    # def test_500():
+    #     return render_template("errors/500.html"), 500
+    
+    @app.errorhandler(404)
+    def not_found_error(error):
+        return render_template('errors/400.html'), 400
 
     # Create tables
     with app.app_context():

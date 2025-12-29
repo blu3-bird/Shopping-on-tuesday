@@ -3,9 +3,19 @@ body {
     /* background: #f4f7f9; */
     color: #222;
     text-align: center;
-    padding: 6rem 1rem;
+    /* padding: 6rem 1rem; */
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 /* Card */
