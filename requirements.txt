@@ -18,5 +18,5 @@ MarkupSafe==3.0.3
 pillow==12.1.0
 SQLAlchemy==2.0.45
 typing_extensions==4.15.0
-Werkzeug==3.1.4
+Werkzeug==3.1.5
 WTForms==3.2.1
