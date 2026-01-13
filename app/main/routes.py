@@ -13,9 +13,10 @@ Routes:
 """
 
 from app.main import main
-from flask import render_template, current_app
+from flask import render_template, current_app , make_response
 from app.constants import FEATURED_PRODUCTS_LIMIT, RELATED_PRODUCTS_LIMIT
 from app.models import Product
+from app.utils import get_recently_viewed, add_to_recently_viewed
 
 @main.route('/')
 def index():
@@ -54,27 +55,37 @@ def products():
 
 @main.route('/products/<int:product_id>')
 def product_detail(product_id):
-    """
-    Display detailed information about a single product.
-
-    Fetches a specific product by its ID. Additionally, retrieves a list
-    of related products from the same category (excluding the current product)
-    to show recommendations.
-
-    Args:
-        product_id (int): ID of the product to display.
-
-    Returns:
-        Response: Rendered product detail page with the selected product
-                  and related product suggestions.
-    """
-
+    
     product = Product.query.get_or_404(product_id)
 
-    related_product = Product.query.filter(
+    related_products = Product.query.filter(
         Product.category == product.category,
-        Product.id != product.id).limit(RELATED_PRODUCTS_LIMIT).all()
-    
-    return render_template('main/product_detail.html',
-                           product=product,
-                           related_product=related_product)
+        Product.id != product.id
+    ).limit(RELATED_PRODUCTS_LIMIT).all()
+
+
+    recently_viewed_products = []
+    recently_viewed_ids = get_recently_viewed()
+
+    if recently_viewed_ids:
+        recently_viewed_products = Product.query.filter(
+            Product.id.in_(recently_viewed_ids),
+            Product.id != product.id
+        ).all()
+
+        recently_viewed_products.sort(
+            key=lambda p : recently_viewed_ids.index(p.id)
+        ) 
+
+    response = make_response(
+        render_template(
+            'main/product_detail.html',
+            product = product,
+            related_products=related_products,
+            recently_viewed_products = recently_viewed_products
+        )
+    )
+
+    response = add_to_recently_viewed(response, product_id)
+
+    return response
