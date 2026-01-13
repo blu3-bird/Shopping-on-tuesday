@@ -42,7 +42,7 @@ def add_to_recently_viewed(response,product_id):
     cookies_values = json.dumps(current_recently_viewed)
 
     #set the cookies
-    response.set_cookies(
+    response.set_cookie(
         'recently_viewed',
         cookies_values,
         max_age = 30 * 24 * 30 * 30 # 30 days
