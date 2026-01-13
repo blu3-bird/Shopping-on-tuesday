@@ -262,4 +262,61 @@
         </div>
     </section>
     {% endif %}
+
+        <!-- Recently Viewed Products -->
+    {% if recently_viewed_products %}
+    <section class="recently-viewed-section">
+        <h2 class="section-title">
+            <span class="history-icon">🕒</span>
+            Recently Viewed
+        </h2>
+        <div class="product-grid">
+            {% for p in recently_viewed_products %}
+                <div class="product-card">
+                    
+                    {% if p.has_discount %}
+                        <div class="product-discount-badge">
+                            {{ p.calculated_discount_percent }}% OFF
+                        </div>
+                    {% endif %}
+                    
+                    {% if p.image_url %}
+                        <img src="{{ p.image_url }}" alt="{{ p.name }}" class="product-image">
+                    {% else %}
+                        <div class="product-image product-placeholder">
+                            {% if p.category == 'anime' %}
+                                <span class="placeholder-icon">🎌</span>
+                            {% else %}
+                                <span class="placeholder-icon">📝</span>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    
+                    <div class="product-info">
+                        <h3 class="product-name">{{ p.name }}</h3>
+                        
+                        <div class="product-price-container">
+                            <p class="product-price">₹{{ p.price }}</p>
+                            {% if p.has_discount %}
+                                <p class="product-original-price-small">
+                                    ₹{{ p.original_price }}
+                                </p>
+                            {% endif %}
+                        </div>
+                        
+                        {% if p.stock > 0 %}
+                            <p class="product-stock in-stock">✓ In Stock</p>
+                        {% else %}
+                            <p class="product-stock out-of-stock">✗ Out of Stock</p>
+                        {% endif %}
+                        
+                        <a href="/products/{{ p.id }}" class="btn btn-block">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
 {% endblock %}
