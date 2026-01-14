@@ -51,6 +51,8 @@ class Product(db.Model):
 
     highlights = db.Column(db.Text)
 
+    images = db.relationship('ProductImage',backref='product',lazy='dynamic',cascade='all, delete-orphan',order_by = 'ProductImage.display_order')
+
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -91,6 +93,64 @@ class Product(db.Model):
         if self.has_discount:
             return int(((self.original_price - self.price) / self.original_price) * 100)
         return 0
+    
+    @property
+    def primary_image(self):
+        """
+        Docstring for primary_image
+        Return Primary Img or First img if no primary img exists
+        """
+        
+        primary = ProductImage.query.filter_by(
+            product_id = self.id,
+            is_primary=True
+        ).first()
+
+        if primary:
+            return primary
+        
+        first_image = ProductImage.query.filter_by(
+            product_id=self.id
+        ).order_by(ProductImage.display_order).first()
+
+        return first_image
+    
+    @property
+    def get_image_url(self):
+        """
+        Docstring for get_image_url
+        to get the primary image url of primary image
+        """
+
+        primary = self.primary_image
+
+        if primary:
+            return primary.image_url
+        
+        return self.image_url
+    
+class ProductImage(db.Model):
+    """
+    Docstring for ProductImage
+    Represent an image associated with a product.
+    """
+
+    __tablename__ = 'productImage'
+
+    id = db.Column(db.Integer, primary_key = True)
+
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'),nullable=False)
+
+    display_order = db.Column(db.Integer,default=0)
+
+    image_url = db.Column(db.String(500),nullable=False)
+
+    is_primary = db.Column(db.Boolean,default=False)
+
+    created_at = db.Column(db.DateTime,default = datetime.utcnow)
+
+    def __repr__(self):
+        return f'<Product Image {self.id} for product {self.product_id}>'
 
 class Admin(db.Model,UserMixin):
     """
