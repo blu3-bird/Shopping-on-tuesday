@@ -301,6 +301,141 @@
                 nativeBtn.style.display = 'none';
             }
         }
+
+        // MULTIPLE IMAGE INPUTS
+        
+        let imageInputCount = 1;
+        const maxImages = 5;
+        
+        function addImageInput() {
+            if (imageInputCount >= maxImages) {
+                alert('Maximum ' + maxImages + ' images allowed!');
+                return;
+            }
+            
+            const container = document.getElementById('image-container');
+            const index = imageInputCount;
+            
+            const newGroup = document.createElement('div');
+            newGroup.className = 'image-input-group';
+            newGroup.setAttribute('data-index', index);
+            
+            newGroup.innerHTML = `
+                <div class="image-input-row">
+                    <input type="text" 
+                           name="image_urls[]" 
+                           class="form-control image-url-input" 
+                           placeholder="Enter image URL"
+                           onchange="previewImage(this)">
+                    <label class="primary-radio">
+                        <input type="radio" name="primary_image" value="${index}">
+                        <span class="radio-label">Primary</span>
+                    </label>
+                    <button type="button" class="btn-remove-image" onclick="removeImageInput(this)" title="Remove">
+                        🗑️
+                    </button>
+                </div>
+                <div class="image-preview-small"></div>
+            `;
+            
+            container.appendChild(newGroup);
+            imageInputCount++;
+            
+            updateRemoveButtons();
+        }
+        
+        function removeImageInput(button) {
+            const group = button.closest('.image-input-group');
+            const wasChecked = group.querySelector('input[type="radio"]').checked;
+            
+            group.remove();
+            imageInputCount--;
+            
+            // If removed the primary, make first one primary
+            if (wasChecked) {
+                const firstRadio = document.querySelector('input[name="primary_image"]');
+                if (firstRadio) {
+                    firstRadio.checked = true;
+                }
+            }
+            
+            updateRemoveButtons();
+        }
+        
+        function updateRemoveButtons() {
+            const groups = document.querySelectorAll('.image-input-group');
+            groups.forEach((group, index) => {
+                const removeBtn = group.querySelector('.btn-remove-image');
+                // Hide remove button if only 1 image input left
+                if (groups.length <= 1) {
+                    removeBtn.style.display = 'none';
+                } else {
+                    removeBtn.style.display = 'block';
+                }
+            });
+        }
+        
+        function previewImage(input) {
+            const url = input.value.trim();
+            const previewContainer = input.closest('.image-input-group').querySelector('.image-preview-small');
+            
+            if (url) {
+                previewContainer.innerHTML = `<img src="${url}" alt="Preview" onerror="this.parentElement.innerHTML='<span class=\\'preview-error\\'>Invalid URL</span>'">`;
+            } else {
+                previewContainer.innerHTML = '';
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateRemoveButtons();
+            
+            // Add preview to existing inputs
+            document.querySelectorAll('.image-url-input').forEach(input => {
+                input.addEventListener('change', function() {
+                    previewImage(this);
+                });
+            });
+        });
+
+        
+        // EDIT PAGE - NEW IMAGE INPUTS
+        
+        let newImageCount = 1;
+        
+        function addNewImageInput() {
+            const container = document.getElementById('new-image-container');
+            if (!container) return;
+            
+            const index = newImageCount;
+            
+            const newGroup = document.createElement('div');
+            newGroup.className = 'image-input-group';
+            newGroup.setAttribute('data-index', index);
+            
+            newGroup.innerHTML = `
+                <div class="image-input-row">
+                    <input type="text" 
+                           name="new_image_urls[]" 
+                           class="form-control image-url-input" 
+                           placeholder="Enter new image URL"
+                           onchange="previewImage(this)">
+                    <button type="button" class="btn-remove-image" onclick="removeNewImageInput(this)" title="Remove">
+                        🗑️
+                    </button>
+                </div>
+                <div class="image-preview-small"></div>
+            `;
+            
+            container.appendChild(newGroup);
+            newImageCount++;
+        }
+        
+        function removeNewImageInput(button) {
+            const group = button.closest('.image-input-group');
+            group.remove();
+            newImageCount--;
+        }
     </script>
 </body>
 
