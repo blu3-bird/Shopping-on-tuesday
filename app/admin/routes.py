@@ -91,7 +91,7 @@ def add_product():
         db.session.add(product)
         db.session.flush()
 
-        image_urls = request.form.getlist('image_url[]')
+        image_urls = request.form.getlist('image_urls[]')
         primary_image_index = request.form.data('primary_image',0)
 
         for index, url in enumerate(image_urls):
@@ -112,7 +112,7 @@ def add_product():
             flash(f'{product.name} is successfully added', 'success')
 
             return redirect(url_for('admin/product_list'))
-        return render_template('admin/add_product.html', form=form)
+    return render_template('admin/add_product.html', form=form)
 
 @admin.route('/edit-product/<int:product_id>', methods=['GET', 'POST'])
 @login_required
@@ -139,13 +139,13 @@ def edit_product(product_id):
         image_to_delete = request.form.getlist('delete_images[]')
 
         for img_id in image_to_delete:
-                image = ProductImage.query.get(img_id)
+                image = ProductImage.query.get(int(img_id))
                 if image and image.product_id == product.id:
                     db.session.delete(image)
 
         #adding new image
-        image_to_add = request.form.getlist('add_img_list[]')
-        current_image_count = product.image.count()
+        image_to_add = request.form.getlist('new_image_urls[]')
+        current_image_count = product.images.count()
 
         for index, url in enumerate(image_to_add):
             if url.strip():
@@ -158,9 +158,9 @@ def edit_product(product_id):
                 db.session.add(image)
 
         #handles the primary image
-        primary_image_id = request.form.data('primary_image')
+        primary_image_id = request.form.get('primary_image')
         if primary_image_id:
-            for img in product.image:
+            for img in product.images:
                 img.is_primary=False
             
             primary_image = ProductImage.query.get(int(primary_image_id))
@@ -172,7 +172,7 @@ def edit_product(product_id):
         
         db.session.commit()
         flash(f'Product {product.name} updated successfully,', 'success')
-        return redirect(url_for('admin.product_list'))
+        return redirect(url_for('admin.products_list'))
     
     #Pre-populate form
     form.name.data = product.name
