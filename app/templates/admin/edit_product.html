@@ -159,6 +159,71 @@
                 {% endif %}
             </div>
 
+            <!-- Existing Images Section -->
+            <div class="form-section">
+                <h3 class="form-section-title">Current Images</h3>
+                
+                {% if existing_images %}
+                    <div class="existing-images-grid">
+                        {% for image in existing_images %}
+                            <div class="existing-image-card">
+                                <img src="{{ image.image_url }}" alt="Product image" class="existing-image-thumbnail">
+                                
+                                <div class="existing-image-controls">
+                                    <label class="primary-radio">
+                                        <input type="radio" 
+                                            name="primary_image" 
+                                            value="{{ image.id }}"
+                                            {{ 'checked' if image.is_primary else '' }}>
+                                        <span class="radio-label">Primary</span>
+                                    </label>
+                                    
+                                    <label class="delete-checkbox">
+                                        <input type="checkbox" name="delete_images[]" value="{{ image.id }}">
+                                        <span class="delete-label">🗑️ Delete</span>
+                                    </label>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="no-images-message">No images uploaded yet.</p>
+                {% endif %}
+            </div>
+
+            <!-- Add New Images Section -->
+            <div class="form-section">
+                <h3 class="form-section-title">Add New Images</h3>
+                <p class="form-section-description">Add more images to this product.</p>
+                
+                <div id="new-image-container">
+                    <div class="image-input-group" data-index="0">
+                        <div class="image-input-row">
+                            <input type="text" 
+                                name="new_image_urls[]" 
+                                class="form-control image-url-input" 
+                                placeholder="Enter new image URL"
+                                onchange="previewImage(this)">
+                            <button type="button" class="btn-remove-image" onclick="removeNewImageInput(this)" title="Remove">
+                                🗑️
+                            </button>
+                        </div>
+                        <div class="image-preview-small"></div>
+                    </div>
+                </div>
+                
+                <button type="button" class="btn btn-outline btn-add-image" onclick="addNewImageInput()">
+                    + Add Another Image
+                </button>
+            </div>
+
+            <!-- Legacy single image field -->
+            <div class="form-group">
+                {{ form.image_url.label }}
+                {{ form.image_url(class="form-control", placeholder="Legacy fallback image URL") }}
+                <small class="form-text text-muted">Only used if no images are added above.</small>
+            </div>
+
             <!-- Submit Button -->
             <div class="form-group">
                 {{ form.submit(class="btn btn-large btn-block btn-primary") }}

@@ -143,6 +143,46 @@
                 {% endif %}
             </div>
 
+            <!-- Multiple Images Section -->
+            <div class="form-section">
+                <h3 class="form-section-title">Product Images</h3>
+                <p class="form-section-description">Add up to 5 images for this product. The first image will be primary by default.</p>
+                
+                <div id="image-container">
+                    <!-- Image Input 1 -->
+                    <div class="image-input-group" data-index="0">
+                        <div class="image-input-row">
+                            <input type="text" 
+                                name="image_urls[]" 
+                                class="form-control image-url-input" 
+                                placeholder="Enter image URL (e.g., https://example.com/image.jpg)">
+                            <label class="primary-radio">
+                                <input type="radio" name="primary_image" value="0" checked>
+                                <span class="radio-label">Primary</span>
+                            </label>
+                            <button type="button" class="btn-remove-image" onclick="removeImageInput(this)" title="Remove">
+                                🗑️
+                            </button>
+                        </div>
+                        <div class="image-preview-small"></div>
+                    </div>
+                </div>
+                
+                <button type="button" class="btn btn-outline btn-add-image" onclick="addImageInput()">
+                    + Add Another Image
+                </button>
+                
+                <!-- Legacy single image field (hidden but kept for compatibility) -->
+                <div class="form-group legacy-image-field" style="margin-top: 20px; padding-top: 20px; border-top: 1px dashed #ddd;">
+                    <label class="form-label">
+                        {{ form.image_url.label.text }}
+                        <span class="label-hint">(Legacy - use if multiple images don't work)</span>
+                    </label>
+                    {{ form.image_url(class="form-control", placeholder="Fallback single image URL") }}
+                </div>
+            </div>
+            
+
             <!-- Submit Button -->
             <div class="form-group">
                 {{ form.submit(class="btn btn-large btn-block btn-primary") }}
