@@ -436,6 +436,73 @@
             group.remove();
             newImageCount--;
         }
+
+
+                // ================================
+        // PRODUCT IMAGE GALLERY
+        // ================================
+        
+        let currentImageIndex = 0;
+        
+        function changeImage(direction) {
+            if (typeof productImages === 'undefined' || productImages.length === 0) return;
+            
+            currentImageIndex += direction;
+            
+            // Loop around
+            if (currentImageIndex < 0) {
+                currentImageIndex = productImages.length - 1;
+            } else if (currentImageIndex >= productImages.length) {
+                currentImageIndex = 0;
+            }
+            
+            updateGallery();
+        }
+        
+        function selectImage(index) {
+            if (typeof productImages === 'undefined') return;
+            
+            currentImageIndex = index;
+            updateGallery();
+        }
+        
+        function updateGallery() {
+            // Update main image
+            const mainImage = document.getElementById('mainProductImage');
+            if (mainImage) {
+                mainImage.style.opacity = '0.5';
+                setTimeout(() => {
+                    mainImage.src = productImages[currentImageIndex];
+                    mainImage.style.opacity = '1';
+                }, 150);
+            }
+            
+            // Update counter
+            const counter = document.getElementById('currentImageNum');
+            if (counter) {
+                counter.textContent = currentImageIndex + 1;
+            }
+            
+            // Update thumbnail active state
+            document.querySelectorAll('.thumbnail-item').forEach((thumb, index) => {
+                if (index === currentImageIndex) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (typeof productImages === 'undefined' || productImages.length <= 1) return;
+            
+            if (e.key === 'ArrowLeft') {
+                changeImage(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeImage(1);
+            }
+        });
     </script>
 </body>
 

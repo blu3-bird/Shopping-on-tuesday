@@ -7,103 +7,137 @@
 {% endblock %}
 
 {% block content %}
-    <!-- Breadcrumb Navigation -->
-    <nav class="breadcrumb">
-        <a href="/">Home</a>
-        <span class="breadcrumb-separator">›</span>
-        <a href="/products">Products</a>
-        <span class="breadcrumb-separator">›</span>
-        <span class="breadcrumb-current">{{ product.name }}</span>
-    </nav>
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb">
+    <a href="/">Home</a>
+    <span class="breadcrumb-separator">›</span>
+    <a href="/products">Products</a>
+    <span class="breadcrumb-separator">›</span>
+    <span class="breadcrumb-current">{{ product.name }}</span>
+</nav>
 
-    <!-- Product Detail Container -->
-    <div class="product-detail-container">
-        <!-- Product Image Section -->
-        <div class="product-detail-image">
-            {% if product.image_url %}
-                <img src="{{ product.image_url }}" alt="{{ product.name }}">
-            {% else %}
-                <div class="product-image-placeholder">
-                    {% if product.category == 'anime' %}
-                        <span class="placeholder-icon-large">🎌</span>
-                    {% else %}
-                        <span class="placeholder-icon-large">📝</span>
-                    {% endif %}
-                </div>
-            {% endif %}
-            
-            <!-- Category Badge -->
-            <div class="category-badge-large {{ product.category }}">
-                {{ product.category|capitalize }}
-            </div>
-
-            {% if product.has_discount %}
-                <div class="discount-badge-large">
-                    {{ product.calculated_discount_percentage }}% OFF
-                </div>
-            {% endif %}
-
-        </div>
-
-        <!-- Product Info Section -->
-        <div class="product-detail-info">
-            <h1 class="product-detail-title">{{ product.name }}</h1>
-            
-            
-            <div class="product-detail-price-section">
+<!-- Product Detail Container -->
+<div class="product-detail-container">
+    <!-- Product Image Section -->
+    <div class="product-detail-image">
+        {% set all_images = product.images.all() %}
+        
+        {% if all_images %}
+            <!-- Main Image Display -->
+            <div class="main-image-container">
+                <img src="{{ all_images[0].image_url }}" 
+                     alt="{{ product.name }}" 
+                     id="mainProductImage"
+                     class="main-product-image">
                 
-                <!-- Main Price Display -->
-                <div class="price-display">
-                    <!-- Selling Price (Main) -->
-                    <p class="product-detail-price">₹{{ product.price }}</p>
+                <!-- Navigation Arrows (if multiple images) -->
+                {% if all_images|length > 1 %}
+                    <button class="gallery-nav gallery-prev" onclick="changeImage(-1)">❮</button>
+                    <button class="gallery-nav gallery-next" onclick="changeImage(1)">❯</button>
                     
-                    
-                    {% if product.has_discount %}
-                        <p class="product-original-price">
-                            <span class="mrp-label">M.R.P.:</span>
-                            <span class="mrp-value">₹{{ product.original_price }}</span>
-                        </p>
-                    {% endif %}
-                </div>
-
-                <!-- Discount Info Box -->
-                {% if product.has_discount %}
-                    <div class="discount-info-box">
-                        <span class="discount-percent-badge">
-                            {{ product.calculated_discount_percent }}% OFF
-                        </span>
-                        <span class="savings-text">
-                            You save ₹{{ product.discount_amount|int }}
-                        </span> 
+                    <!-- Image Counter -->
+                    <div class="image-counter">
+                        <span id="currentImageNum">1</span> / {{ all_images|length }}
                     </div>
                 {% endif %}
+            </div>
+            
+            <!-- Thumbnail Strip -->
+            {% if all_images|length > 1 %}
+                <div class="thumbnail-strip">
+                    {% for image in all_images %}
+                        <div class="thumbnail-item {{ 'active' if loop.index == 1 else '' }}" 
+                             onclick="selectImage({{ loop.index0 }})"
+                             data-index="{{ loop.index0 }}">
+                            <img src="{{ image.image_url }}" alt="Thumbnail {{ loop.index }}">
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+        {% elif product.image_url %}
+            <!-- Fallback to legacy single image -->
+            <img src="{{ product.image_url }}" alt="{{ product.name }}">
+            
+        {% else %}
+            <!-- No image placeholder -->
+            <div class="product-image-placeholder">
+                {% if product.category == 'anime' %}
+                    <span class="placeholder-icon-large">🎌</span>
+                {% else %}
+                    <span class="placeholder-icon-large">📝</span>
+                {% endif %}
+            </div>
+        {% endif %}
+        
+        <!-- Category Badge -->
+        <div class="category-badge-large {{ product.category }}">
+            {{ product.category|capitalize }}
+        </div>
+
+        {% if product.has_discount %}
+            <div class="discount-badge-large">
+                {{ product.calculated_discount_percent }}% OFF
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Product Info Section -->
+    <div class="product-detail-info">
+        <h1 class="product-detail-title">{{ product.name }}</h1>
+        
+        <div class="product-detail-price-section">
+            <!-- Main Price Display -->
+            <div class="price-display">
+                <!-- Selling Price (Main) -->
+                <p class="product-detail-price">₹{{ product.price }}</p>
                 
-                <!-- Stock Status -->
-                {% if product.stock > 0 %}
-                    <p class="stock-badge in-stock">
-                        <span class="stock-icon">✓</span>
-                        <span>{{ product.stock }} in stock</span>
-                    </p>
-                {% else %}
-                    <p class="stock-badge out-of-stock">
-                        <span class="stock-icon">✗</span>
-                        <span>Out of Stock</span>
+                {% if product.has_discount %}
+                    <p class="product-original-price">
+                        <span class="mrp-label">M.R.P.:</span>
+                        <span class="mrp-value">₹{{ product.original_price }}</span>
                     </p>
                 {% endif %}
             </div>
 
-            <!-- Description -->
-            <div class="product-detail-description">
-                <h3>Description</h3>
-                {% if product.description %}
-                    <p>{{ product.description }}</p>
-                {% else %}
-                    <p class="no-description">No description available for this product.</p>
-                {% endif %}
-            </div>
+            <!-- Discount Info Box -->
+            {% if product.has_discount %}
+                <div class="discount-info-box">
+                    <span class="discount-percent-badge">
+                        {{ product.calculated_discount_percent }}% OFF
+                    </span>
+                    <span class="savings-text">
+                        You save ₹{{ product.discount_amount|int }}
+                    </span> 
+                </div>
+            {% endif %}
+            
+            <!-- Stock Status -->
+            {% if product.stock > 0 %}
+                <p class="stock-badge in-stock">
+                    <span class="stock-icon">✓</span>
+                    <span>{{ product.stock }} in stock</span>
+                </p>
+            {% else %}
+                <p class="stock-badge out-of-stock">
+                    <span class="stock-icon">✗</span>
+                    <span>Out of Stock</span>
+                </p>
+            {% endif %}
+        </div>
 
-            <!--Product Highlights-->
-            {% if product.highlights %}
+        <!-- Description -->
+        <div class="product-detail-description">
+            <h3>Description</h3>
+            {% if product.description %}
+                <p>{{ product.description }}</p>
+            {% else %}
+                <p class="no-description">No description available for this product.</p>
+            {% endif %}
+        </div>
+
+        <!-- Product Highlights -->
+        {% if product.highlights %}
             <div class="product-highlights-section">
                 <h3>Product Highlights</h3>
                 <ul class="highlight-list">
@@ -114,115 +148,112 @@
                     {% endfor %}
                 </ul>
             </div>
-            {% endif %}
+        {% endif %}
 
-            <!--Trust badges-->
-            {% from 'components/trust_badges.html' import render_trust_badges %}
+        <!-- Trust badges -->
+        {% from 'components/trust_badges.html' import render_trust_badges %}
+        {{ render_trust_badges() }}
 
-            {{ render_trust_badges() }}
-
-            <!-- Product Meta Information -->
-            <div class="product-meta">
-                <div class="meta-item">
-                    <span class="meta-label">Category:</span>
-                    <span class="meta-value">{{ product.category|capitalize }}</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Product ID:</span>
-                    <span class="meta-value">#{{ product.id }}</span>
-                </div>
-                {% if product.created_at %}
+        <!-- Product Meta Information -->
+        <div class="product-meta">
+            <div class="meta-item">
+                <span class="meta-label">Category:</span>
+                <span class="meta-value">{{ product.category|capitalize }}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Product ID:</span>
+                <span class="meta-value">#{{ product.id }}</span>
+            </div>
+            {% if product.created_at %}
                 <div class="meta-item">
                     <span class="meta-label">Added:</span>
                     <span class="meta-value">{{ product.created_at.strftime('%B %d, %Y') }}</span>
                 </div>
-                {% endif %}
-                
-                
-                {% if product.has_discount %}
+            {% endif %}
+            
+            {% if product.has_discount %}
                 <div class="meta-item meta-discount">
                     <span class="meta-label">Discount:</span>
                     <span class="meta-value discount-highlight">
                         {{ product.calculated_discount_percent }}% off
                     </span>
                 </div>
-                {% endif %}
-                
-            </div>
+            {% endif %}
+        </div>
 
-            <!-- Action Buttons -->
-            <div class="product-detail-actions">
-                {% if product.stock > 0 %}
-                    <a href="https://ig.me/m/blu3_bird_?text=Hi! I want to buy {{ product.name }} (Product ID: {{ product.id }}) at ₹{{ product.price }}{% if product.has_discount %} ({{ product.calculated_discount_percent }}% off!){% endif %}" 
-                       class="btn btn-large btn-primary"
-                       target="_blank">
-                        🛒 Buy Now via Instagram
-                    </a>
-
-                            <!-- Share Button -->
-                            <div class="share-button-container">
-                                <button class="btn btn-outline btn-large share-toggle-btn" onclick="toggleShareMenu()">
-                                    📤 Share Product
-                                    <span class="dropdown-arrow">▼</span>
-                                </button>
-                                
-                                <div class="share-dropdown" id="shareDropdown">
-                                    <!-- WhatsApp Share -->
-                                    <a href="https://wa.me/?text=Check out this {{ product.category }} product: {{ product.name }} for ₹{{ product.price }}! {{ request.url }}" 
-                                    target="_blank" 
-                                    class="share-option whatsapp">
-                                        <span class="share-icon">💬</span>
-                                        Share on WhatsApp
-                                    </a>
-                                    
-                                    <!-- Copy Link -->
-                                    <button onclick="copyProductLink()" class="share-option copy-link">
-                                        <span class="share-icon">🔗</span>
-                                        Copy Link
-                                    </button>
-                                    
-                                    <!-- Native Share (Mobile Only) -->
-                                    <button onclick="nativeShare()" class="share-option native-share" id="nativeShareBtn">
-                                        <span class="share-icon">📱</span>
-                                        More Options
-                                    </button>
-                                </div>
-                            </div>
-                    <p class="purchase-note">
-                        You'll be redirected to Instagram to complete your purchase
-                    </p>
-                {% else %}
-                    <button class="btn btn-large btn-disabled" disabled>
-                        Out of Stock
-                    </button>
-                    <p class="purchase-note">
-                        This item is currently unavailable
-                    </p>
-                {% endif %}
-                
-                <a href="/products" class="btn btn-outline btn-large">
-                    ← Back to Products
+        <!-- Action Buttons -->
+        <div class="product-detail-actions">
+            {% if product.stock > 0 %}
+                <a href="https://ig.me/m/blu3_bird_?text=Hi! I want to buy {{ product.name }} (Product ID: {{ product.id }}) at ₹{{ product.price }}{% if product.has_discount %} ({{ product.calculated_discount_percent }}% off!){% endif %}" 
+                   class="btn btn-large btn-primary"
+                   target="_blank">
+                    🛒 Buy Now via Instagram
                 </a>
-            </div>
+
+                <!-- Share Button -->
+                <div class="share-button-container">
+                    <button class="btn btn-outline btn-large share-toggle-btn" onclick="toggleShareMenu()">
+                        📤 Share Product
+                        <span class="dropdown-arrow">▼</span>
+                    </button>
+                    
+                    <div class="share-dropdown" id="shareDropdown">
+                        <!-- WhatsApp Share -->
+                        <a href="https://wa.me/?text=Check out this {{ product.category }} product: {{ product.name }} for ₹{{ product.price }}! {{ request.url }}" 
+                           target="_blank" 
+                           class="share-option whatsapp">
+                            <span class="share-icon">💬</span>
+                            Share on WhatsApp
+                        </a>
+                        
+                        <!-- Copy Link -->
+                        <button onclick="copyProductLink()" class="share-option copy-link">
+                            <span class="share-icon">🔗</span>
+                            Copy Link
+                        </button>
+                        
+                        <!-- Native Share (Mobile Only) -->
+                        <button onclick="nativeShare()" class="share-option native-share" id="nativeShareBtn">
+                            <span class="share-icon">📱</span>
+                            More Options
+                        </button>
+                    </div>
+                </div>
+
+                <p class="purchase-note">
+                    You'll be redirected to Instagram to complete your purchase
+                </p>
+            {% else %}
+                <button class="btn btn-large btn-disabled" disabled>
+                    Out of Stock
+                </button>
+                <p class="purchase-note">
+                    This item is currently unavailable
+                </p>
+            {% endif %}
+            
+            <a href="/products" class="btn btn-outline btn-large">
+                ← Back to Products
+            </a>
         </div>
     </div>
+</div>
 
-    <!-- Related Products Section -->
-    {% if related_products %}
+<!-- Related Products Section -->
+{% if related_products %}
     <section class="related-products-section">
         <h2 class="section-title">You May Also Like</h2>
         <div class="product-grid">
             {% for p in related_products %}
                 <div class="product-card">
-                    
                     {% if p.has_discount %}
                         <div class="product-discount-badge">
                             {{ p.calculated_discount_percent }}% OFF
                         </div>
                     {% endif %}
                     
-                    {% if p.image_url %}
-                        <img src="{{ p.image_url }}" alt="{{ p.name }}" class="product-image">
+                    {% if p.get_image_url %}
+                        <img src="{{ p.get_image_url }}" alt="{{ p.name }}" class="product-image">
                     {% else %}
                         <div class="product-image product-placeholder">
                             {% if p.category == 'anime' %}
@@ -236,7 +267,6 @@
                     <div class="product-info">
                         <h3 class="product-name">{{ p.name }}</h3>
                         
-                        
                         <div class="product-price-container">
                             <p class="product-price">₹{{ p.price }}</p>
                             {% if p.has_discount %}
@@ -245,7 +275,6 @@
                                 </p>
                             {% endif %}
                         </div>
-                        
                         
                         {% if p.stock > 0 %}
                             <p class="product-stock in-stock">✓ In Stock</p>
@@ -261,10 +290,10 @@
             {% endfor %}
         </div>
     </section>
-    {% endif %}
+{% endif %}
 
-        <!-- Recently Viewed Products -->
-    {% if recently_viewed_products %}
+<!-- Recently Viewed Products -->
+{% if recently_viewed_products %}
     <section class="recently-viewed-section">
         <h2 class="section-title">
             <span class="history-icon">🕒</span>
@@ -273,15 +302,14 @@
         <div class="product-grid">
             {% for p in recently_viewed_products %}
                 <div class="product-card">
-                    
                     {% if p.has_discount %}
                         <div class="product-discount-badge">
                             {{ p.calculated_discount_percent }}% OFF
                         </div>
                     {% endif %}
                     
-                    {% if p.image_url %}
-                        <img src="{{ p.image_url }}" alt="{{ p.name }}" class="product-image">
+                    {% if p.get_image_url %}
+                        <img src="{{ p.get_image_url }}" alt="{{ p.name }}" class="product-image">
                     {% else %}
                         <div class="product-image product-placeholder">
                             {% if p.category == 'anime' %}
@@ -310,7 +338,7 @@
                             <p class="product-stock out-of-stock">✗ Out of Stock</p>
                         {% endif %}
                         
-                        <a href="/products/{{ p.id }}" class="btn btn-block">
+                        <a href="/product/{{ p.id }}" class="btn btn-block">
                             View Details
                         </a>
                     </div>
@@ -318,5 +346,65 @@
             {% endfor %}
         </div>
     </section>
-    {% endif %}
+{% endif %}
+
+<script>
+    // Product images array
+    const productImages = [
+        {% if product.images.all() %}
+            {% for image in product.images.all() %}
+                "{{ image.image_url }}"{{ "," if not loop.last else "" }}
+            {% endfor %}
+        {% endif %}
+    ];
+
+    let currentImageIndex = 0;
+
+    // Change image function
+    function changeImage(direction) {
+        if (productImages.length === 0) return;
+        
+        currentImageIndex += direction;
+        
+        // Loop around
+        if (currentImageIndex >= productImages.length) {
+            currentImageIndex = 0;
+        } else if (currentImageIndex < 0) {
+            currentImageIndex = productImages.length - 1;
+        }
+        
+        updateMainImage();
+    }
+
+    // Select specific image
+    function selectImage(index) {
+        if (productImages.length === 0) return;
+        currentImageIndex = index;
+        updateMainImage();
+    }
+
+    // Update main image display
+    function updateMainImage() {
+        const mainImg = document.getElementById('mainProductImage');
+        const counterNum = document.getElementById('currentImageNum');
+        const thumbnails = document.querySelectorAll('.thumbnail-item');
+        
+        if (mainImg && productImages[currentImageIndex]) {
+            mainImg.src = productImages[currentImageIndex];
+        }
+        
+        if (counterNum) {
+            counterNum.textContent = currentImageIndex + 1;
+        }
+        
+        // Update active thumbnail
+        thumbnails.forEach((thumb, idx) => {
+            if (idx === currentImageIndex) {
+                thumb.classList.add('active');
+            } else {
+                thumb.classList.remove('active');
+            }
+        });
+    }
+</script>
 {% endblock %}

@@ -82,7 +82,7 @@ def add_product():
             stock = form.stock.data,
             image_url = form.image_url.data,
             original_price = form.original_price.data,
-            discount_percent = form.discount_percentage.data,
+            discount_percentage = form.discount_percentage.data,
             category = form.category.data,
             price = form.price.data,
             highlights = form.highlights.data
@@ -92,7 +92,7 @@ def add_product():
         db.session.flush()
 
         image_urls = request.form.getlist('image_urls[]')
-        primary_image_index = request.form.data('primary_image',0)
+        primary_image_index = request.form.get('primary_image',0)
 
         for index, url in enumerate(image_urls):
             if url.strip():
@@ -104,14 +104,14 @@ def add_product():
                 )
                 db.session.add(image)
 
-            if not any(url.strip() for url in image_urls):
-                if form.image_url.data:
-                    product.image_url = form.image_url.data
-            
-            db.session.commit()
-            flash(f'{product.name} is successfully added', 'success')
+        if not any(url.strip() for url in image_urls):
+            if form.image_url.data:
+                product.image_url = form.image_url.data
+        
+        db.session.commit()
+        flash(f'{product.name} is successfully added', 'success')
 
-            return redirect(url_for('admin/product_list'))
+        return redirect(url_for('admin.products_list'))
     return render_template('admin/add_product.html', form=form)
 
 @admin.route('/edit-product/<int:product_id>', methods=['GET', 'POST'])
