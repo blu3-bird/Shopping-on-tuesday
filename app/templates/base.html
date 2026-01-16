@@ -40,7 +40,9 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <p>&copy; <script>document.write(new Date().getFullYear())</script> Shopping On Tuesday. Anime & Stationery</p>
+            <p>&copy;
+                <script>document.write(new Date().getFullYear())</script> Shopping On Tuesday. Anime & Stationery
+            </p>
 
             <div class="footer-links">
                 <a href="#" id="reportBugLink">🐛 Report a Bug</a>
@@ -156,9 +158,16 @@
                 <div class="send-reprot">
                     <button class="send-button">Send Bug Report</button>
                 </div>
-                <p class="footer-quote">
-                    Thank you for your assistance!
-                </p>
+                <footer class="site-footer">
+                    <p class="footer-quote">
+                        Thank you for your assistance!
+                    </p>
+                    <p class="footer-copy">
+                        2026 Shopping on Tuesday
+                    </p>
+                    <a href="#" class="footer-btn">Contact Us</a>
+                </footer>
+
             </div>
         </div>
     </div>
@@ -303,23 +312,23 @@
         }
 
         // MULTIPLE IMAGE INPUTS
-        
+
         let imageInputCount = 1;
         const maxImages = 5;
-        
+
         function addImageInput() {
             if (imageInputCount >= maxImages) {
                 alert('Maximum ' + maxImages + ' images allowed!');
                 return;
             }
-            
+
             const container = document.getElementById('image-container');
             const index = imageInputCount;
-            
+
             const newGroup = document.createElement('div');
             newGroup.className = 'image-input-group';
             newGroup.setAttribute('data-index', index);
-            
+
             newGroup.innerHTML = `
                 <div class="image-input-row">
                     <input type="text" 
@@ -337,20 +346,20 @@
                 </div>
                 <div class="image-preview-small"></div>
             `;
-            
+
             container.appendChild(newGroup);
             imageInputCount++;
-            
+
             updateRemoveButtons();
         }
-        
+
         function removeImageInput(button) {
             const group = button.closest('.image-input-group');
             const wasChecked = group.querySelector('input[type="radio"]').checked;
-            
+
             group.remove();
             imageInputCount--;
-            
+
             // If removed the primary, make first one primary
             if (wasChecked) {
                 const firstRadio = document.querySelector('input[name="primary_image"]');
@@ -358,10 +367,10 @@
                     firstRadio.checked = true;
                 }
             }
-            
+
             updateRemoveButtons();
         }
-        
+
         function updateRemoveButtons() {
             const groups = document.querySelectorAll('.image-input-group');
             groups.forEach((group, index) => {
@@ -374,45 +383,45 @@
                 }
             });
         }
-        
+
         function previewImage(input) {
             const url = input.value.trim();
             const previewContainer = input.closest('.image-input-group').querySelector('.image-preview-small');
-            
+
             if (url) {
                 previewContainer.innerHTML = `<img src="${url}" alt="Preview" onerror="this.parentElement.innerHTML='<span class=\\'preview-error\\'>Invalid URL</span>'">`;
             } else {
                 previewContainer.innerHTML = '';
             }
         }
-        
+
         // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             updateRemoveButtons();
-            
+
             // Add preview to existing inputs
             document.querySelectorAll('.image-url-input').forEach(input => {
-                input.addEventListener('change', function() {
+                input.addEventListener('change', function () {
                     previewImage(this);
                 });
             });
         });
 
-        
+
         // EDIT PAGE - NEW IMAGE INPUTS
-        
+
         let newImageCount = 1;
-        
+
         function addNewImageInput() {
             const container = document.getElementById('new-image-container');
             if (!container) return;
-            
+
             const index = newImageCount;
-            
+
             const newGroup = document.createElement('div');
             newGroup.className = 'image-input-group';
             newGroup.setAttribute('data-index', index);
-            
+
             newGroup.innerHTML = `
                 <div class="image-input-row">
                     <input type="text" 
@@ -426,11 +435,11 @@
                 </div>
                 <div class="image-preview-small"></div>
             `;
-            
+
             container.appendChild(newGroup);
             newImageCount++;
         }
-        
+
         function removeNewImageInput(button) {
             const group = button.closest('.image-input-group');
             group.remove();
@@ -438,34 +447,34 @@
         }
 
 
-                // ================================
+        // ================================
         // PRODUCT IMAGE GALLERY
         // ================================
-        
+
         let currentImageIndex = 0;
-        
+
         function changeImage(direction) {
             if (typeof productImages === 'undefined' || productImages.length === 0) return;
-            
+
             currentImageIndex += direction;
-            
+
             // Loop around
             if (currentImageIndex < 0) {
                 currentImageIndex = productImages.length - 1;
             } else if (currentImageIndex >= productImages.length) {
                 currentImageIndex = 0;
             }
-            
+
             updateGallery();
         }
-        
+
         function selectImage(index) {
             if (typeof productImages === 'undefined') return;
-            
+
             currentImageIndex = index;
             updateGallery();
         }
-        
+
         function updateGallery() {
             // Update main image
             const mainImage = document.getElementById('mainProductImage');
@@ -476,13 +485,13 @@
                     mainImage.style.opacity = '1';
                 }, 150);
             }
-            
+
             // Update counter
             const counter = document.getElementById('currentImageNum');
             if (counter) {
                 counter.textContent = currentImageIndex + 1;
             }
-            
+
             // Update thumbnail active state
             document.querySelectorAll('.thumbnail-item').forEach((thumb, index) => {
                 if (index === currentImageIndex) {
@@ -492,11 +501,11 @@
                 }
             });
         }
-        
+
         // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (typeof productImages === 'undefined' || productImages.length <= 1) return;
-            
+
             if (e.key === 'ArrowLeft') {
                 changeImage(-1);
             } else if (e.key === 'ArrowRight') {

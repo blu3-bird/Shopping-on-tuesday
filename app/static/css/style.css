@@ -1594,3 +1594,35 @@ footer {
         transform: rotate(360deg);
     }
 }
+.site-footer {
+  background-color: #222;
+  color: #eee;
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: 40px;
+}
+
+.footer-quote {
+  font-style: italic;
+  margin-bottom: 8px;
+  color: #ccc;
+}
+
+.footer-copy {
+  font-size: 14px;
+  color: #aaa;
+}
+.footer-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.footer-btn:hover {
+  background-color: #43a047;
+}
