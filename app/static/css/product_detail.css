@@ -183,6 +183,22 @@
     color: var(--accent-color);
 }
 
+/* Pincode checker */
+.pincode-checker {
+    margin-top: 20px;
+}
+
+.pincode-input {
+    padding: 8px;
+    margin-right: 8px;
+    width: 200px;
+}
+
+.delivery-message {
+    margin-top: 8px;
+    font-weight: 500;
+}
+
 /* Description */
 .product-detail-description {
     line-height: 1.6;
@@ -301,7 +317,7 @@
     .product-detail-container {
         grid-template-columns: 1fr;
     }
-    
+
     .product-meta {
         grid-template-columns: 1fr;
     }
@@ -311,7 +327,7 @@
     .product-detail-title {
         font-size: 1.5rem;
     }
-    
+
     .product-detail-price {
         font-size: 1.8rem;
     }
@@ -327,7 +343,7 @@
 }
 
 .product-highlights-section h3 {
-    margin-top:  0;
+    margin-top: 0;
     margin-bottom: 15px;
     color: #2c3e50;
     font-size: 1.3rem;
@@ -355,7 +371,8 @@
     font-weight: bold;
     font-size: 1.2rem;
 }
- /*Share btn*/
+
+/*Share btn*/
 
 .share-button-container {
     position: relative;
@@ -411,7 +428,7 @@
     background: white;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     margin-top: 10px;
     z-index: 1000;
     overflow: hidden;
@@ -427,6 +444,7 @@
         opacity: 0;
         transform: translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -579,7 +597,7 @@
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: var(--spacing-md, 16px);
     }
-    
+
     .product-card .product-image,
     .product-card .product-placeholder {
         height: 200px;
@@ -591,17 +609,17 @@
         grid-template-columns: repeat(2, 1fr);
         gap: var(--spacing-sm, 12px);
     }
-    
+
     .product-card .product-image,
     .product-card .product-placeholder {
         height: 180px;
     }
-    
+
     .product-name {
         font-size: 0.9rem;
         min-height: auto;
     }
-    
+
     .product-price {
         font-size: 1.1rem;
     }
@@ -717,12 +735,12 @@
     .main-product-image {
         height: 350px;
     }
-    
+
     .thumbnail-item {
         width: 60px;
         height: 60px;
     }
-    
+
     .gallery-nav {
         padding: 10px 8px;
         font-size: 1.2rem;
@@ -745,7 +763,7 @@
     color: white;
     padding: 12px 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 10000;
     animation: slideIn 0.3s ease;
 }
@@ -754,6 +772,7 @@
     from {
         transform: translateX(400px);
     }
+
     to {
         transform: translateX(0);
     }
