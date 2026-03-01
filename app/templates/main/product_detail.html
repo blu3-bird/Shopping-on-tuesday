@@ -126,6 +126,25 @@
             {% endif %}
         </div>
 
+        <!-- Delivery PIN Code Checker -->
+        <div class="pincode-checker">
+          <h3>Check Delivery Availability</h3>
+
+            <input type="text"
+            id="pincode"
+            placeholder="Enter 6-digit PIN code"
+            maxlength="6"
+            class="pincode-input">
+
+            <button type="button"
+            class="btn btn-outline"
+            onclick="checkPincode()">
+            Check
+            </button>
+
+         <p id="delivery-message" class="delivery-message"></p>
+        </div>
+
         <!-- Description -->
         <div class="product-detail-description">
             <h3>Description</h3>
@@ -406,5 +425,31 @@
             }
         });
     }
+
+    // PIN Code Validation
+    function checkPincode() {
+       const pincode = document.getElementById("pincode").value.trim();
+       const message = document.getElementById("delivery-message");
+
+       const indianPattern = /^[1-9][0-9]{5}$/;
+
+      if (!indianPattern.test(pincode)) {
+        message.innerText = "Delivery not available for this PIN code";
+        message.style.color = "red";
+       } else {
+        message.innerText = "Delivery will take 5–6 working days";
+        message.style.color = "green";
+       }
+    }
+
+    // Allow only numbers
+    document.addEventListener("DOMContentLoaded", function () {
+      const input = document.getElementById("pincode");
+      if (input) {
+        input.addEventListener("input", function () {
+            this.value = this.value.replace(/\D/g, '');
+        });
+       }
+    });
 </script>
 {% endblock %}
