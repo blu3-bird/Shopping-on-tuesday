@@ -16,10 +16,15 @@ def create_app(config_name='default'):
     app.config.from_object(config[config_name])
     app.config["INSTAGRAM_URL"] = "https://instagram.com/blu3_bird_"
 
-    # Create instance directory if needed
+   
     instance_path = os.path.join(app.root_path, '..', 'instance')
     if not os.path.exists(instance_path):
         os.makedirs(instance_path)
+
+    
+    upload_path = app.config.get('UPLOAD_FOLDER')
+    if upload_path and not os.path.exists(upload_path):
+        os.makedirs(upload_path)
 
     db.init_app(app)
     login_manager.init_app(app)
@@ -34,7 +39,7 @@ def create_app(config_name='default'):
         from app.models import Admin
         return Admin.query.get(int(user_id))
 
-    # Import blueprints (CORRECT import — no circular import)
+    
     from app.main import main
     from app.auth import auth
     from app.admin import admin
@@ -44,22 +49,15 @@ def create_app(config_name='default'):
     app.register_blueprint(admin, url_prefix='/admin')
     app.register_blueprint(auth, url_prefix='/auth')
 
-    # ⭐ ADDING THE CUSTOM 500 ERROR HANDLER HERE ⭐
+    
     @app.errorhandler(500)
     def internal_server_error(error):
         return render_template("errors/500.html"), 500
     
-    # test 5xx err
-    # @app.route('/t500')
-    # def test_500():
-    #     return render_template("errors/500.html"), 500
     
     @app.errorhandler(404)
     def not_found_error(error):
-        return render_template('errors/400.html'), 400
+        return render_template('errors/400.html'), 404
 
-    # Create tables
-    with app.app_context():
-        db.create_all()
-
+    
     return app
