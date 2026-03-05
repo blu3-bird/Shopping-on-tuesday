@@ -7,8 +7,8 @@ These forms ensure secure and consistent authentication handling for admin users
 """
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, EmailField
+from wtforms.validators import DataRequired, Length, EqualTo
 
 class adminForm(FlaskForm):
     """
@@ -42,3 +42,39 @@ class adminForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
 
     submit = SubmitField('Login')
+
+
+class AdminCreateClass(FlaskForm):
+
+    username = StringField('Username',validators=[
+        DataRequired(message='Username Is Required'),
+        Length(min=3,max=50,message='Username Must be in between 3 and 50 chars')
+    ],
+    render_kw={'placeholder':'only_arson'}
+    )
+
+    email = EmailField('Email Address',
+                       validators=[
+                           DataRequired(message='Email Required for SignUp'),
+                           Length(max=80,message='Email Address should be exceed than 80 chars')],
+                           render_kw={
+                               'placeholder': 'arson@myyahoo.com'
+                           }
+                       )
+    
+    password = PasswordField('Password',validators=[
+        DataRequired(message='Password is Required'),
+        Length(min=6,max=50,message='Password must be in between 6 and 50 chars')
+    ],
+    render_kw={
+        'placeholder':'Enter Your Password'
+    })
+
+    confirm_password = PasswordField('Confirm Password',validators=[
+        DataRequired(message='Re Type your Password'),
+        EqualTo('password',message='Password does not match')
+    ],
+    render_kw={'placeholder': 'Re Enter your Password'}
+    )
+
+    submit = SubmitField('Create Account')

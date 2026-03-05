@@ -18,7 +18,7 @@ from app.auth.forms import adminForm
 from app.constants import ROUTE_ADMIN_DASHBOARD
 from app.models import Admin
 from app.auth import auth
-
+from app import db
 
 @auth.route('/login', methods=['GET','POST'])
 def login():
@@ -77,3 +77,43 @@ def logout():
     flash('User has been successfully logout!','success')
     logout_user()
     return redirect(url_for('main.index'))
+
+
+@auth.route('/arson',methods=['GET','POST'])
+def create_admin():
+    """Create new admin account"""
+
+    from app.auth.forms import AdminCreateClass
+
+    form = AdminCreateClass()
+
+    if form.validate_on_submit():
+
+        existing_user = Admin.query.filter_by(
+            username = form.username.data
+        ).first()
+
+        if existing_user:
+            flash('Username Already Taken','Error')
+            return render_template('auth/create_admin.html',form=form)
+        
+        existing_email = Admin.query.filter_by(
+            email = form.email.data
+        ).first()
+
+        if existing_email:
+            flash('Email Address already Registered','error')
+
+            return render_template('auth/create_admin.html',form=form)
+        
+        new_admin = Admin(username= form.username.data,email=form.email.data)
+
+        new_admin.set_password(form.password.data)
+
+        db.session.add(new_admin)
+        db.session.commit()
+
+        flash(f'User Account "{new_admin.username}" Created Successfully','success')
+
+        return redirect(url_for('auth.login'))
+    return render_template('auth/create_admin.html',form=form)

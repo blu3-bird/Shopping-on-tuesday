@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% block title %}Create Admin Account{% endblock %}
+
+{% block extra_css %}
+<style>
+    .create-admin-page {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    .create-admin-card {
+        width: 100%;
+        max-width: 450px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 2.5rem;
+    }
+
+    .create-admin-card h2 {
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .create-admin-card .subtitle {
+        text-align: center;
+        color: #888;
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.3rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 0.7rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        box-sizing: border-box;
+        transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #3498db;
+    }
+
+    .error-msg {
+        color: #e74c3c;
+        font-size: 0.8rem;
+        margin-top: 0.2rem;
+    }
+
+    .flash-msg {
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .flash-msg.error {
+        background: #fde8e8;
+        color: #e74c3c;
+    }
+
+    .flash-msg.success {
+        background: #e8fde8;
+        color: #27ae60;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 0.8rem;
+        background: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 0.5rem;
+        transition: background 0.2s;
+    }
+
+    .submit-btn:hover {
+        background: #c0392b;
+    }
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 1rem;
+        color: #888;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+    .back-link:hover {
+        color: #333;
+    }
+
+    .warning-box {
+        background: #fff3e0;
+        border-left: 4px solid #ff9800;
+        padding: 0.8rem 1rem;
+        border-radius: 4px;
+        margin-bottom: 1.5rem;
+        font-size: 0.85rem;
+        color: #e65100;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="create-admin-page">
+    <div class="create-admin-card">
+        <h2>🔐 Create Admin</h2>
+        <p class="subtitle">Secret admin account creation</p>
+
+        <div class="warning-box">
+            ⚠️ This page creates admin accounts with full dashboard access. 
+            Only create accounts for trusted people.
+        </div>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-msg {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                {{ form.username.label }}
+                {{ form.username }}
+                {% for error in form.username.errors %}
+                    <div class="error-msg">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                {{ form.email.label }}
+                {{ form.email }}
+                {% for error in form.email.errors %}
+                    <div class="error-msg">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                {{ form.password.label }}
+                {{ form.password }}
+                {% for error in form.password.errors %}
+                    <div class="error-msg">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                {{ form.confirm_password.label }}
+                {{ form.confirm_password }}
+                {% for error in form.confirm_password.errors %}
+                    <div class="error-msg">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            {{ form.submit(class="submit-btn") }}
+        </form>
+
+        <a href="{{ url_for('admin.dashboard') }}" class="back-link">
+            ← Back to Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}
