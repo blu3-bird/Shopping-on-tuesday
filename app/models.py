@@ -38,6 +38,7 @@ class Product(db.Model):
     """
     __tablename__ = 'product'
 
+    # getting values from a db
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), nullable=False)
     price = db.Column(db.Float, nullable=False)
@@ -68,15 +69,12 @@ class Product(db.Model):
     
     @property
     def has_discount(self):
-        """
-        Docstring for has_discount
-        
-        """
+        # discount activity (True/False)
         return self.original_price and self.original_price > self.price
 
     @property
     def discount_amount(self):
-        """docstring"""
+        # discount amount
         if self.has_discount:
             return self.original_price - self.price
         return 0
@@ -84,7 +82,7 @@ class Product(db.Model):
     @property 
     def calculated_discount_percent(self):
         """
-        Docstring for calculated_discount_percented
+        discount percentage
         
         :param self: Description
         """
