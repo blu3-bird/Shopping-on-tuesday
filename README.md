@@ -34,19 +34,6 @@ If you want something minimal but functional, this project is the sweet spot.
 
 ---
 
-## 📦 Key Dependencies
-
-Here’s the clean format you wanted:
-
-- **Flask** → `3.1.2`  
-- **Flask-Login** → `0.6.3`  
-- **Flask-SQLAlchemy** → `3.1.1`  
-- **Flask-WTF** → `1.2.2`  
-- **Pillow** → `12.0.0`  
-- **Email Validator** → `latest`  
-
----
-
 ## 📁 Project Structure
 
 ```
@@ -107,27 +94,29 @@ Shopping-on-tuesday/
             └── super_admin_login.css
 ```
 
-## 🛠️ Development Setup
-
-### Python Setup
-1. Install Python (v3.8+ recommended)
-2. Create a virtual environment: `python -m venv venv`
-3. Activate the environment:
-   - Windows: `venv\Scripts\activate`
-   - Unix/MacOS: `source venv/bin/activate`
-4. Install dependencies: `pip install -r requirements.txt`
-
-
 ## 👥 Contributing
 
 Contributions are welcome! Here's how you can help:
 
-1. **Fork** the repository
-2. **Clone** your fork: `git clone https://github.com/blu3-bird/Shopping-on-tuesday.git`
-3. **Create** a new branch: `git checkout -b feature/your-feature`
-4. **Commit** your changes: `git commit -am 'Add some feature'`
-5. **Push** to your branch: `git push origin feature/your-feature`
-6. **Open** a pull request
+## Installation and launch:
+
+1. **Install** Python (v3.8+ recommended)
+2. **Fork** the repository
+3. **Clone** your fork: `git clone https://github.com/your-name/Shopping-on-tuesday.git`
+4. **Create** a virtual environment: `python -m venv venv`
+5. **Activate** the virtual environment: `venv\Scripts\activate`
+6. **Install** dependencies: `pip install -r requirements.txt`
+7. **Create** database tables: `python -c "from app import create_app, db; from app.models import Product; app = create_app(); app.app_context().push(); db.create_all()"`
+8. **Set up** the database: `flask db stamp head`
+9. **Launch** the project: `python run.py`
+
+## How to make changes:
+
+9. **Create** a new branch: `git checkout -b feature/your-feature`
+10. **Make** your changes to the code
+11. **Commit** your changes: `git commit -am 'Add some feature'`
+12. **Push** to your branch: `git push origin feature/your-feature`
+13. **Open** a pull request
 
 Please ensure your code follows the project's style guidelines and includes tests where applicable.
 
