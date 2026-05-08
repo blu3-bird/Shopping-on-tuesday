@@ -34,19 +34,6 @@ If you want something minimal but functional, this project is the sweet spot.
 
 ---
 
-## 📦 Key Dependencies
-
-Here’s the clean format you wanted:
-
-- **Flask** → `3.1.3`  
-- **Flask-Login** → `0.6.3`  
-- **Flask-SQLAlchemy** → `3.1.1`  
-- **Flask-WTF** → `1.3.0`  
-- **Pillow** → `12.2.0`  
-- **Email Validator** → `latest`  
-
----
-
 ## 📁 Project Structure
 
 ```
