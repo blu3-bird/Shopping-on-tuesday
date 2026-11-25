@@ -79,13 +79,13 @@ class ProductForm(FlaskForm):
         'Original Price',validators=[
             Optional(),NumberRange(min=PRICE_MIN, message='Price can never be negative'),
         ],
-        render_kw={'placeholder' :500}
+        render_kw={'placeholder' :'500'}
     )
 
     discount_percentage = FloatField(
         "Discount Percentage", validators=[
             Optional(),
-            NumberRange(min=DISCOUNT_MIN, max=DISCOUNT_MAX, message=f'Discount must be between {DISCOUNT_MIN} and {DISCOUNT_MIN}')
+            NumberRange(min=DISCOUNT_MIN, max=DISCOUNT_MAX, message=f'Discount must be between {DISCOUNT_MIN} and {DISCOUNT_MAX}')
         ],
         render_kw={'placeholder': '10%'}
     )

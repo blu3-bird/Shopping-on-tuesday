@@ -131,7 +131,7 @@ def edit_product(product_id):
         product.description = form.description.data
         product.stock = form.stock.data
         product.category = form.category.data
-        product.hightlights = form.highlights.data
+        product.highlights = form.highlights.data
         product.original_price = form.original_price.data
         product.discount_percentage = form.discount_percentage.data
 

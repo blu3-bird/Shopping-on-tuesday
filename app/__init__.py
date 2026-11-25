@@ -57,7 +57,7 @@ def create_app(config_name='default'):
     
     @app.errorhandler(404)
     def not_found_error(error):
-        return render_template('errors/400.html'), 404
+        return render_template('errors/404.html'), 404
 
     
     return app
