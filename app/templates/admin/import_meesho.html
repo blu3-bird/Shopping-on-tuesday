@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}📥 Import from Meesho - Admin{% endblock %}
+
+{% block content %}
+    <div class="admin-form-container">
+        <!-- Header -->
+        <div class="admin-form-header">
+            <h1>📥 Import Product from Meesho</h1>
+            <a href="{{ url_for('admin.products_list') }}" class="btn btn-outline">← Back to Products</a>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Import Form -->
+        <div class="admin-form">
+            <form method="POST" action="{{ url_for('admin.import_meesho') }}">
+
+                <div class="form-group">
+                    <label class="form-label">Meesho Product URL</label>
+                    <input type="text" name="meesho_url" class="form-input"
+                           placeholder="https://www.meesho.com/product/...">
+                    <small class="form-hint">Paste a Meesho product page URL</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Markup Percentage (%)</label>
+                    <input type="number" name="markup_percentage" class="form-input"
+                           value="20" min="0" max="500" step="1">
+                    <small class="form-hint">Your selling price = Meesho price + markup. Default: 20%</small>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-large btn-block btn-primary">📥 Import Product</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="admin-form-hint">
+            <p><strong>How it works:</strong></p>
+            <ul>
+                <li>Paste a Meesho product URL</li>
+                <li>We scrape the product title, price, description, and images</li>
+                <li>Your selling price is calculated automatically with your markup</li>
+                <li>The product is added to your store and appears in the product list</li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
