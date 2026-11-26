@@ -20,9 +20,18 @@ All notable changes to the codebase are recorded here. Format: `YYYY-MM-DD — d
   - `admin/forms.py`: Fixed `original_price` placeholder (integer → string)
   - Verified: `poetry install` works, app starts, all pages load (200/302), DB tables created
 
+## 2026-11-26
+- **Phase 2 COMPLETED:** Meesho scraping layer
+  - `app/models.py`: Added Meesho fields (`source_url`, `meesho_price`, `markup_percentage`, `last_synced`, `is_imported`) + `selling_price` property
+  - `app/services/__init__.py`: New services package
+  - `app/services/meesho_scraper.py`: `scrape_product()`, `scrape_category()`, `is_meesho_url()` using requests + BeautifulSoup4
+  - `app/admin/routes.py`: Added `/admin/import-meesho` GET/POST route
+  - `app/templates/admin/import_meesho.html`: Import form template
+  - Recreated local SQLite DB with new columns
+  - Verified: all pages load (200/302), import route works
+
 ## Planned (not yet done)
 - Set up PostgreSQL database (Neon/Supabase free tier) for production
-- Phase 2: Meesho scraping layer
 - Phase 3: Cart + orders
 - Phase 4: Payments
 - Phase 5: Free deployment on Render
