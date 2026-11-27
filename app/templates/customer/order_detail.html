@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}📦 Order {{ order.order_number }} - Shopping on Tuesday{% endblock %}
+
+{% block content %}
+    <div class="admin-form-container">
+        <div class="admin-form-header">
+            <h1>📦 Order Confirmation</h1>
+            <a href="{{ url_for('main.index') }}" class="btn btn-outline">← Home</a>
+        </div>
+
+        <div class="order-details">
+            <div class="order-meta">
+                <p><strong>Order Number:</strong> {{ order.order_number }}</p>
+                <p><strong>Date:</strong> {{ order.created_at.strftime('%d %b, %Y %H:%M') }}</p>
+                <p><strong>Status:</strong> <span class="status-{{ order.status }}">{{ order.status }}</span></p>
+                <p><strong>Payment:</strong> <span class="status-{{ order.payment_status }}">{{ order.payment_status }}</span></p>
+            </div>
+
+            <div class="customer-info">
+                <h3>Customer Details</h3>
+                <p><strong>Name:</strong> {{ order.customer_name }}</p>
+                <p><strong>Email:</strong> {{ order.customer_email }}</p>
+                <p><strong>Phone:</strong> {{ order.customer_phone }}</p>
+                <p><strong>Shipping Address:</strong></p>
+                <p>{{ order.shipping_address }}</p>
+            </div>
+
+            <div class="order-items">
+                <h3>Items</h3>
+                <table class="cart-table">
+                    <thead>
+                        <tr><th>Product</th><th>Qty</th><th>Price</th><th>Subtotal</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>₹{{ item.price }}</td>
+                            <td>₹{{ item.subtotal }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="order-total">
+                    <strong>Total: ₹{{ order.total_amount }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
