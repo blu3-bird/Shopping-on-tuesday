@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}🛒 Your Cart - Shopping on Tuesday{% endblock %}
+
+{% block content %}
+    <div class="admin-form-container">
+        <div class="admin-form-header">
+            <h1>🛒 Your Shopping Cart</h1>
+            <a href="{{ url_for('main.products') }}" class="btn btn-outline">← Continue Shopping</a>
+            {% if items %}
+                <a href="{{ url_for('customer.checkout') }}" class="btn btn-primary">Proceed to Checkout →</a>
+            {% endif %}
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% if not items %}
+            <div class="empty-cart">
+                <p>Your cart is empty.</p>
+                <a href="{{ url_for('main.products') }}" class="btn btn-primary">Start Shopping</a>
+            </div>
+        {% else %}
+            <div class="cart-items">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td>
+                                <strong>{{ item.product.name }}</strong>
+                                {% if item.product.is_imported %}
+                                    <br><small class="text-muted">📦 Imported from Meesho</small>
+                                {% endif %}
+                            </td>
+                            <td>₹{{ item.product.selling_price }}</td>
+                            <td>
+                                <form method="POST" action="{{ url_for('customer.cart_update', item_id=item.id) }}" class="quantity-form">
+                                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="qty-input">
+                                    <button type="submit" class="btn btn-sm btn-outline">Update</button>
+                                </form>
+                            </td>
+                            <td>₹{{ item.subtotal }}</td>
+                            <td>
+                                <form method="POST" action="{{ url_for('customer.cart_remove', item_id=item.id) }}" class="remove-form">
+                                    <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="cart-total">
+                    <strong>Total: ₹{{ cart.total }}</strong>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
