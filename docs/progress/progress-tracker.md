@@ -20,17 +20,15 @@ Phase 2 COMPLETED — PR #181 merged to main. Ready for Phase 3.
 - [ ] Setting up PostgreSQL (need DATABASE_URL password in .env)
 
 ## Blocked
-- [ ] Need to replace [YOUR-DATABASE-PASSWORD] in .env with actual Supabase DB password
+- [ ] None
 
 ## Next up
-1. Replace DATABASE_URL password in .env with actual Supabase password
-2. Test PostgreSQL connection
-3. Phase 3: Cart + orders
-4. Phase 4: Payments
-5. Phase 5: Free deployment on Render
+1. Phase 3: Cart + orders
+2. Phase 4: Payments
+3. Phase 5: Free deployment on Render
 
 ## Session notes
-- 2026-11-27: PR #181 merged to main. Local main pulled and up to date. .env still needs real Supabase DB password.
+- 2026-11-27: .env updated with real Supabase DATABASE_URL password. PostgreSQL connection verified. All pages working (200/302).
 2. Set up PostgreSQL database (Neon/Supabase free tier) + add DATABASE_URL to .env
 3. Phase 3: Cart + orders
 4. Phase 4: Payments
