@@ -43,11 +43,13 @@ def create_app(config_name='default'):
     from app.main import main
     from app.auth import auth
     from app.admin import admin
+    from app.customer import customer
 
     # Register blueprints
     app.register_blueprint(main)
     app.register_blueprint(admin, url_prefix='/admin')
     app.register_blueprint(auth, url_prefix='/auth')
+    app.register_blueprint(customer)
 
     
     @app.errorhandler(500)
