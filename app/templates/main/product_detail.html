@@ -203,10 +203,13 @@
         <!-- Action Buttons -->
         <div class="product-detail-actions">
             {% if product.stock > 0 %}
+                <form method="POST" action="{{ url_for('customer.cart_add', product_id=product.id) }}">
+                    <button type="submit" class="btn btn-large btn-primary">🛒 Add to Cart</button>
+                </form>
                 <a href="https://ig.me/m/blu3_bird_?text=Hi! I want to buy {{ product.name }} (Product ID: {{ product.id }}) at ₹{{ product.price }}{% if product.has_discount %} ({{ product.calculated_discount_percent }}% off!){% endif %}" 
-                   class="btn btn-large btn-primary"
+                   class="btn btn-large btn-outline"
                    target="_blank">
-                    🛒 Buy Now via Instagram
+                    💬 Buy via Instagram
                 </a>
 
                 <!-- Share Button -->
