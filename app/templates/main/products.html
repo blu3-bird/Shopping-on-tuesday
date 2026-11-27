@@ -72,6 +72,11 @@
                         
                         <!-- Action Buttons -->
                         <div class="product-actions">
+                            {% if product.stock > 0 %}
+                                <form method="POST" action="{{ url_for('customer.cart_add', product_id=product.id) }}" style="display: inline;">
+                                    <button type="submit" class="btn btn-block btn-primary" style="margin-bottom: 5px;">🛒 Add to Cart</button>
+                                </form>
+                            {% endif %}
                             <a href="/products/{{ product.id }}" class="btn btn-outline btn-block">
                                 View Details
                             </a>
