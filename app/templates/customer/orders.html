@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}📦 My Orders - Shopping on Tuesday{% endblock %}
+
+{% block content %}
+    <div class="admin-form-container">
+        <div class="admin-form-header">
+            <h1>📦 My Orders</h1>
+            <a href="{{ url_for('main.index') }}" class="btn btn-outline">← Home</a>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% if not orders %}
+            <div class="empty-cart">
+                <p>You haven't placed any orders yet.</p>
+                <a href="{{ url_for('main.products') }}" class="btn btn-primary">Start Shopping</a>
+            </div>
+        {% else %}
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Order Number</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Payment</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td><strong>{{ order.order_number }}</strong></td>
+                        <td>{{ order.created_at.strftime('%d %b, %Y') }}</td>
+                        <td><span class="status-{{ order.status }}">{{ order.status }}</span></td>
+                        <td><span class="status-{{ order.payment_status }}">{{ order.payment_status }}</span></td>
+                        <td>₹{{ order.total_amount }}</td>
+                        <td>
+                            <a href="{{ url_for('customer.order_detail', order_id=order.id) }}" class="btn btn-sm btn-outline">View</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}
