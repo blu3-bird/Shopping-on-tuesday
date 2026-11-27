@@ -1,7 +1,7 @@
 # Progress Tracker
 
 ## Current phase
-Phase 2 COMPLETED — PR #181 merged to main. Ready for Phase 3.
+Phase 3 COMPLETED — Cart + Orders built and verified. PR ready to be opened.
 
 ## Completed
 - [x] Explored existing codebase
@@ -10,29 +10,24 @@ Phase 2 COMPLETED — PR #181 merged to main. Ready for Phase 3.
 - [x] Recorded architecture decisions (Render, BeautifulSoup+requests, PostgreSQL, Python 3.13)
 - [x] Phase 1: Poetry migration, PostgreSQL config, bug fixes — DONE, merged to main
 - [x] Phase 2: Meesho scraping layer — DONE, PR #181 merged to main
-  - Product model: Meesho fields + selling_price property
-  - app/services/meesho_scraper.py: scrape_product, scrape_category, is_meesho_url
-  - Admin import route: /admin/import-meesho GET/POST
-  - Import template: app/templates/admin/import_meesho.html
+- [x] Phase 3: Cart + orders — DONE
+  - Cart, CartItem, Order, OrderItem models
+  - Customer routes: /cart, /cart/add, /cart/remove, /cart/update, /checkout, /order/<id>, /orders
+  - Admin routes: /admin/orders, /admin/orders/<id>, /admin/orders/<id>/status
+  - Templates: cart, checkout, order_detail, orders, admin orders, admin order_detail
+  - UI: cart link in nav, Add to Cart buttons on product pages
   - All pages verified (200/302)
 
 ## In progress
-- [ ] Setting up PostgreSQL (need DATABASE_URL password in .env)
+- [ ] Awaiting your merge of Phase 3 PR
 
 ## Blocked
 - [ ] None
 
 ## Next up
-1. Phase 3: Cart + orders
+1. You merge Phase 3 PR (only you can do this)
 2. Phase 4: Payments
 3. Phase 5: Free deployment on Render
 
 ## Session notes
-- 2026-11-27: .env updated with real Supabase DATABASE_URL password. PostgreSQL connection verified. All pages working (200/302).
-2. Set up PostgreSQL database (Neon/Supabase free tier) + add DATABASE_URL to .env
-3. Phase 3: Cart + orders
-4. Phase 4: Payments
-5. Phase 5: Free deployment on Render
-
-## Session notes
-- 2026-11-26: Phase 2 completed. Meesho scraping layer built and verified. Ready to commit, push, and open PR.
+- 2026-11-27: Phase 3 completed. Cart + orders built and verified with Supabase PostgreSQL.
