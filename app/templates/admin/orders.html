@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title }}{{ admin_orders | length }} Orders - Admin{% endblock %}
+
+{% block content %}
+    <div class="admin-form-container">
+        <div class="admin-form-header">
+            <h1>📦 All Orders</h1>
+            <a href="{{ url_for('admin.products_list') }}" class="btn btn-outline">← Back to Products</a>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% if not orders %}
+            <div class="empty-cart">
+                <p>No orders yet.</p>
+            </div>
+        {% else %}
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Order Number</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Payment</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td><strong>{{ order.order_number }}</strong></td>
+                        <td>{{ order.customer_name }} ({{ order.customer_email }})</td>
+                        <td>{{ order.created_at.strftime('%d %b, %Y') }}</td>
+                        <td>
+                            <form method="POST" action="{{ url_for('customer.admin_update_order_status', order_id=order.id) }}">
+                                <select name="status" class="form-input form-select" onchange="this.form.submit()">
+                                    {% for s in ['pending', 'paid', 'shipped', 'delivered', 'cancelled'] %}
+                                    <option value="{{ s }}" {% if order.status == s %}selected{% endif %}>{{ s }}</option>
+                                    {% endfor %}
+                                </select>
+                                <input type="hidden" name="csrf_token" value="">
+                            </form>
+                        </td>
+                        <td><span class="status-{{ order.payment_status }}">{{ order.payment_status }}</span></td>
+                        <td>₹{{ order.total_amount }}</td>
+                        <td>
+                            <a href="{{ url_for('customer.admin_order_detail', order_id=order.id) }}" class="btn btn-sm btn-outline">View</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}
