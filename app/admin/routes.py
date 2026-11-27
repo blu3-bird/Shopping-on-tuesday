@@ -13,7 +13,7 @@ to perform CRUD operations. Proper error handling and database transaction safet
 are implemented for all write operations.
 """
 
-from flask import redirect, render_template, flash, url_for , request
+from flask import redirect, render_template, flash, url_for, request
 from flask_login import login_required
 from app.admin import admin
 from app.constants import LOW_STOCK_THRESHOLD, RECENT_PRODUCTS_LIMIT, CATEGORY_ANIME, CATEGORY_STATIONERY
@@ -224,4 +224,80 @@ def delete_product(product_id):
         db.session.rollback()
         flash('Something went wrong, Please try again','error')
         return redirect(url_for('admin.products_list'))
+
+
+@admin.route('/import-meesho', methods=['GET', 'POST'])
+@login_required
+def import_meesho():
+    """
+    Import a product from Meesho via scraping.
+
+    GET: Show the import form.
+    POST: Scrape the Meesho URL and create a product (draft, not published).
+    """
+    from app.services.meesho_scraper import scrape_product, is_meesho_url
+
+    if request.method == 'POST':
+        meesho_url = request.form.get('meesho_url', '').strip()
+        markup = request.form.get('markup_percentage', 20).strip()
+
+        if not meesho_url:
+            flash('Please enter a Meesho product URL', 'error')
+            return render_template('admin/import_meesho.html')
+
+        if not is_meesho_url(meesho_url):
+            flash('URL must be from meesho.com', 'error')
+            return render_template('admin/import_meesho.html')
+
+        try:
+            markup_pct = float(markup) if markup else 20.0
+        except ValueError:
+            markup_pct = 20.0
+
+        try:
+            data = scrape_product(meesho_url)
+        except Exception as e:
+            flash(f'Failed to scrape Meesho product: {str(e)}', 'error')
+            return render_template('admin/import_meesho.html')
+
+        # Calculate selling price with markup
+        meesho_price = data.get('price') or 0
+        selling_price = round(meesho_price * (1 + markup_pct / 100), 2) if meesho_price else 0
+
+        product = Product(
+            name=data.get('title', 'Untitled Product'),
+            price=selling_price,
+            description=data.get('description', ''),
+            category=data.get('category', 'general'),
+            stock=data.get('stock', 1),
+            image_url=data['image_urls'][0] if data.get('image_urls') else None,
+            source_url=data['source_url'],
+            meesho_price=meesho_price,
+            markup_percentage=markup_pct,
+            is_imported=True,
+        )
+
+        db.session.add(product)
+        db.session.flush()
+
+        # Add additional images
+        for idx, img_url in enumerate(data.get('image_urls', [])[1:], start=1):
+            image = ProductImage(
+                product_id=product.id,
+                image_url=img_url,
+                display_order=idx,
+                is_primary=False,
+            )
+            db.session.add(image)
+
+        db.session.commit()
+
+        flash(
+            f'Imported "{product.name}" from Meesho. '
+            f'Meesho price: ₹{meesho_price}, Your price: ₹{selling_price}',
+            'success',
+        )
+        return redirect(url_for('admin.products_list'))
+
+    return render_template('admin/import_meesho.html')
   

@@ -52,6 +52,13 @@ class Product(db.Model):
 
     highlights = db.Column(db.Text)
 
+    # Meesho dropshipping fields
+    source_url = db.Column(db.String(500))
+    meesho_price = db.Column(db.Float)
+    markup_percentage = db.Column(db.Float, default=20.0)
+    last_synced = db.Column(db.DateTime)
+    is_imported = db.Column(db.Boolean, default=False)
+
     images = db.relationship('ProductImage',backref='product',lazy='dynamic',cascade='all, delete-orphan',order_by = 'ProductImage.display_order')
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -79,7 +86,7 @@ class Product(db.Model):
             return self.original_price - self.price
         return 0
 
-    @property 
+    @property
     def calculated_discount_percent(self):
         """
         discount percentage
@@ -91,6 +98,18 @@ class Product(db.Model):
         if self.has_discount:
             return int(((self.original_price - self.price) / self.original_price) * 100)
         return 0
+    
+    @property
+    def selling_price(self):
+        """
+        Calculate selling price based on Meesho price and markup percentage.
+        
+        Returns:
+            float: Selling price = meesho_price * (1 + markup_percentage / 100)
+        """
+        if self.meesho_price and self.markup_percentage:
+            return round(self.meesho_price * (1 + self.markup_percentage / 100), 2)
+        return self.price
     
     @property
     def primary_image(self):

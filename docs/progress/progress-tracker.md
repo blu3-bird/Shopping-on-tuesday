@@ -1,41 +1,33 @@
 # Progress Tracker
 
 ## Current phase
-Phase 1 COMPLETED — awaiting next decision (PostgreSQL setup + Phase 2 planning).
+Phase 2 COMPLETED — PR ready to be opened, awaiting your merge.
 
 ## Completed
 - [x] Explored existing codebase
 - [x] Created docs directory structure
 - [x] Wrote project overview plan
 - [x] Recorded architecture decisions (Render, BeautifulSoup+requests, PostgreSQL, Python 3.13)
-- [x] Phase 1: Poetry migration (`pyproject.toml`, `poetry.lock`, removed `requirements.txt`)
-- [x] Phase 1: PostgreSQL config (`DATABASE_URL` env var)
-- [x] Phase 1: Bug fixes (404 template, highlights typo, discount validator, placeholder type)
-- [x] Phase 1 verified: all pages load (200/302), DB tables created
+- [x] Phase 1: Poetry migration, PostgreSQL config, bug fixes — DONE, merged to main
+- [x] Phase 2: Meesho scraping layer — DONE
+  - Product model: Meesho fields + selling_price property
+  - app/services/meesho_scraper.py: scrape_product, scrape_category, is_meesho_url
+  - Admin import route: /admin/import-meesho GET/POST
+  - Import template: app/templates/admin/import_meesho.html
+  - All pages verified (200/302)
 
 ## In progress
-- [ ] Awaiting decision: PostgreSQL provider (Neon vs Supabase) + database setup
+- [ ] Awaiting your merge of Phase 2 PR #181 (10 individual commits)
 
 ## Blocked
 - [ ] Need PostgreSQL database URL for production deployment
 
 ## Next up
-1. Set up PostgreSQL database (Neon/Supabase free tier) + add DATABASE_URL to .env
-2. Phase 2: Meesho scraping layer (`app/services/meesho_scraper.py`)
+1. You merge PR #181 (only you can do this)
+2. Set up PostgreSQL database (Neon/Supabase free tier) + add DATABASE_URL to .env
 3. Phase 3: Cart + orders
 4. Phase 4: Payments
 5. Phase 5: Free deployment on Render
 
 ## Session notes
-- 2026-11-25: Phase 1 completed. Poetry migration done, all bug fixes applied, app verified working. Local DB is SQLite fallback; PostgreSQL needed for production.
-
-## Next up (once approved)
-1. Phase 1: Poetry migration (`pyproject.toml`, `poetry.lock`, remove `requirements.txt`)
-2. Phase 1: Fix broken codebase (templates, routes, config)
-3. Phase 2: Meesho scraping layer
-4. Phase 3: Cart + orders
-5. Phase 4: Payments
-6. Phase 5: Free deployment
-
-## Session notes
-- 2026-11-25: Initial exploration complete. User confirmed scraping is preferred over API (no Meesho API available). User wants docs first, no code until approved.
+- 2026-11-26: Phase 2 completed. Meesho scraping layer built and verified. Ready to commit, push, and open PR.
