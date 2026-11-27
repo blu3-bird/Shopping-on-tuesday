@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}💳 Checkout - Shopping on Tuesday{% endblock %}
+
+{% block content %}
+    <div class="admin-form-container">
+        <div class="admin-form-header">
+            <h1>💳 Checkout</h1>
+            <a href="{{ url_for('customer.cart') }}" class="btn btn-outline">← Back to Cart</a>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="checkout-container">
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <table class="summary-table">
+                    <thead>
+                        <tr><th>Item</th><th>Qty</th><th>Price</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>₹{{ item.subtotal }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="summary-total">
+                    <strong>Total: ₹{{ cart.total }}</strong>
+                </div>
+            </div>
+
+            <!-- Customer Details Form -->
+            <div class="customer-form">
+                <h3>Your Details</h3>
+                <form method="POST" action="{{ url_for('customer.checkout') }}">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" name="customer_name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" name="customer_email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" name="customer_phone" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Shipping Address</label>
+                        <textarea name="shipping_address" class="form-input form-textarea" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-large btn-block btn-primary">Place Order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
