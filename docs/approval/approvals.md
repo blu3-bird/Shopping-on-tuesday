@@ -9,6 +9,7 @@ No code is built until the design doc for that phase is approved here.
 | 2: Meesho scraping layer | `docs/plans/002-scraping-layer.md` | Approved | User | 2026-11-26 |
 | 2: PR #181 merged | — | Done | User | 2026-11-27 |
 | 3: Cart + orders | `docs/plans/003-cart-orders.md` | Approved | User | 2026-11-27 |
+| 3: Pushed to main | — | Done | User | 2026-11-27 |
 | 3: Cart + orders | `docs/plans/003-cart-orders.md` | Pending | — | — |
 | 4: Payments | `docs/plans/004-payments.md` | Pending | — | — |
 | 5: Free deployment | `docs/plans/005-deployment.md` | Pending | — | — |
