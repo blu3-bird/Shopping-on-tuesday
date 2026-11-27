@@ -231,3 +231,156 @@ class Admin(db.Model,UserMixin):
             str: Human-readable representation of the Admin instance.
         """
         return f'<Admin {self.username}>'
+
+
+class Cart(db.Model):
+    """
+    Represents a shopping cart for customers.
+    
+    Stores cart information for both guest users (session-based) and
+    logged-in users (database-backed). Each cart can have multiple items.
+    
+    Attributes:
+        id (int): Primary key identifier for the cart.
+        user_id (int): Foreign key to Admin (customer) - nullable for guest carts.
+        session_id (str): Session ID for guest users.
+        created_at (datetime): Timestamp when the cart was created.
+        updated_at (datetime): Timestamp when the cart was last updated.
+    """
+    __tablename__ = 'cart'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=True)
+    session_id = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    # Relationships
+    items = db.relationship('CartItem', backref='cart', lazy='dynamic', cascade='all, delete-orphan')
+
+    @property
+    def total(self):
+        """Calculate cart total from all items."""
+        return sum(item.subtotal for item in self.items.all())
+
+    @property
+    def item_count(self):
+        """Return total number of items in cart."""
+        return sum(item.quantity for item in self.items.all())
+
+    def __repr__(self):
+        return f'<Cart {self.id} ({self.item_count} items)>'
+
+
+class CartItem(db.Model):
+    """
+    Represents an item in a shopping cart.
+    
+    Attributes:
+        id (int): Primary key identifier for the cart item.
+        cart_id (int): Foreign key to Cart.
+        product_id (int): Foreign key to Product.
+        quantity (int): Quantity of the product.
+        added_at (datetime): Timestamp when the item was added.
+    """
+    __tablename__ = 'cart_item'
+
+    id = db.Column(db.Integer, primary_key=True)
+    cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+    quantity = db.Column(db.Integer, default=1, nullable=False)
+    added_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # Relationships
+    product = db.relationship('Product', backref='cart_items')
+
+    @property
+    def subtotal(self):
+        """Calculate line item subtotal."""
+        return self.product.selling_price * self.quantity
+
+    def __repr__(self):
+        return f'<CartItem {self.id} x{self.quantity} of {self.product.name}>'
+
+
+class Order(db.Model):
+    """
+    Represents a customer order.
+    
+    Stores order information including customer details, total amount,
+    and order/payment status.
+    
+    Attributes:
+        id (int): Primary key identifier for the order.
+        order_number (str): Unique order number (e.g., ORD-1001).
+        user_id (int): Foreign key to Admin (customer).
+        customer_name (str): Customer name.
+        customer_email (str): Customer email address.
+        customer_phone (str): Customer phone number.
+        total_amount (float): Order total amount.
+        status (str): Order status (pending, paid, shipped, delivered, cancelled).
+        payment_status (str): Payment status (unpaid, paid, failed, refunded).
+        shipping_address (text): Delivery address.
+        created_at (datetime): Timestamp when the order was created.
+        updated_at (datetime): Timestamp when the order was last updated.
+    """
+    __tablename__ = 'order'
+
+    id = db.Column(db.Integer, primary_key=True)
+    order_number = db.Column(db.String(20), unique=True, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=True)
+    customer_name = db.Column(db.String(100), nullable=False)
+    customer_email = db.Column(db.String(100), nullable=False)
+    customer_phone = db.Column(db.String(20), nullable=False)
+    total_amount = db.Column(db.Float, nullable=False)
+    status = db.Column(db.String(20), default='pending')
+    payment_status = db.Column(db.String(20), default='unpaid')
+    shipping_address = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    # Relationships
+    items = db.relationship('OrderItem', backref='order', lazy='dynamic', cascade='all, delete-orphan')
+
+    @staticmethod
+    def generate_order_number():
+        """Generate a unique order number."""
+        import random
+        import string
+        return 'ORD-' + ''.join(random.choices(string.digits, k=6))
+
+    def __repr__(self):
+        return f'<Order {self.order_number} ({self.status})>'
+
+
+class OrderItem(db.Model):
+    """
+    Represents an item in an order.
+    
+    Stores a snapshot of the product at the time of order.
+    
+    Attributes:
+        id (int): Primary key identifier for the order item.
+        order_id (int): Foreign key to Order.
+        product_id (int): Foreign key to Product.
+        quantity (int): Quantity ordered.
+        price (float): Price at the time of order.
+    """
+    __tablename__ = 'order_item'
+
+    id = db.Column(db.Integer, primary_key=True)
+    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+
+    # Relationships
+    product = db.relationship('Product', backref='order_items')
+
+    @property
+    def subtotal(self):
+        """Calculate line item subtotal."""
+        return self.price * self.quantity
+
+    def __repr__(self):
+        return f'<OrderItem {self.id} x{self.quantity} of {self.product.name}>'
